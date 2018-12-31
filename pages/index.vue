@@ -12,7 +12,6 @@
         {{i.text}}
       </nuxt-link>
       <!-- <nuxt-link :to="{name:'login',path:'/login',query:{newsID:item.value,testidd:item.text,link:item.link},params:{hideid:item.text }}">登陆</nuxt-link> -->
-
       <!-- <nuxt-link :to="{name:item.link,path:item.link,params:{vv:item.link}}">{{ item.text }}</nuxt-link> -->
     </div>
   </div>
@@ -24,8 +23,10 @@ export default {
 
   data() {
     return {
-      items: [{ clink: '/about', text: '关于', value: '123', title: 'about' },
-      { clink: '/login', text: '登陆', value: '123', title: 'login' }
+      items: [{ clink: '/about', text: '关于', value: '123', title: 'about' }
+      ,{ clink: '/login', text: '登陆', value: '123', title: 'login' }
+      ,{ clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
+      ,{ clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }
       ]
     }
   }
@@ -49,5 +50,10 @@ export default {
   width: auto;
   height: auto;
   border: 1px;
+
+  
 }
+  a {
+      margin-left: 5px;
+  }
 </style>

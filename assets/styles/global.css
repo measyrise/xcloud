@@ -8,3 +8,7 @@ button {
     .page-enter, .page-leave-active {
     opacity: 0;
 }
+
+* {
+    box-sizing: border-box;
+}
