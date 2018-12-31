@@ -152,7 +152,7 @@
 
               <!-- 手机输入行 -->
               <div class="inputlinebox">
-                <div    class="prepend">
+                <div class="prepend">
                   <div><span class="text">中国</span> </div>
                 </div>
                 <div class="flex_full">
@@ -163,7 +163,7 @@
                 </div>
 
               </div>
-<!-- ////////////////////////////////////////////////////////////////////////////// -->
+              <!-- *********************************************************************** -->
               <!-- 密码输入行 -->
               <div class="inputlinebox">
 
