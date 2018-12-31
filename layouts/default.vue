@@ -6,7 +6,5 @@
 
 <style>
   
-  button {
-    outline: none;
-  }
+ 
 </style>
