@@ -1,3 +1,5 @@
-<style lang="scss">
-   background-color:red;
+<style  rel="stylesheet/scss" lang="scss">
+   .test{
+       background: red;
+   }
 </style>
