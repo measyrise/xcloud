@@ -24,9 +24,10 @@ export default {
   data() {
     return {
       items: [{ clink: '/about', text: '关于', value: '123', title: 'about' }
-      ,{ clink: '/login', text: '登陆', value: '123', title: 'login' }
-      ,{ clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
-      ,{ clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }
+        , { clink: '/login', text: '登陆', value: '123', title: 'login' }
+        , { clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
+        , { clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }
+        , { clink: '/gird', text: '栅格测试', value: '123', title: '栅格测试' }
       ]
     }
   }
@@ -50,10 +51,8 @@ export default {
   width: auto;
   height: auto;
   border: 1px;
-
-  
 }
-  a {
-      margin-left: 5px;
-  }
+a {
+  margin-left: 5px;
+}
 </style>

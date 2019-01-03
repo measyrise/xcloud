@@ -1,0 +1,7 @@
+@import './variables.scss';
+
+//DIV输入框获得焦点时边框颜色
+@mixin dhbc() {
+  border: 1px solid $b1677d9;
+  box-shadow: 0 0 0 2px $we6e6e6;
+}
