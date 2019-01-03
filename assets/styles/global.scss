@@ -2,23 +2,75 @@
 /****************************************************** 公共 ***********************************/
 
 /*  大小一致*/
-// * {
-//   box-sizing: border-box;
-// }
+* {
+  box-sizing: border-box;
+}
 
 /* 点击后不要外框 */
-// button {
-//   outline: none;
-// }
+button {
+  outline: none;
+}
 
-// div {
-//   background: $white;
-//   height: 100%;
-//   width: 100%;
-//   display: flex;
-// }
+/////////////////////////////////栅格容器/////////////////////////////////////////////
+
+.container {
+  background: $white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid blue;
+  flex-direction: column;
+}
+
+/////////////////////////////////栅格行/////////////////////////////////////////////
+
+@mixin row($h,$auto:0){
+  display: inline-flex;
+  @if $auto==1 {
+   flex-grow: 1; 
+  }@else{
+   height:calc(#{$h} * 1%);
+  }
+  border: 1px solid red;
+  width: 100%;
+
+}
+
+@for $i from 1 through 100
+{
+   .row#{$i}
+   {
+      @include row($i);
+   }
+}
 
 
+/////////////////////////////////栅格列/////////////////////////////////////////////
+@mixin col($h,$auto:0){
+  display: inline-flex;
+  @if $auto==1 {
+   flex-grow: 1; 
+  }@else{
+   width:calc(#{$h} * 1%);
+  }
+  border: 1px solid red;
+  height: 100%;
+ 
+}
+
+@for $i from 1 through 100
+{
+   .col#{$i}
+   {
+      @include col($i);
+   }
+}
+
+///自适应
+.fill{
+  flex-grow: 1;
+}
 
 /****************************************************** 弹性盒子 ***********************************/
 

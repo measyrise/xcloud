@@ -1,55 +1,73 @@
 <template>
+   <div>
+  <div class="main">
+    <div class="container">
+      <div class="row50"> 
+       
+       <div class="container">
+         <div class="row10"></div>
+         <div class="row30"></div>
+        <div class="row10 fill"></div> 
+       </div>
 
-  <div class="container">
-    <div class="cl main">
+      </div>
+      <div class="row10">
+        <div class="col10"></div>
+        <div class="col20"></div>
+        <div class="col10 fill">
+
+            <div class="container">
+              <div class="row10"></div>
+              <div class="row30"></div>
+              <div class="row10 fill"></div> 
+            </div>
+
+        </div>
+        <div class="col10 "></div>
+      </div>
+      <div class="row10"></div>
+      <div class="row10 fill"></div>
     </div>
-    <div class="cl sub"></div>
-    <div class="cl extra"></div>
+  </div>
   </div>
 
 </template>
-
-
-
+<script>
+export default {
   
+} 
+</script>
 <style rel="stylesheet/scss" lang="scss">
-* {
-  box-sizing: border-box;
-}
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-.container {
-  width: 100%;
-}
-// .container:after {
-//   display: table;
-//   content: '.';
-//   clear: both;
-// }
+@import '../assets/styles/global.scss';
 
-.container .cl {
-  float: left;
-  border: 1px solid red;
-  height: 200px;
+.smain{
+   width: 400px;
+   height: 600px;
 }
 
-.main {
-  width: 100%;
-  padding: 0 290px 0 320px;
-  background-color: blue;
+.main
+{
+  width: calc(100vw - 1px);
+  height: calc(100vh - 1px);
+   zoom:1;
+
+overflow: hidden;
+
+             clear: both;
+
+             position:relative
+
 }
-.sub {
-  width: 320px;
-  margin-left: -100%;
-  background-color: green;
-}
-.extra {
-  width: 290px;
-  margin-left: -290px;
-  background-color: yellow;
-}
+  .main:after{
+                 /*添加一个内容*/
+                content: "";
+                /*转换为一个块元素*/
+                 display: block;
+                 /*清除两侧的浮动*/
+                 clear: both;
+             }
+
+
+
+
 </style>
