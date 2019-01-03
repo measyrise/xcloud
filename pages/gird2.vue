@@ -25,11 +25,11 @@ body {
 .container {
   width: 100%;
 }
-// .container:after {
-//   display: table;
-//   content: '.';
-//   clear: both;
-// }
+.container:after {
+  display: table;
+  content: '.';
+  clear: both;
+}
 
 .container .cl {
   float: left;
@@ -42,14 +42,14 @@ body {
   padding: 0 290px 0 320px;
   background-color: blue;
 }
-// .sub {
-//   width: 320px;
-//   margin-left: -100%;
-//   background-color: green;
-// }
-// .extra {
-//   width: 290px;
-//   margin-left: -290px;
-//   background-color: yellow;
-// }
+.sub {
+  width: 320px;
+  margin-left: -100%;
+  background-color: green;
+}
+.extra {
+  width: 290px;
+  margin-left: -290px;
+  background-color: yellow;
+}
  </style>
