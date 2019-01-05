@@ -1,271 +1,290 @@
 <template>
-  <div class="body">
-    <!-- <div class="login" :class="{adlogin:ad!=typeid}"> -->
+  <div class="main">
+    <div class="container ">
 
-    <!-- // $('.login').addClass('animated bounceOutLeft');
-        //  <transition enter-active-class="fadeInRight"
-        //               leave-active-class="fadeOutRight">
-        // this.$refs.login.addClass('animated fadeOutRight'); -->
+      <div class="srow800">
+        <div class="col100 fill">
+          <div class="container ">
+            <div class="srow30 "></div>
+            <div class="row20 "></div>
+            <div class="row30"></div>
+            <div class="row60"></div>
+          </div>
+        </div>
+        <div class="scol600">
+          <div class="login animated"
+               :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}">
+            <!-- <div class="login animated"  :class="{zoomOutRight:ad==2,zoomInLeft:ad==1,zoomOutLeft:ad==4,zoomInRight:ad==3}" > -->
 
-    <div class="login animated"
-         :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}">
-      <!-- <div class="login animated"  :class="{zoomOutRight:ad==2,zoomInLeft:ad==1,zoomOutLeft:ad==4,zoomInRight:ad==3}" > -->
+            <!-- <div class="login animated"  :class="{flipOutY:ad==2,flipInY:ad==1}" > -->
+            <!-- <div class="login animated"  :class="{rotateOut:ad==2,rotateIn:ad==1}" > -->
+            <div class="top">
+              <div class="svg_comlogo">
+              </div>
+            </div>
 
-      <!-- <div class="login animated"  :class="{flipOutY:ad==2,flipInY:ad==1}" > -->
-      <!-- <div class="login animated"  :class="{rotateOut:ad==2,rotateIn:ad==1}" > -->
-      <div class="top">
-        <div class="svg_comlogo">
+            <div class="contain_login"
+                 v-show="typeid==1">
+              <div class="header">
+                <!--  -->
+                <div class="router">
+                  <nuxt-link v-for="(item,index) in ltabs"
+                             @click.native="selectitem(1,index)"
+                             :to="item.to"
+                             :key="index"
+                             :class="{'active':index===currid}"
+                             v-show="true">
+                    {{item.name}}
+                  </nuxt-link>
+                </div>
+              </div>
+              <!--FORM 区  -->
+              <div class="loginform"
+                   v-show="typeid==1">
+
+                <div v-show="0 == currid"
+                     class="child">
+                  <form action="a-mobile">
+
+                    <!-- 手机输入行 -->
+                    <div class="inputlinebox">
+                      <div class="prepend">
+                        <div><span class="text">中国</span> </div>
+                      </div>
+                      <div class="flex_full">
+                        <input type="text"
+                               placeholder="请输入手机号"
+                               class="text-input">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                    </div>
+
+                    <!-- 密码输入行 -->
+                    <div class="inputlinebox">
+
+                      <div class="checkbox">
+                        <input type="text"
+                               placeholder="请输入验证码"
+                               class="text-input checkbox">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                      <div class="smsbox">
+                        <button type="button"
+                                class="btnsend">获取短信验证码(1)</button>
+                      </div>
+
+                    </div>
+
+                    <!-- 登陆按钮 -->
+                    <button type="submit"
+                            class="btn inputlinebox"><span>登陆</span></button>
+
+                  </form>
+
+                  <div class="tip">注册即表示同意<a href="/terms"
+                       target="_blank"
+                       class="link">《使用条款》
+                    </a>和<a href="/comment-self-discipline"
+                       target="_blank"
+                       class="link">《跟帖评论自律管理承诺书》</a></div>
+
+                </div>
+
+                <div v-show="1 == currid"
+                     class="child">
+                  <form action="a-mobile">
+
+                    <!-- 手机输入行 -->
+                    <div class="inputlinebox">
+                      <!-- <div data-v-4a5bb81d="" class="prepend">
+                    <div ><span  class="text">中国</span> </div>
+                    </div>  -->
+                      <div class="flex_full">
+                        <input type="text"
+                               placeholder="请输入手机号/手机号/邮箱"
+                               class="text-input">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                    </div>
+
+                    <!-- 密码输入行 -->
+                    <div class="inputlinebox">
+
+                      <div class="flex_full">
+                        <input type="text"
+                               placeholder="请输入登陆密码"
+                               class="text-input checkbox">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                      <div class="smsbox">
+                        <button type="button"
+                                class="btnsend">忘记密码？</button>
+                      </div>
+
+                    </div>
+
+                    <!-- 登陆按钮 -->
+                    <button type="submit"
+                            class="btn inputlinebox"><span>登陆</span></button>
+
+                  </form>
+
+                  <div class="tip">注册即表示同意<a href="/terms"
+                       target="_blank"
+                       class="link">《使用条款》
+                    </a>和<a href="/comment-self-discipline"
+                       target="_blank"
+                       class="link">《跟帖评论自律管理承诺书》</a></div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="contain_register"
+                 v-show="typeid==2">
+              <div class="header">
+                <!--  -->
+                <div class="router">
+                  <nuxt-link v-for="(item,index) in rtabs"
+                             @click.native="selectitem(2,index)"
+                             :to="item.to"
+                             :key="index"
+                             :class="{'active':index===currid}"
+                             v-show="true">
+                    {{item.name}}
+                  </nuxt-link>
+                </div>
+              </div>
+              <!--FORM 区  -->
+              <div class="loginform">
+
+                <div v-show="0 == currid"
+                     class="child">
+                  <form action="a-mobile">
+
+                    <!-- 手机输入行 -->
+                    <div class="inputlinebox">
+                      <div class="prepend">
+                        <div><span class="text">中国</span> </div>
+                      </div>
+                      <div class="flex_full">
+                        <input type="text"
+                               placeholder="请输入手机号"
+                               class="text-input">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                    </div>
+                    <!-- ****************************333333444******************************************* -->
+                    <!-- 密码输入行 -->
+                    <div class="inputlinebox">
+
+                      <div class="flex_full">
+                        <input type="text"
+                               placeholder="请输入验证码"
+                               class="text-input checkbox">
+                        <!-- 图标考虑 -->
+                      </div>
+
+                      <div class="smsbox">
+                        <button type="button"
+                                class="btnsend">获取短信验证码(1)</button>
+                      </div>
+
+                    </div>
+
+                    <!-- 登陆按钮 -->
+                    <button type="submit"
+                            class="btn inputlinebox"><span>登陆</span></button>
+
+                  </form>
+
+                  <div class="tip">注册即表示同意<a href="/terms"
+                       target="_blank"
+                       class="link">《使用条款》
+                    </a>和<a href="/comment-self-discipline"
+                       target="_blank"
+                       class="link">《跟帖评论自律管理承诺书》</a></div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="foot">
+              <!--  -->
+              <div class="line">
+                <div class="befor"></div>
+                <div class="text">第三方平台注册/登陆</div>
+                <div class="after"></div>
+              </div>
+
+              <div class="thirdbox">
+                <!-- 微信 -->
+                <div>
+                  <nuxt-link to="#"
+                             class="">
+                    <span class="svg-weixin"></span>
+                  </nuxt-link>
+                </div>
+
+                <!-- 支付宝 -->
+                <!-- <div>
+                  <nuxt-link to="#"
+                            class="">
+                    <span class="svg-qq"></span>
+                  </nuxt-link>
+                </div> -->
+
+                <!--  QQ-->
+                <div>
+                  <nuxt-link to="#"
+                             class="">
+                    <span class="svg-qq"></span>
+                  </nuxt-link>
+                </div>
+
+                <!--  GITHUB -->
+                <div>
+                  <nuxt-link to="#"
+                             class="">
+                    <span class="svg-github"></span>
+                  </nuxt-link>
+                </div>
+                <!--  微博 -->
+                <div>
+                  <nuxt-link to="#"
+                             class="">
+                    <span class="svg-weibo"></span>
+                  </nuxt-link>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <div class="contain_login"
-           v-show="typeid==1">
-        <div class="header">
-          <!--  -->
-          <div class="router">
-            <nuxt-link v-for="(item,index) in ltabs"
-                       @click.native="selectitem(1,index)"
-                       :to="item.to"
-                       :key="index"
-                       :class="{'active':index===currid}"
-                       v-show="true">
-              {{item.name}}
-            </nuxt-link>
-          </div>
-        </div>
-        <!--FORM 区  -->
-        <div class="loginform"
-             v-show="typeid==1">
+      <div class="row70 fill">
 
-          <div v-show="0 == currid"
-               class="child">
-            <form action="a-mobile">
-
-              <!-- 手机输入行 -->
-              <div class="inputlinebox">
-                <div class="prepend">
-                  <div><span class="text">中国</span> </div>
-                </div>
-                <div class="flex_full">
-                  <input type="text"
-                         placeholder="请输入手机号"
-                         class="text-input">
-                  <!-- 图标考虑 -->
-                </div>
-
-              </div>
-
-              <!-- 密码输入行 -->
-              <div class="inputlinebox">
-
-                <div class="checkbox">
-                  <input type="text"
-                         placeholder="请输入验证码"
-                         class="text-input checkbox">
-                  <!-- 图标考虑 -->
-                </div>
-
-                <div class="smsbox">
-                  <button type="button"
-                          class="btnsend">获取短信验证码(1)</button>
-                </div>
-
-              </div>
-
-              <!-- 登陆按钮 -->
-              <button type="submit"
-                      class="btn inputlinebox"><span>登陆</span></button>
-
-            </form>
-
-            <div class="tip">注册即表示同意<a href="/terms"
-                 target="_blank"
-                 class="link">《使用条款》
-              </a>和<a href="/comment-self-discipline"
-                 target="_blank"
-                 class="link">《跟帖评论自律管理承诺书》</a></div>
-
-          </div>
-
-          <div v-show="1 == currid"
-               class="child">
-            <form action="a-mobile">
-
-              <!-- 手机输入行 -->
-              <div class="inputlinebox">
-                <!-- <div data-v-4a5bb81d="" class="prepend">
-                  <div ><span  class="text">中国</span> </div>
-                  </div>  -->
-                <div class="flex_full">
-                  <input type="text"
-                         placeholder="请输入手机号/手机号/邮箱"
-                         class="text-input">
-                  <!-- 图标考虑 -->
-                </div>
-
-              </div>
-
-              <!-- 密码输入行 -->
-              <div class="inputlinebox">
-
-                <div class="flex_full">
-                  <input type="text"
-                         placeholder="请输入登陆密码"
-                         class="text-input checkbox">
-                  <!-- 图标考虑 -->
-                </div>
-
-                <div class="smsbox">
-                  <button type="button"
-                          class="btnsend">忘记密码？</button>
-                </div>
-
-              </div>
-
-              <!-- 登陆按钮 -->
-              <button type="submit"
-                      class="btn inputlinebox"><span>登陆</span></button>
-
-            </form>
-
-            <div class="tip">注册即表示同意<a href="/terms"
-                 target="_blank"
-                 class="link">《使用条款》
-              </a>和<a href="/comment-self-discipline"
-                 target="_blank"
-                 class="link">《跟帖评论自律管理承诺书》</a></div>
-
-          </div>
-
+        <div class="col100"></div>
+        <div class="col0">
         </div>
       </div>
 
-      <div class="contain_register"
-           v-show="typeid==2">
-        <div class="header">
-          <!--  -->
-          <div class="router">
-            <nuxt-link v-for="(item,index) in rtabs"
-                       @click.native="selectitem(2,index)"
-                       :to="item.to"
-                       :key="index"
-                       :class="{'active':index===currid}"
-                       v-show="true">
-              {{item.name}}
-            </nuxt-link>
-          </div>
-        </div>
-        <!--FORM 区  -->
-        <div class="loginform">
-
-          <div v-show="0 == currid"
-               class="child">
-            <form action="a-mobile">
-
-              <!-- 手机输入行 -->
-              <div class="inputlinebox">
-                <div class="prepend">
-                  <div><span class="text">中国</span> </div>
-                </div>
-                <div class="flex_full">
-                  <input type="text"
-                         placeholder="请输入手机号"
-                         class="text-input">
-                  <!-- 图标考虑 -->
-                </div>
-
-              </div>
-              <!-- ****************************333333444******************************************* -->
-              <!-- 密码输入行 -->
-              <div class="inputlinebox">
-
-                <div class="flex_full">
-                  <input type="text"
-                         placeholder="请输入验证码"
-                         class="text-input checkbox">
-                  <!-- 图标考虑 -->
-                </div>
-
-                <div class="smsbox">
-                  <button type="button"
-                          class="btnsend">获取短信验证码(1)</button>
-                </div>
-
-              </div>
-
-              <!-- 登陆按钮 -->
-              <button type="submit"
-                      class="btn inputlinebox"><span>登陆</span></button>
-
-            </form>
-
-            <div class="tip">注册即表示同意<a href="/terms"
-                 target="_blank"
-                 class="link">《使用条款》
-              </a>和<a href="/comment-self-discipline"
-                 target="_blank"
-                 class="link">《跟帖评论自律管理承诺书》</a></div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <div class="foot">
-        <!--  -->
-        <div class="line">
-          <div class="befor"></div>
-          <div class="text">第三方平台注册/登陆</div>
-          <div class="after"></div>
-        </div>
-
-        <div class="thirdbox">
-          <!-- 微信 -->
-          <div>
-            <nuxt-link to="#"
-                       class="">
-              <span class="svg-weixin"></span>
-            </nuxt-link>
-          </div>
-
-          <!-- 支付宝 -->
-          <!-- <div>
-                <nuxt-link to="#"
-                          class="">
-                  <span class="svg-qq"></span>
-                </nuxt-link>
-              </div> -->
-
-          <!--  QQ-->
-          <div>
-            <nuxt-link to="#"
-                       class="">
-              <span class="svg-qq"></span>
-            </nuxt-link>
-          </div>
-
-          <!--  GITHUB -->
-          <div>
-            <nuxt-link to="#"
-                       class="">
-              <span class="svg-github"></span>
-            </nuxt-link>
-          </div>
-          <!--  微博 -->
-          <div>
-            <nuxt-link to="#"
-                       class="">
-              <span class="svg-weibo"></span>
-            </nuxt-link>
-
-          </div>
-        </div>
-
+      <div class="srow30">
       </div>
 
     </div>
-
   </div>
+
 </template>
 
 
@@ -273,7 +292,7 @@
 <script>
 
 import animate from 'animate.css'
-// import $ from 'jquery.js';//非必要
+
 
 function query(el) {
   if (typeof el === 'string') {
@@ -363,6 +382,9 @@ export default {
 }
 
 </script>
+
+
+
 <style rel="stylesheet/scss" lang="scss">
 @import '../assets/styles/xmixin.scss';
 @import '../assets/styles/variables.scss';
@@ -382,15 +404,19 @@ export default {
   }
 }
 
+@include srow(800);
+@include scol(600);
+
 .login {
   backface-visibility: hidden;
   position: relative;
-  min-width: 280px;
-  min-height: 300px;
+  min-width: 380px;
+  min-height: 500px;
   max-width: 380px;
-  max-height: 550px;
+  max-height: 500px;
   margin: auto;
   box-shadow: 0 6px 12px $b1677d9;
+
   //只有属发生变化后这个效果才会现
   //transition:width 10s;
   //  transition: width 2s;  //移动或是
