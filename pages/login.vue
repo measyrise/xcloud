@@ -1,23 +1,13 @@
 <template>
+
   <div class="main">
     <div class="container ">
 
-      <div class="srow800">
-        <div class="col100 fill">
-          <div class="container ">
-            <div class="srow30 "></div>
-            <div class="row20 "></div>
-            <div class="row30"></div>
-            <div class="row60"></div>
-          </div>
-        </div>
-        <div class="scol600">
+       <div class="srow60"></div>
+       <div class="row100">
           <div class="login animated"
                :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}">
-            <!-- <div class="login animated"  :class="{zoomOutRight:ad==2,zoomInLeft:ad==1,zoomOutLeft:ad==4,zoomInRight:ad==3}" > -->
-
-            <!-- <div class="login animated"  :class="{flipOutY:ad==2,flipInY:ad==1}" > -->
-            <!-- <div class="login animated"  :class="{rotateOut:ad==2,rotateIn:ad==1}" > -->
+        
             <div class="top">
               <div class="svg_comlogo">
               </div>
@@ -269,16 +259,7 @@
             </div>
 
           </div>
-        </div>
       </div>
-
-      <div class="row70 fill">
-
-        <div class="col100"></div>
-        <div class="col0">
-        </div>
-      </div>
-
       <div class="srow30">
       </div>
 
@@ -642,33 +623,4 @@ export default {
   }
 }
 
-// .fade-enter-active, .fade-leave-active {
-//   transition: opacity .5s;
-// }
-// .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-//   opacity: 0;
-// }
-// .login:hover
-// {
-//   transform: rotate(180deg);
-// }
-
-.adlogin {
-  animation: alogin 5s ease;
-  animation-delay: -2s;
-}
-@keyframes alogin {
-  0% {
-    left: 0px;
-  }
-  50% {
-    left: 100px;
-  }
-  70% {
-    left: -100px;
-  }
-  100% {
-    left: 0px;
-  }
-}
 </style>

@@ -57,13 +57,13 @@
 }
 
 
-@for $i from 0 through 100 {
+@for $i from 0 through 1 {
   .row#{$i} {
     @include row($i);
   }
 }
 
-@for $i from 0 through 100 {
+@for $i from 0 through 1 {
   @include srow($i);
 }
 
@@ -121,13 +121,13 @@
   }
 }
 
-@for $i from 0 through 100 {
+@for $i from 0 through 1 {
   .col#{$i} {
     @include col($i);
   }
 }
 
-@for $i from 0 through 100 {
+@for $i from 0 through 1 {
   @include scol($i);
 }
 
