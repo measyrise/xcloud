@@ -1,5 +1,6 @@
 <template>
-  <div class="container" :style="style">
+  <div class="container"
+       :style="style">
     <slot></slot>
   </div>
 </template>
@@ -9,15 +10,15 @@
 .container {
   background: $white;
 
-  //   height: 100%;
+  height: 100%;
 
-  //   width: 100%;
+  width: 100%;
 
   display: flex;
 
   overflow: hidden;
 
-  border: 1px solid $red;
+  // border: 1px solid $red;
 
   flex-direction: column;
 }
@@ -47,7 +48,7 @@ export default {
   },
   computed: {},
   watch: {},
-  created: function() {
+  created: function () {
     let s = 'width:' + this.w + ';'
 
     s += 'height:' + this.h + ';'
@@ -57,9 +58,9 @@ export default {
 
   inject: [],
 
-  beforeDestroy: function() {},
+  beforeDestroy: function () { },
 
-  mounted: function() {},
+  mounted: function () { },
 
   methods: {}
 }

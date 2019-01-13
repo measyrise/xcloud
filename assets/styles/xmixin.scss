@@ -6,130 +6,130 @@
   box-shadow: 0 0 0 2px $we6e6e6;
 }
 
-/////////////////////////////////栅格容器/////////////////////////////////////////////
+// /////////////////////////////////栅格容器/////////////////////////////////////////////
 
-.container {
-  background: $white;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  overflow: hidden;
-  border: 1px solid rgb(42, 42, 53);
-  flex-direction: column;
-}
+// .container {
+//   background: $white;
+//   height: 100%;
+//   width: 100%;
+//   display: flex;
+//   overflow: hidden;
+//   border: 1px solid rgb(42, 42, 53);
+//   flex-direction: column;
+// }
 
-/////////////////////////////////栅格行/////////////////////////////////////////////
+// /////////////////////////////////栅格行/////////////////////////////////////////////
 
-@mixin row($h, $auto:0) {
-  display: inline-flex;
+// @mixin row($h, $auto:0) {
+//   display: inline-flex;
 
-  @if $auto==1 {
-    flex-grow: 1;
-  }
+//   @if $auto==1 {
+//     flex-grow: 1;
+//   }
 
-  @else {
-    height:calc(#{$h} * 1%);
-  }
+//   @else {
+//     height:calc(#{$h} * 1%);
+//   }
 
-  border: 1px solid red;
-  width: 100%;
-  overflow: hidden;
+//   border: 1px solid red;
+//   width: 100%;
+//   overflow: hidden;
 
-  // padding: 15px 15px 15px 15px;
-}
+//   // padding: 15px 15px 15px 15px;
+// }
 
-@mixin srow($h, $auto:0) {
-  .srow#{$h} {
-    display: inline-flex;
+// @mixin srow($h, $auto:0) {
+//   .srow#{$h} {
+//     display: inline-flex;
 
-    @if $auto==1 {
-      flex-grow: 1;
-    }
+//     @if $auto==1 {
+//       flex-grow: 1;
+//     }
 
-    @else {
-      height:#{$h}px;
-    }
+//     @else {
+//       height:#{$h}px;
+//     }
 
-    border: 1px solid red;
-    width: 100%;
-    overflow: hidden;
-  }
-}
+//     border: 1px solid red;
+//     width: 100%;
+//     overflow: hidden;
+//   }
+// }
 
 
-@for $i from 0 through 1 {
-  .row#{$i} {
-    @include row($i);
-  }
-}
+// @for $i from 0 through 1 {
+//   .row#{$i} {
+//     @include row($i);
+//   }
+// }
 
-@for $i from 0 through 1 {
-  @include srow($i);
-}
+// @for $i from 0 through 1 {
+//   @include srow($i);
+// }
 
 /////////////////////////////////栅格列/////////////////////////////////////////////
-@mixin col($w, $auto:0) {
-  display: inline-flex;
+// @mixin col($w, $auto:0) {
+//   display: inline-flex;
 
-  @if $auto==1 {
-    flex-grow: 1;
-  }
+//   @if $auto==1 {
+//     flex-grow: 1;
+//   }
 
-  @else {
+//   @else {
 
-    @if $w==0 {
-      width: 100%
-    }
+//     @if $w==0 {
+//       width: 100%
+//     }
 
-    @else {
-      width:calc(#{$w} * 1%);
-    }
-  }
+//     @else {
+//       width:calc(#{$w} * 1%);
+//     }
+//   }
 
-  border: 1px solid red;
-  height: 100%;
-  overflow: hidden;
+//   border: 1px solid red;
+//   height: 100%;
+//   overflow: hidden;
 
-}
+// }
 
 
-@mixin scol($w, $auto:0) {
+// @mixin scol($w, $auto:0) {
 
-  .scol#{$w} {
-    display: inline-flex;
+//   .scol#{$w} {
+//     display: inline-flex;
 
-    @if $auto==1 {
-      flex-grow: 1;
-    }
+//     @if $auto==1 {
+//       flex-grow: 1;
+//     }
 
-    @else {
+//     @else {
 
-      @if $w==0 {
-        width: 100%
-      }
+//       @if $w==0 {
+//         width: 100%
+//       }
 
-      @else {
-        width:#{$w}px;
-      }
+//       @else {
+//         width:#{$w}px;
+//       }
 
-    }
+//     }
 
-    border: 1px solid red;
-    height: 100%;
-    overflow: hidden;
+//     border: 1px solid red;
+//     height: 100%;
+//     overflow: hidden;
 
-  }
-}
+//   }
+// }
 
-@for $i from 0 through 1 {
-  .col#{$i} {
-    @include col($i);
-  }
-}
+// @for $i from 0 through 1 {
+//   .col#{$i} {
+//     @include col($i);
+//   }
+// }
 
-@for $i from 0 through 1 {
-  @include scol($i);
-}
+// @for $i from 0 through 1 {
+//   @include scol($i);
+// }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

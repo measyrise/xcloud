@@ -8,7 +8,7 @@
 
 .col {
   display: inline-flex;
-  border: 1px solid red;
+  // border: 1px solid red;
   height: 100%;
   overflow: hidden;
 }
