@@ -88,14 +88,17 @@ module.exports = {
    */
   plugins: [
     // { src: '~/plugins/mock/mock.js', ssr: true },
+    //语言设置
     {
       src: '~/plugins/lang/index.js',
       ssr: true
     },
+    //拦截器设置
     {
       src: '~/plugins/axios/index.js',
       ssr: true
     },
+    //路由配置
     {
       src: '~/plugins/route/index.js',
       ssr: true
@@ -115,19 +118,35 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // prefix: '/api',
+    prefix: '/api/',
     proxy: true, // Can be also an object with default options
     credentials: true
   },
   proxy: {
     '/api': {
+      target: 'http://127.0.0.1:3001',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api/': '/' //意思  /=/API/
+      }
+    },
+    '/ip/': {
       target: 'http://icanhazip.com',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '' //将 /api 替换掉
+        '^/ip/': '/'
       }
     }
   },
+
+  // proxy: [
+  //   [
+  //     '/ip',
+  //     {
+  //       target: 'http://icanhazip.com'
+  //     }
+  //   ] //注意这也是一个数组
+  // ],
 
   /*
    ** Build configuration

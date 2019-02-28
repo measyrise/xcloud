@@ -1,3 +1,12 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: 
+ * @LastEditors: liangbojie
+ * @LastEditTtime: lastTime
+ * @Date: 2018-12-27 11:59:20
+ -->
+ 
 <template>
   <div class="main">
     <xlgrid>
@@ -7,17 +16,22 @@
       </xlrow>
 
       <xlrow h="100%">
+          
+          <!-- 动画应用 -->
         <div
           class="login animated"
           :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}"
         >
+         <!-- 头部LOGO 显示 -->
           <div class="top">
             <div class="svg_comlogo"></div>
           </div>
-
+          
+           <!-- 中部框架 -->
           <div class="contain_login" v-show="typeid==1">
+             
+             <!-- 切换TAB  -->
             <div class="header">
-              <!--  -->
               <div class="router">
                 <nuxt-link
                   v-for="(item,index) in ltabs"
@@ -29,33 +43,27 @@
                 >{{item.name}}</nuxt-link>
               </div>
             </div>
-            <!--FORM 区  -->
+
+            <!--TAB 显示 FORM 区  -->
             <div class="loginform" v-show="typeid==1">
               <div v-show="0 == currid" class="child">
                 <form action="a-mobile">
+
                   <!-- 手机输入行 -->
                   <div class="inputlinebox">
-                    <!-- <div class="prepend">
-                      <div>
-                        <span class="text">中国</span>
-                      </div>
-                    </div>-->
+                    <!-- 使用地区插件 -->
                     <selcountry></selcountry>
-                    <div class="flex_full">
-                      <input type="text" placeholder="请输入手机号" class="text-input">
-                      <!-- 图标考虑 -->
-                    </div>
+                    <!-- 使用input插件 -->
+                    <einput placeholder="请输入手机号" verrortip="请输入正确的手机号"  ref="idmobile"> </einput>
                   </div>
 
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <div class="checkbox">
-                      <input type="text" placeholder="请输入验证码" class="text-input checkbox">
-                      <!-- 图标考虑 -->
-                    </div>
+
+                     <einput placeholder="请输入验证码" verrortip="请输入正确的密码" type="password" :showpwd="true" > </einput>
 
                     <div class="smsbox">
-                      <button type="button" class="btnsend">获取短信验证码(1)</button>
+                      <button type="button" class="btnsend" @click="sendsms()">获取短信验证码(1)</button>
                     </div>
                   </div>
 
@@ -132,11 +140,12 @@
                 <form action="a-mobile">
                   <!-- 手机输入行 -->
                   <div class="inputlinebox">
-                    <div class="prepend">
+                    <!-- <div class="prepend">
                       <div>
                         <span class="text">中国</span>
                       </div>
-                    </div>
+                    </div> -->
+                    <selcountry></selcountry>
                     <div class="flex_full">
                       <input type="text" placeholder="请输入手机号" class="text-input">
                       <!-- 图标考虑 -->
@@ -228,6 +237,7 @@ import animate from 'animate.css'
 
 import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
 import selcountry from '../components/adrress/selcountry.vue'
+import einput from '../components/input/einput.vue' 
 
 function query(el) {
   if (typeof el === 'string') {
@@ -242,7 +252,10 @@ function query(el) {
 }
 
 export default {
-  components: { xlgrid, xlrow, xlcol, selcountry },
+  components: { xlgrid, xlrow, xlcol, selcountry
+   ,einput 
+  
+  },
   data() {
     return {
       ltabs: [
@@ -310,6 +323,10 @@ export default {
 
       this.typeid = ltypeid
       this.currid = lindex
+    },
+    sendsms()
+    {
+        this.$refs.idmobile.seterror("test")
     }
   }
 }
@@ -321,27 +338,13 @@ export default {
 @import '../assets/styles/xmixin.scss';
 @import '../assets/styles/variables.scss';
 
-//插入图片
-@mixin svg_logo($url, $size) {
-  background-image: url($url);
-  display: inline-block;
-  background-repeat: round;
-  width: $size;
-  height: $size;
-  vertical-align: middle;
-  padding-right: 10px;
-  background-size: $size;
-  &:hover {
-    opacity: 0.7;
-  }
-}
 
 .login {
   backface-visibility: hidden;
   position: relative;
-  min-width: 380px;
-  min-height: 500px;
-  max-width: 380px;
+  min-width: 420px;
+  min-height: 450px;
+  max-width: 460px;
   max-height: 500px;
   margin: auto;
   box-shadow: 0 6px 12px $b1677d9;
@@ -441,22 +444,22 @@ export default {
           border: 1px solid $wccc;
           margin-top: 20px;
 
-          .flex_full {
-            flex-grow: 1;
-            display: flex;
-          }
+          // .flex_full {
+          //   flex-grow: 1;
+          //   display: flex;
+          // }
 
-          //验证码输入框
-          .text-input {
-            margin-left: 16px;
-            min-width: 0;
-            line-height: 45px;
-            background: transparent;
-            border: none;
-            outline: none;
-            flex-grow: 1;
-            padding: 0px 5px 0px 3px;
-          }
+          // //验证码输入框
+          // .text-input {
+          //   margin-left: 16px;
+          //   min-width: 0;
+          //   line-height: 45px;
+          //   background: transparent;
+          //   border: none;
+          //   outline: none;
+          //   flex-grow: 1;
+          //   padding: 0px 5px 0px 3px;
+          // }
 
           .checkbox {
             display: flex;

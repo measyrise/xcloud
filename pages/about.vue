@@ -24,11 +24,10 @@ import Mock from 'mockjs'
 // .Mock.setup({
 //   timeout: '200-400'
 // })
+//MOCK 使用时，URL 与GET 一致时就会转到MOCK 来，这里有几个问题 AXIOS 拦截器在前，还是代理在前，MOCK 能拦截代理的请求吗？
+//顺序是代理最前，拦截在后，MOCK 拦截代理最后的地址
 
-var data = Mock.mock(
-  'http://abc.json',
-  'get',
-  {
+Mock.mock('/api/fi',  'get',  {
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
     'list|1-10': [
       {
@@ -38,10 +37,22 @@ var data = Mock.mock(
     ]
   }
 )
+
+Mock.mock('/api/ip/fi',  'get',  {
+    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+    'list|1-100': [
+      {
+        // 属性 id 是一个自增数，起始值为 1，每次增 1
+        'id|+1': 1
+      }
+    ]
+  }
+)
+
 // 输出结果
 // console.log(JSON.stringify(data, null, 4))
 
-// Mock.mock('http://icanhazip.com', 'get',"'dd':'3333'")
+ Mock.mock('http://icanhazip.com', 'get',"'dd':'3333'")
 // ;('use strict')
 export default {
   head: {
@@ -51,7 +62,8 @@ export default {
     let data = null
     await $axios
       .request({
-        url: 'http://abc.json',
+        //url: '/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
+        url: '/ip/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
         method: 'get',
         data: 'params'
       })

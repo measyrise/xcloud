@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2019-01-06 23:04:55
+ -->
 <template>
   <div class="container"
        :style="style">
@@ -18,7 +26,7 @@
 
   overflow: hidden;
 
-  // border: 1px solid $red;
+  border: 1px solid $red;
 
   flex-direction: column;
 }

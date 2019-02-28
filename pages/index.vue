@@ -23,7 +23,7 @@ export default {
 
   data() {
     return {
-      items: [{ clink: '/about', text: '关于', value: '123', title: 'about' }
+      items: [{ clink: '/about', text: '关于MOCK AXIOS 演示DEMO', value: '123', title: 'about' }
         , { clink: '/login', text: '登陆', value: '123', title: 'login' }
         , { clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
         , { clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }

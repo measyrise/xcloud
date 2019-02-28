@@ -6,6 +6,21 @@
   box-shadow: 0 0 0 2px $we6e6e6;
 }
 
+//插入图片
+@mixin svg_logo($url, $size) {
+  background-image: url($url);
+  display: inline-block;
+  background-repeat: round;
+  width: $size;
+  height: $size;
+  vertical-align: middle;
+  padding-right: 10px;
+  background-size: $size;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
 // /////////////////////////////////栅格容器/////////////////////////////////////////////
 
 // .container {
@@ -62,6 +77,8 @@
 //     @include row($i);
 //   }
 // }
+ 
+
 
 // @for $i from 0 through 1 {
 //   @include srow($i);
