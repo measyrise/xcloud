@@ -1,7 +1,7 @@
 @import './variables.scss';
 
 //DIV输入框获得焦点时边框颜色
-@mixin dhbc() {
+@mixin focus() {
   border: 1px solid $b1677d9;
   box-shadow: 0 0 0 2px $we6e6e6;
 }
@@ -16,6 +16,7 @@
   vertical-align: middle;
   padding-right: 10px;
   background-size: $size;
+
   &:hover {
     opacity: 0.7;
   }
@@ -77,7 +78,7 @@
 //     @include row($i);
 //   }
 // }
- 
+
 
 
 // @for $i from 0 through 1 {

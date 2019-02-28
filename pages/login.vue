@@ -16,21 +16,19 @@
       </xlrow>
 
       <xlrow h="100%">
-          
-          <!-- 动画应用 -->
+        <!-- 动画应用 -->
         <div
           class="login animated"
           :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}"
         >
-         <!-- 头部LOGO 显示 -->
+          <!-- 头部LOGO 显示 -->
           <div class="top">
             <div class="svg_comlogo"></div>
           </div>
-          
-           <!-- 中部框架 -->
+
+          <!-- 中部框架 -->
           <div class="contain_login" v-show="typeid==1">
-             
-             <!-- 切换TAB  -->
+            <!-- 切换TAB  -->
             <div class="header">
               <div class="router">
                 <nuxt-link
@@ -48,19 +46,22 @@
             <div class="loginform" v-show="typeid==1">
               <div v-show="0 == currid" class="child">
                 <form action="a-mobile">
-
                   <!-- 手机输入行 -->
-                  <div class="inputlinebox">
+                  <div class="inputlinebox" :class="{error:iserror===true}">
                     <!-- 使用地区插件 -->
                     <selcountry></selcountry>
                     <!-- 使用input插件 -->
-                    <einput placeholder="请输入手机号" verrortip="请输入正确的手机号"  ref="idmobile"> </einput>
+                    <einput placeholder="请输入手机号" verrortip="请输入正确的手机号" ref="idmobile"></einput>
                   </div>
 
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-
-                     <einput placeholder="请输入验证码" verrortip="请输入正确的密码" type="password" :showpwd="true" > </einput>
+                    <einput
+                      placeholder="请输入验证码"
+                      verrortip="请输入正确的密码"
+                      type="password"
+                      :showpwd="true"
+                    ></einput>
 
                     <div class="smsbox">
                       <button type="button" class="btnsend" @click="sendsms()">获取短信验证码(1)</button>
@@ -69,7 +70,7 @@
 
                   <!-- 登陆按钮 -->
                   <button type="submit" class="loginbtn inputlinebox">
-                    <span>登陆</span>
+                    <span>手机登陆</span>
                   </button>
                 </form>
 
@@ -84,21 +85,17 @@
                 <form action="a-mobile">
                   <!-- 手机输入行 -->
                   <div class="inputlinebox">
-                    <!-- <div data-v-4a5bb81d="" class="prepend">
-                    <div ><span  class="text">中国</span> </div>
-                    </div>-->
-                    <div class="flex_full">
-                      <input type="text" placeholder="请输入手机号/手机号/邮箱" class="text-input">
-                      <!-- 图标考虑 -->
-                    </div>
+                    <einput placeholder="请输入手机号/手机号/邮箱"></einput>
                   </div>
 
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <div class="flex_full">
-                      <input type="text" placeholder="请输入登陆密码" class="text-input checkbox">
-                      <!-- 图标考虑 -->
-                    </div>
+                    <einput
+                      placeholder="请输入验证码"
+                      verrortip="请输入正确的密码"
+                      type="password"
+                      :showpwd="true"
+                    ></einput>
 
                     <div class="smsbox">
                       <button type="button" class="btnsend">忘记密码？</button>
@@ -106,8 +103,8 @@
                   </div>
 
                   <!-- 登陆按钮 -->
-                  <button type="submit" class="btn inputlinebox">
-                    <span>登陆</span>
+                  <button type="submit" class="regbtn inputlinebox">
+                    <span>帐号登陆</span>
                   </button>
                 </form>
 
@@ -144,20 +141,15 @@
                       <div>
                         <span class="text">中国</span>
                       </div>
-                    </div> -->
+                    </div>-->
                     <selcountry></selcountry>
-                    <div class="flex_full">
-                      <input type="text" placeholder="请输入手机号" class="text-input">
-                      <!-- 图标考虑 -->
-                    </div>
+                    <einput type="text" placeholder="请输入手机号"></einput>
+                    <!-- 图标考虑 -->
                   </div>
                   <!-- ****************************333333444******************************************* -->
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <div class="flex_full">
-                      <input type="text" placeholder="请输入验证码" class="text-input checkbox">
-                      <!-- 图标考虑 -->
-                    </div>
+                    <einput type="password" placeholder="请输入验证码" :showpwd="true"></einput>
 
                     <div class="smsbox">
                       <button type="button" class="btnsend">获取短信验证码(1)</button>
@@ -165,8 +157,8 @@
                   </div>
 
                   <!-- 登陆按钮 -->
-                  <button type="submit" class="btn inputlinebox">
-                    <span>登陆</span>
+                  <button type="submit" class="regbtn inputlinebox">
+                    <span>注册帐号</span>
                   </button>
                 </form>
 
@@ -237,7 +229,7 @@ import animate from 'animate.css'
 
 import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
 import selcountry from '../components/adrress/selcountry.vue'
-import einput from '../components/input/einput.vue' 
+import einput from '../components/input/einput.vue'
 
 function query(el) {
   if (typeof el === 'string') {
@@ -252,9 +244,12 @@ function query(el) {
 }
 
 export default {
-  components: { xlgrid, xlrow, xlcol, selcountry
-   ,einput 
-  
+  components: {
+    xlgrid,
+    xlrow,
+    xlcol,
+    selcountry,
+    einput
   },
   data() {
     return {
@@ -289,7 +284,8 @@ export default {
       ],
       currid: 0,
       typeid: 1,
-      ad: 0
+      ad: 0,
+      iserror: false
     }
   },
   methods: {
@@ -324,28 +320,23 @@ export default {
       this.typeid = ltypeid
       this.currid = lindex
     },
-    sendsms()
-    {
-        this.$refs.idmobile.seterror("test")
+    sendsms() {
+      this.$refs.idmobile.seterror('test')
+      this.iserror = true
     }
   }
 }
 </script>
 
-
-
 <style rel="stylesheet/scss" lang="scss">
 @import '../assets/styles/xmixin.scss';
 @import '../assets/styles/variables.scss';
 
-
 .login {
   backface-visibility: hidden;
   position: relative;
-  min-width: 420px;
-  min-height: 450px;
-  max-width: 460px;
-  max-height: 500px;
+  width: 460px;
+  height: 500px;
   margin: auto;
   box-shadow: 0 6px 12px $b1677d9;
 
@@ -492,7 +483,10 @@ export default {
         }
 
         .inputlinebox:hover {
-          @include dhbc();
+          @include focus();
+        }
+        .error {
+          border: 1px solid red;
         }
 
         //登础按钮
@@ -502,11 +496,21 @@ export default {
           display: block;
           margin-top: 30px;
         }
+
+        //注册按钮
+        .regbtn {
+          background: #1677d9;
+          color: #fff;
+          display: block;
+          margin-top: 30px;
+        }
       }
     }
 
     .tip {
-      margin-top: 10px;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
       font-size: 12px;
       padding-bottom: 30px;
       // box-shadow: 0 -1px 0 0 #e6e6e6 inset;
