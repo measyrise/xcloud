@@ -1,4 +1,5 @@
 export default function({ $axios, redirect }) {
+  debugger
   let axios = $axios
 
   axios.onRequest(config => {

@@ -44,6 +44,10 @@ export default {
     full: {
       type: Boolean,
       default: false
+    },
+    border: {
+      type: String,
+      default: '0'
     }
   },
   created: function() {
@@ -52,6 +56,7 @@ export default {
     if (this.full) {
       s += 'flex-grow:' + 1 + ';'
     }
+    s += 'border:' + this.border + ' solid red;'
     this.style = s
   },
   inject: [],

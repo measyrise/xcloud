@@ -46,6 +46,10 @@ export default {
       type: String,
 
       default: '100%'
+    },
+    border: {
+      type: String,
+      default: '0'
     }
   },
   data() {
@@ -59,6 +63,7 @@ export default {
     let s = 'width:' + this.w + ';'
 
     s += 'height:' + this.h + ';'
+    s += 'border:' + this.border + ' solid red;'
 
     this.style = s
   },
