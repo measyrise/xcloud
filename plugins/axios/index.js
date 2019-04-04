@@ -8,6 +8,7 @@
  */
 //如下{ $axios, redirect }表示引用VUE系统_ref对像的_ref.$axios,_ref.redirect
 export default function({ $axios, redirect }) {
+  debugger
   let axios = $axios
 
   axios.onRequest(config => {
