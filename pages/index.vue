@@ -25,13 +25,7 @@
 export default {
   data() {
     return {
-<<<<<<< HEAD
-      items: [{ clink: '/about', text: '关于MOCK AXIOS 演示DEMO', value: '123', title: 'about' }
-        , { clink: '/LO/login', text: '登陆', value: '123', title: 'login' }
-        , { clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
-        , { clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }
-        , { clink: '/gird', text: '栅格测试', value: '123', title: '栅格测试' }
-=======
+
       items: [
         {
           clink: '/about',
@@ -52,7 +46,6 @@ export default {
         { clink: '/touch', text: 'touch', value: '123', title: 'touch' },
         { clink: '/mouse', text: 'mouse', value: '123', title: 'mouse' },
         { clink: '/main', text: 'main', value: '123', title: 'main' }
->>>>>>> 885d41b06f2e54002fcb1ecb5745e11722a88a29
       ]
     }
   }
