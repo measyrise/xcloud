@@ -1,10 +1,18 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-25 23:10:30
+ */
 const app = {
   state: {
     sidebar: {
       withoutAnimation: false
     },
     device: 'desktop',
-    language: 'en',
+    language: 'zh',
     size: 'medium'
   },
   mutations: {

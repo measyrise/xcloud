@@ -1,4 +1,12 @@
 /*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:16:17
+ */
+/*
  * 1. sets i18n.locale and state.locale if possible
  * 2. redirects if not with locale
  */
@@ -14,7 +22,7 @@ export default function({ isHMR, app, store, route, params, error, redirect }) {
   }
 
   // based on directory structure _lang/xxxx, en/about has params.lang as "en"
-  const locale = params.lang || 'en'
+  const locale = params.lang || 'zh'
   store.commit('SET_LANG', locale) // set store
   console.log(store.state.app.size)
   //调用模块里的东西时

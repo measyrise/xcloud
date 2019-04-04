@@ -1,3 +1,11 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import getters from './getters'
@@ -23,7 +31,7 @@ const store = () =>
 
     state: {
       locales: ['en', 'zh'],
-      locale: 'en',
+      locale: 'zh',
       todos: [
         { id: 1, text: '...', done: true },
         { id: 2, text: '...', done: false },
@@ -41,6 +49,9 @@ const store = () =>
         state.size = size
       }
     },
-    getters
+    getters: {
+      doneTodos: state => state.todos.filter(todo => todo.done),
+      gapp: state => state.app.device
+    }
   })
 export default store

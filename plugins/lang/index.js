@@ -1,3 +1,11 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ */
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
@@ -7,7 +15,7 @@ export default ({ app, store }) => {
   // debugger
   app.i18n = new VueI18n({
     locale: store.state.locale,
-    fallbackLocale: 'en',
+    fallbackLocale: 'zh',
     messages: {
       en: require('~/plugins/lang/en.js'),
       zh: require('~/plugins/lang/zh.js')

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ -->
 <template>
 
   <div class="flex-container">
@@ -24,7 +32,7 @@ export default {
   data() {
     return {
       items: [{ clink: '/about', text: '关于MOCK AXIOS 演示DEMO', value: '123', title: 'about' }
-        , { clink: '/login', text: '登陆', value: '123', title: 'login' }
+        , { clink: '/LO/login', text: '登陆', value: '123', title: 'login' }
         , { clink: '/adtest', text: '动画测试', value: '123', title: 'animate.css测试' }
         , { clink: '/trtest', text: '过渡测试', value: '123', title: '过渡测试' }
         , { clink: '/gird', text: '栅格测试', value: '123', title: '栅格测试' }

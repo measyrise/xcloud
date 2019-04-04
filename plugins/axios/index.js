@@ -1,3 +1,12 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ */
+//如下{ $axios, redirect }表示引用VUE系统_ref对像的_ref.$axios,_ref.redirect
 export default function({ $axios, redirect }) {
   let axios = $axios
 

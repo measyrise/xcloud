@@ -1,3 +1,11 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ */
 const pkg = require('./package')
 const path = require('path')
 
@@ -81,6 +89,7 @@ module.exports = {
   /*
    ** Global CSS
    */
+  // 每个
   css: ['normalize.css/normalize.css', '~/assets/styles/global.scss'],
 
   /*
@@ -139,15 +148,6 @@ module.exports = {
     }
   },
 
-  // proxy: [
-  //   [
-  //     '/ip',
-  //     {
-  //       target: 'http://icanhazip.com'
-  //     }
-  //   ] //注意这也是一个数组
-  // ],
-
   /*
    ** Build configuration
    */
@@ -158,6 +158,33 @@ module.exports = {
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
+        // 如果需要在项目中全局使用某个 scss 文件（ 如 mixins, vars 等），
+        // 需要借助 sass - resources - loader: yarn add sass - resources - loader— dev，
+        // 还需要在 nuxt.config.js 的 build 配置中调整导出的 loader 配置：
+
+        // const sassResourcesLoader = {
+        //   loader: 'sass-resources-loader',
+        //   options: {
+        //     resources: [
+        //       // 填写需要全局注入 scss 的文件。引入后，所有页面均有效。
+        //       'assets/styles/mixins.scss'
+        //     ]
+        //   }
+        // }
+
+        // // 修改 scss sass 引用的 loader。
+        // config.module.rules.forEach(rule => {
+        //   if (rule.test.toString() === '/\\.vue$/') {
+        //     rule.options.loaders.sass.push(sassResourcesLoader)
+        //     rule.options.loaders.scss.push(sassResourcesLoader)
+        //   }
+        //   if (
+        //     ['/\\.sass$/', '/\\.scss$/'].indexOf(rule.test.toString()) !== -1
+        //   ) {
+        //     rule.use.push(sassResourcesLoader)
+        //   }
+        // })
+
         config.module.rules.push(
           ...[
             {
