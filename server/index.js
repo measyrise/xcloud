@@ -1,3 +1,11 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ * @Date: 2018-12-24 01:17:01
+ */
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -14,7 +22,7 @@ config.dev = !(process.env.NODE_ENV === 'production')
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
-  debugger
+  // debugger
   console.log('0')
   // Build only in dev mode
   if (config.dev) {

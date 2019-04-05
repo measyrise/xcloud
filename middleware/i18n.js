@@ -11,7 +11,7 @@
  * 2. redirects if not with locale
  */
 export default function({ isHMR, app, store, route, params, error, redirect }) {
-  debugger
+  // debugger
   if (isHMR) {
     // ignore if called from hot module replacement
     return

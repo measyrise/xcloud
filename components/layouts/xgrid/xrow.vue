@@ -60,7 +60,15 @@ export default {
   computed: {},
   watch: {},
   created: function() {
-    let s = 'width:' + this.w + ';'
+    let s="";
+    if (this.w=='0px' || this.w=='0%')
+    {
+      let a="";
+    }
+    else
+    {
+       s = 'width:' + this.w + ';'
+    }
 
     s += 'height:' + this.h + ';'
 
