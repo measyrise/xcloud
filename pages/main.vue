@@ -17,26 +17,67 @@
 <template>
   <div class="main">
     <xlgrid border="1px">
-      <xlrow h="100%" border="1px">
-         
-         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
-        <xlcol w='0%'  border="1px" style="z-index:1000">
-   
-             <div class="" style="width:200px;background-color:green;">
+      <xlrow h="100%" border="0px">
+        <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
-          </div>
-         </xlcol>
-        <xlcol w="100%"  border="1px" style="z-index:1000;flex-grow:1"></xlcol>
+        <xlcol border="0px" w="0px" style="z-index:1000;overflow:visible;">
+          <Xsidebar h="100%" w="100px" itemw="100px" itemh="60px"></Xsidebar>
+        </xlcol>
+
+        <!-- 右方文档 -->
+        <xlcol w="100%" border="1px" style="z-index:1000;flex-grow:1">
+          <xlgrid w="100%" h="100%">
+            <xlrow h="60px" border="1px">title</xlrow>
+            <xlrow h="100%" border="1px">
+              <Slotdemo :lists="menulist" sslot="aaa">
+                <template slot="footer">333</template>
+                <template slot="header">111</template>
+                <template slot="main">222</template>
+                <template slot="boy">提供的男人</template>
+                <template slot="girl"></template>
+                <template slot="dd">1</template>
+                <!-- //这里的B就是引用了所有的作用域插槽，slot-scope="b" 时的b 就是引用指针，引用所有
+                作用域-->
+                <template slot-scope="b">
+                  {{ b }}
+                  <!-- {{b.say}}
+                  {{b.shit}}-->
+                  <!-- {{b.menu.id}} -->
+                </template>
+              </Slotdemo>
+
+              <!-- 默认的插的内容
+              <h4>这个世界不仅有男人和女人</h4>-->
+
+              <!-- <div style="height:1px;background-color:red;"></div> 
+                  <div style="height:1px;background-color:red;"></div>
+              <slot tl="girldd">作用域插插调用</slot>-->
+            </xlrow>
+          </xlgrid>
+        </xlcol>
       </xlrow>
     </xlgrid>
   </div>
-</template>
+</template>  
 
 <script>
 import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
-
+import Xsidebar from '../components/sidebar/sidebar.vue'
+import Slotdemo from '../pages/slot'
 export default {
-  components: { xlgrid, xlrow, xlcol }
+  components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo },
+  data() {
+    return {
+      menulist: [
+        { id: 1, name: '孙悟空' },
+        { id: 2, name: '猪八戒' },
+        { id: 3, name: '沙和尚' },
+        { id: 4, name: '唐僧' },
+        { id: 5, name: '小白龙' }
+      ],
+      slot: 'ssss'
+    }
+  }
 }
 </script>
 

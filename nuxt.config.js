@@ -17,8 +17,7 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -47,26 +46,23 @@ module.exports = {
         name: 'format-detection'
       }
     ],
-    link: [
-      {
+    link: [{
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
-      }
-      // {
-      //   rel: 'stylesheet',
-      //   href:
-      //     'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
-      // }
-    ],
-    // html head 中创建 script 标签
-    script: [
+      },
+      //引入全局性连接
       {
-        innerHTML: require('./assets/js/global.js'),
-        type: 'text/javascript',
-        charset: 'utf-8'
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
       }
-    ],
+    ]
+    // html head 中创建 script 标签,也相当于全局性功能
+    script: [{
+      innerHTML: require('./assets/js/global.js'),
+      type: 'text/javascript',
+      charset: 'utf-8'
+    }],
     // 不对<script>标签中内容做转义处理
     __dangerouslyDisableSanitizers: ['script']
   },
@@ -90,7 +86,12 @@ module.exports = {
    ** Global CSS
    */
   // 每个
-  css: ['normalize.css/normalize.css', '~/assets/styles/global.scss'],
+  css: [
+    'normalize.css/normalize.css',
+    '~/assets/styles/global.scss',
+    '~assets/styles/variables.scss',
+    '~assets/styles/xmixin.scss'
+  ],
 
   /*
    ** Plugins to load before mounting the App
@@ -186,8 +187,7 @@ module.exports = {
         // })
 
         config.module.rules.push(
-          ...[
-            {
+          ...[{
               enforce: 'pre',
               test: /\.(js|vue)$/,
               loader: 'eslint-loader',
@@ -216,13 +216,13 @@ module.exports = {
       // Object.assign(config.resolve.alias, {
       //   utils: path.resolve(__dirname, 'utils')
       // })
-    },
+    }
     // postcss: [
     //   require('postcss-px2rem')({
     //     remUnit: 75
     //   })
     // ],
-    vendor: ['vue-i18n'] // webpack vue-i18n.bundle.js
+    // vendor: ['vue-i18n'] // webpack vue-i18n.bundle.js
   },
   env: {
     __ENV: process.env.__ENV

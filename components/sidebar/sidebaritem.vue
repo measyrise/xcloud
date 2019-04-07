@@ -15,20 +15,34 @@
   -->
 <template>
   <!-- 外套 装上 SCROLLBAR -->
-  <div class="scrollbarhide scrollbar">
-    <xlgrid :h="sh" :w="sw">
-      <Sidebaritem
-        v-for="(item,index) in asyncRouterMap"
-        :key="index"
-        :itemw="itemw"
-        :itemh="itemh"
-        :item="item"
-        :w="w"
-        :h="h"
-        :index="index"
-      />
-    </xlgrid>
-  </div>
+
+  <xlrow
+    :class="{'headitem':index==0}"
+    :style="(index==1?seconditemstyle:itemstyle)"
+    v-if="!item.hidden&&item.children"
+  >
+    {{ item.path }}
+    <!-- 如果只有一个窗口就执行连接到具体事务窗口 -->
+    <a v-if="!item.children" class="linkto" style="display:none"></a>
+
+    <div v-else class="menuitem" style="display:none;position:fixed;">
+      <div class="menuitemcont" style="display:none"></div>
+
+      <template v-for="subitem in item.children" v-if="!subitem.hidden">
+        <Sidebaritem
+          v-if="subitem.children && subitem.children.length>0 "
+          :itemw="itemw"
+          :itemh="itemh"
+          :item="subitem"
+          :w="w"
+          :h="h"
+          :index="index"
+          :key="subitem.path"
+        />
+        <a v-else class="linkto" style="display:none" :key="subitem.path"></a>
+      </template>
+    </div>
+  </xlrow>
 </template>
 <style rel="stylesheet/scss" lang="scss" >
 .scrollbar {
@@ -49,9 +63,9 @@
   
 <script>
 import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
-import Sidebaritem from '../sidebar/sidebaritem'
 export default {
-  components: { xlgrid, xlrow, xlcol, Sidebaritem },
+  name: 'Sidebaritem',
+  components: { xlgrid, xlrow, xlcol },
   extends: '',
   props: {
     w: {
@@ -79,6 +93,14 @@ export default {
     border: {
       type: String,
       default: '0'
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
+    item: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -320,69 +342,8 @@ export default {
           ]
         },
 
-        { path: '*', redirect: '/404', hidden: true },
-        {
-          path: '/nested',
-          component: '',
-          redirect: '/nested/menu1/menu1-1',
-          name: 'Nested',
-          meta: {
-            title: 'nested',
-            icon: 'nested'
-          },
-          children: [
-            {
-              path: 'menu1',
-              component: '', // Parent router-view
-              name: 'Menu1',
-              meta: { title: 'menu1' },
-              redirect: '/nested/menu1/menu1-1',
-              children: [
-                {
-                  path: 'menu1-1',
-                  component: '',
-                  name: 'Menu1-1',
-                  meta: { title: 'menu1-1' }
-                },
-                {
-                  path: 'menu1-2',
-                  component: '',
-                  name: 'Menu1-2',
-                  redirect: '/nested/menu1/menu1-2/menu1-2-1',
-                  meta: { title: 'menu1-2' },
-                  children: [
-                    {
-                      path: 'menu1-2-1',
-                      component: '',
-                      name: 'Menu1-2-1',
-                      meta: { title: 'menu1-2-1' }
-                    },
-                    {
-                      path: 'menu1-2-2',
-                      component: '',
-                      name: 'Menu1-2-2',
-                      meta: { title: 'menu1-2-2' }
-                    }
-                  ]
-                },
-                {
-                  path: 'menu1-3',
-                  component: '',
-                  name: 'Menu1-3',
-                  meta: { title: 'menu1-3' }
-                }
-              ]
-            },
-            {
-              path: 'menu2',
-              name: 'Menu2',
-              component: '',
-              meta: { title: 'menu2' }
-            }
-          ]
-        }
-      ],
-      sidebarstyle: {}
+        { path: '*', redirect: '/404', hidden: true }
+      ]
     }
   },
   computed: {
@@ -392,6 +353,7 @@ export default {
   },
   watch: {},
   created: function() {
+    debugger
     let sstyle = ''
     let sitemstyle = ''
     let sseconditemstyle = ''

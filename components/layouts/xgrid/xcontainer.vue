@@ -16,17 +16,8 @@
 
 .container {
   background: $white;
-
-  height: 100%;
-
-  width: 100%;
-
   display: flex;
-
   overflow: hidden;
-
-  // border: 1px solid $red;
-
   flex-direction: column;
 }
 </style>
@@ -60,9 +51,20 @@ export default {
   computed: {},
   watch: {},
   created: function() {
-    let s = 'width:' + this.w + ';'
+    // debugger
+    let s = ''
+    if (this.w == '0px' || this.w == '0%') {
+      let a = ''
+    } else {
+      s = 'width:' + this.w + ';'
+    }
 
-    s += 'height:' + this.h + ';'
+    if (this.h == '0px' || this.h == '0%') {
+      let a = ''
+    } else {
+      s += 'height:' + this.h + ';'
+    }
+
     s += 'border:' + this.border + ' solid red;'
 
     this.style = s
