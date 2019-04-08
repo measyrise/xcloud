@@ -7,7 +7,22 @@
     而 <template slot="girl">提供的女人</template> 显示 提供的女人
        4.当父级窗体传用错误时，会引起整个调用出错,传参时类型不对特别容易出错
        5.作用域插槽在于父组件引用子组件的数据，也想当于子组件给外部提供数据的接口
-
+<Slotdemo :lists="menulist" sslot="aaa">
+                <template slot="footer">333</template>
+                <template slot="header">111</template>
+                <template slot="main">222</template>
+                <template slot="boy">提供的男人</template>
+                <template slot="girl"></template>
+                <template slot="dd">1</template>
+                <!-- //这里的B就是引用了所有的作用域插槽，slot-scope="b" 时的b 就是引用指针，引用所有
+                作用域-
+                <template slot-scope="b">
+                  {{ b }}
+                  <!-- {{b.say}}
+            {{b.shit}}
+            {{b.menu.id}} 
+          </template>
+              </Slotdemo>
 
 
   -->
