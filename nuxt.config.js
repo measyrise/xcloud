@@ -17,7 +17,8 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -46,7 +47,8 @@ module.exports = {
         name: 'format-detection'
       }
     ],
-    link: [{
+    link: [
+      {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
@@ -54,15 +56,18 @@ module.exports = {
       //引入全局性连接
       {
         rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
       }
-    ]
+    ],
     // html head 中创建 script 标签,也相当于全局性功能
-    script: [{
-      innerHTML: require('./assets/js/global.js'),
-      type: 'text/javascript',
-      charset: 'utf-8'
-    }],
+    script: [
+      {
+        innerHTML: require('./assets/js/global.js'),
+        type: 'text/javascript',
+        charset: 'utf-8'
+      }
+    ],
     // 不对<script>标签中内容做转义处理
     __dangerouslyDisableSanitizers: ['script']
   },
@@ -187,7 +192,8 @@ module.exports = {
         // })
 
         config.module.rules.push(
-          ...[{
+          ...[
+            {
               enforce: 'pre',
               test: /\.(js|vue)$/,
               loader: 'eslint-loader',

@@ -45,7 +45,9 @@ export default {
         { clink: '/touch', text: 'touch', value: '123', title: 'touch' },
         { clink: '/mouse', text: 'mouse', value: '123', title: 'mouse' },
         { clink: '/slot', text: 'slot', value: '123', title: 'slot' },
-        { clink: '/main', text: 'main', value: '123', title: 'main' }
+        { clink: '/main', text: 'main', value: '123', title: 'main' },
+        { clink: '/menu', text: 'menu', value: '123', title: 'menu' },
+        { clink: '/menu1', text: 'menu1', value: '123', title: 'menu1' }
       ]
     }
   }
