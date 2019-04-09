@@ -14,11 +14,11 @@
                 <template slot="boy">提供的男人</template>
                 <template slot="girl"></template>
                 <template slot="dd">1</template>
-                <!-- //这里的B就是引用了所有的作用域插槽，slot-scope="b" 时的b 就是引用指针，引用所有
+                //这里的B就是引用了所有的作用域插槽，slot-scope="b" 时的b 就是引用指针，引用所有
                 作用域-
                 <template slot-scope="b">
                   {{ b }}
-                  <!-- {{b.say}}
+                   {{b.say}}
             {{b.shit}}
             {{b.menu.id}} 
           </template>

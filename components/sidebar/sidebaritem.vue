@@ -16,17 +16,15 @@
 <template>
   <!-- 外套 装上 SCROLLBAR -->
 
-  <xlrow
-    :class="{'headitem':index==0}"
-    :style="(index==1?seconditemstyle:itemstyle)"
-    v-if="!item.hidden&&item.children"
-  >
-    {{ item.path }}
-    <!-- 如果只有一个窗口就执行连接到具体事务窗口 -->
-    <a v-if="!item.children" class="linkto" style="display:none"></a>
+  <ul style="width:100%;height:100%">
+    <!-- 如果窗口就执行连接到具体事务窗口 -->
+    <li v-if="!item.children" class="linkto">
+      <a>{{ item.path }}</a>
+      <ul style="display:none" class="onlychild">onlychild</ul>
+    </li>
 
-    <div v-else class="menuitem" style="display:none;position:fixed;">
-      <div class="menuitemcont" style="display:none"></div>
+    <Submenu v-else class="menuitem">
+      <template slot="title">{{ item.path }}</template>
 
       <template v-for="subitem in item.children" v-if="!subitem.hidden">
         <Sidebaritem
@@ -38,11 +36,13 @@
           :h="h"
           :index="index"
           :key="subitem.path"
+          style="display:none"
         />
-        <a v-else class="linkto" style="display:none" :key="subitem.path"></a>
+
+        <li v-else style="display:none" class="lastchild" :key="subitem.path">lastchild</li>
       </template>
-    </div>
-  </xlrow>
+    </Submenu>
+  </ul>
 </template>
 <style rel="stylesheet/scss" lang="scss" >
 .scrollbar {
@@ -59,13 +59,20 @@
   background: white;
   width: inherit;
 }
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 </style>
   
 <script>
 import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
+import Submenu from '../sidebar/submenu'
 export default {
   name: 'Sidebaritem',
-  components: { xlgrid, xlrow, xlcol },
+  components: { xlgrid, xlrow, xlcol, Submenu },
   extends: '',
   props: {
     w: {

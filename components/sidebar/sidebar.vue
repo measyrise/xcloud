@@ -17,16 +17,22 @@
   <!-- 外套 装上 SCROLLBAR -->
   <div class="scrollbarhide scrollbar">
     <xlgrid :h="sh" :w="sw">
-      <Sidebaritem
+      <xlrow
         v-for="(item,index) in asyncRouterMap"
+        :class="{'headitem':index==0}"
+        :style="(index==1?seconditemstyle:itemstyle)"
         :key="index"
-        :itemw="itemw"
-        :itemh="itemh"
-        :item="item"
-        :w="w"
-        :h="h"
-        :index="index"
-      />
+      >
+        <Sidebaritem
+          :key="index"
+          :itemw="itemw"
+          :itemh="itemh"
+          :item="item"
+          :w="w"
+          :h="h"
+          :index="index"
+        />
+      </xlrow>
     </xlgrid>
   </div>
 </template>

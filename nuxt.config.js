@@ -52,13 +52,13 @@ module.exports = {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
-      },
-      //引入全局性连接
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
       }
+      //引入全局性连接
+      //   {
+      //     rel: 'stylesheet',
+      //     href:
+      //       'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'
+      //   }
     ],
     // html head 中创建 script 标签,也相当于全局性功能
     script: [
