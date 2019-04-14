@@ -14,32 +14,31 @@
       >{{ item.name }}</xlrow>
   -->
 <template>
-  <!-- 外套 装上 SCROLLBAR -->
-
-  <ul style="width:100%;height:100%">
+  <!-- 外套 装上 SCROLLBAR  Ul是一个，只是放在DIV里，还是放在-->
+  <!-- 这里制定二级与二级以后的style -->
+  <ul class="ulitem" :style="ulstyle">
     <!-- 如果窗口就执行连接到具体事务窗口 -->
-    <li v-if="!item.children" class="linkto">
-      <a>{{ item.path }}</a>
-      <ul style="display:none" class="onlychild">onlychild</ul>
+
+    <li v-if="!item.children" class="limenuitem" :style="listyle">
+      <a :href="item.path">111</a>
+      <ul class="pnextulitem">{{item.path}}</ul>
     </li>
 
-    <Submenu v-else class="menuitem">
+    <Submenu v-else class="lisubmenuitem" :style="listyle">
       <template slot="title">{{ item.path }}</template>
 
-      <template v-for="subitem in item.children" v-if="!subitem.hidden">
+      <template v-for="(subitem,index) in item.children" v-if="!subitem.hidden">
         <Sidebaritem
           v-if="subitem.children && subitem.children.length>0 "
           :itemw="itemw"
           :itemh="itemh"
           :item="subitem"
-          :w="w"
-          :h="h"
           :index="index"
+          :isNest="true"
           :key="subitem.path"
-          style="display:none"
         />
 
-        <li v-else style="display:none" class="lastchild" :key="subitem.path">lastchild</li>
+        <li v-else class="lastchild" :key="subitem.path">{{subitem.path}}</li>
       </template>
     </Submenu>
   </ul>
@@ -54,16 +53,41 @@
   -ms-overflow-style: none; //IE 10+
   overflow: -moz-scrollbars-none; //Firefox
 }
-.headitem {
-  position: fixed;
-  background: white;
-  width: inherit;
-}
+
 ul,
 li {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+li:hover {
+  background: #333;
+}
+
+li:hover > .nextulitem {
+  background: #333;
+  display: block;
+}
+
+.ulitem {
+  align-items: center;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+.pnextulitem {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  z-index: 99;
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+  transform: translateZ(0);
 }
 </style>
   
@@ -75,15 +99,10 @@ export default {
   components: { xlgrid, xlrow, xlcol, Submenu },
   extends: '',
   props: {
-    w: {
-      type: String,
-      default: '100%'
+    isNest: {
+      type: Boolean,
+      default: false
     },
-    h: {
-      type: String,
-      default: '100%'
-    },
-
     // v=竖，纵向,h=水平
     direction: {
       type: String,
@@ -101,19 +120,19 @@ export default {
       type: String,
       default: '0'
     },
-    index: {
-      type: Number,
-      default: 0
-    },
     item: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
-      style: {},
-      itemstyle: {},
+      listyle: {},
+      ulstyle: {},
       seconditemstyle: {},
       sw: '0%',
       sh: '0%',
@@ -360,64 +379,33 @@ export default {
   },
   watch: {},
   created: function() {
-    debugger
-    let sstyle = ''
-    let sitemstyle = ''
-    let sseconditemstyle = ''
-    // debugger
-    if (this.w == '0px' || this.w == '0%') {
-      let a = ''
-    } else {
-      // 如果水平，宽度不定宽，自动增长
-      if (this.direction == 'h') {
-        this.sw = '0%;'
-      } else {
-        this.sw = this.w
-        sstyle = 'width:' + this.w + ';'
-      }
-    }
+    let listyle = ''
+    let ulstyle = ''
 
-    if (this.h == '0px' || this.h == '0%') {
-      let a = ''
+    if (this.index == 0) {
+      ulstyle = 'background:#333'
     } else {
-      if (this.direction == 'h') {
-        this.sh = this.h
-        sstyle += 'height:' + this.h + ';'
-      } else {
-        this.sh = '0%'
-      }
+      ulstyle = 'background:#676a6c'
+      // ulstyle = 'background:green'
     }
 
     if (this.itemw == '0px' || this.itemw == '0%') {
       let a = ''
     } else {
-      sitemstyle = 'width:' + this.itemw + ';'
+      listyle = 'width:' + this.itemw + ';'
     }
 
     if (this.itemh == '0px' || this.itemh == '0%') {
       let a = ''
     } else {
-      sitemstyle += 'height:' + this.itemh + ';'
-    }
-    if (this.direction == 'h') {
-      sseconditemstyle = 'margin-teft: ' + this.itemw + ';'
-    } else {
-      sseconditemstyle = 'margin-top:' + this.itemh + ';'
+      listyle += 'height:' + this.itemh + ';'
+      listyle += 'line-height:' + this.itemh + ';'
     }
 
-    for (var i = 1; i < 20; i++) {
-      let a = {}
-      a.name = i
-      this.numitems.push(a)
-    }
-    sstyle += 'border:' + this.border + ' solid red;'
-    // debugger
-    sitemstyle += 'border:' + this.border + ' solid red;'
-    sseconditemstyle = sitemstyle + sseconditemstyle
+    listyle += 'border:' + this.border + ' solid red;'
 
-    this.style = sstyle
-    this.itemstyle = sitemstyle
-    this.seconditemstyle = sseconditemstyle
+    this.listyle = listyle
+    this.ulstyle = ulstyle
   },
   inject: [],
   beforeDestroy: function() {},

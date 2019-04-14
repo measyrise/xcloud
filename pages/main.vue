@@ -20,12 +20,12 @@
       <xlrow h="100%" border="0px">
         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
-        <xlcol border="0px" w="0px" style="z-index:1000;overflow:visible;">
+        <xlcol border="0px" w="0px" style="overflow:visible;">
           <Xsidebar h="100%" w="100px" itemw="100px" itemh="60px"></Xsidebar>
         </xlcol>
 
         <!-- 右方文档 -->
-        <xlcol w="100%" border="1px" style="z-index:1000;flex-grow:1">
+        <xlcol w="100%" border="1px" style="flex-grow:1">
           <xlgrid w="100%" h="100%">
             <xlrow h="60px" border="1px">title</xlrow>
             <xlrow h="100%" border="1px">

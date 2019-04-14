@@ -28,8 +28,7 @@
           :itemw="itemw"
           :itemh="itemh"
           :item="item"
-          :w="w"
-          :h="h"
+          :direction="direction"
           :index="index"
         />
       </xlrow>
@@ -38,7 +37,6 @@
 </template>
 <style rel="stylesheet/scss" lang="scss" >
 .scrollbar {
-  background-color: green;
   overflow-y: auto;
 }
 .scrollbarhide::-webkit-scrollbar {
