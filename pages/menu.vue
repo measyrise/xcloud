@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-06-01 08:10:26
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
   <div id="leftMenu">
     <ul>
@@ -70,8 +78,6 @@ li > ul {
 }
 
 li:hover > ul {
-  width: 100px;
-  height: 200px;
-  display: block;
+   display: block;
 }
 </style>

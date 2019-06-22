@@ -44,6 +44,7 @@ export default {
         { clink: '/drag', text: 'drag', value: '123', title: 'drag' },
         { clink: '/touch', text: 'touch', value: '123', title: 'touch' },
         { clink: '/mouse', text: 'mouse', value: '123', title: 'mouse' },
+        { clink: '/mousestyle', text: 'mousestyle', value: '123', title: '坐标与样式' },
         { clink: '/slot', text: 'slot', value: '123', title: 'slot' },
         { clink: '/main', text: 'main', value: '123', title: 'main' },
         { clink: '/menu', text: 'menu', value: '123', title: 'menu' },

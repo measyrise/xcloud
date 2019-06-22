@@ -23,7 +23,40 @@ button {
 
 /****************************************************** 弹性盒子 ***********************************/
 
+.sidebar-container {
+  transition: width 0.28s;
+  width: 180px !important;
+  height: 100%;
+  // position: fixed;  去掉，如果脱离档流那么左边的180就不生效，除非整个都是脱脑文档流
+  font-size: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
 
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+      .el-scrollbar__view {
+        height: 100%;
+      }
+      .el-scrollbar__view {
+        height: 100%;
+      }
+    }
+
+    .el-scrollbar__wrap {
+      overflow: scroll;
+      height: 100%;
+    }
+    
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+    }
+
+}
 
 
 /****************************************************** Focus ***********************************/

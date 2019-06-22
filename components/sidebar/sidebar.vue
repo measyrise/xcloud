@@ -15,13 +15,14 @@
   -->
 <template>
   <!-- 外套 装上 SCROLLBAR -->
-  <div class="scrollbarhide scrollbar">
+  <div class="scrollbarhide scrollbar"  v-on:scroll.passive="onScroll">
     <xlgrid :h="sh" :w="sw">
       <xlrow
         v-for="(item,index) in asyncRouterMap"
         :class="{'headitem':index==0}"
         :style="(index==1?seconditemstyle:itemstyle)"
         :key="index"
+        class="sidebarmenu"
       >
         <Sidebaritem
           :key="index"
@@ -30,6 +31,7 @@
           :item="item"
           :direction="direction"
           :index="index"
+          ref="rsidebar"
         />
       </xlrow>
     </xlgrid>
@@ -37,7 +39,7 @@
 </template>
 <style rel="stylesheet/scss" lang="scss" >
 .scrollbar {
-  overflow-y: auto;
+  overflow-y:auto;
 }
 .scrollbarhide::-webkit-scrollbar {
   display: none; //Safari and Chrome
@@ -54,6 +56,7 @@
 <script>
 import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
 import Sidebaritem from '../sidebar/sidebaritem'
+import Vue from 'vue'
 export default {
   components: { xlgrid, xlrow, xlcol, Sidebaritem },
   extends: '',
@@ -90,6 +93,7 @@ export default {
       style: {},
       itemstyle: {},
       seconditemstyle: {},
+      scrollTop:0,
       sw: '0%',
       sh: '0%',
       numitems: [],
@@ -125,6 +129,7 @@ export default {
             }
           ]
         },
+         
 
         {
           path: '/icon',
@@ -254,6 +259,65 @@ export default {
               meta: { title: 'uploadExcel' }
             }
           ]
+        },{
+          path: '/nested',
+          component: '',
+          redirect: '/nested/menu1/menu1-1',
+          name: 'Nested',
+          meta: {
+            title: 'nested',
+            icon: 'nested'
+          },
+          children: [
+            {
+              path: 'menu1',
+              component: '', // Parent router-view
+              name: 'Menu1',
+              meta: { title: 'menu1' },
+              redirect: '/nested/menu1/menu1-1',
+              children: [
+                {
+                  path: 'menu1-1',
+                  component: '',
+                  name: 'Menu1-1',
+                  meta: { title: 'menu1-1' }
+                },
+                {
+                  path: 'menu1-2',
+                  component: '',
+                  name: 'Menu1-2',
+                  redirect: '/nested/menu1/menu1-2/menu1-2-1',
+                  meta: { title: 'menu1-2' },
+                  children: [
+                    {
+                      path: 'menu1-2-1',
+                      component: '',
+                      name: 'Menu1-2-1',
+                      meta: { title: 'menu1-2-1' }
+                    },
+                    {
+                      path: 'menu1-2-2',
+                      component: '',
+                      name: 'Menu1-2-2',
+                      meta: { title: 'menu1-2-2' }
+                    }
+                  ]
+                },
+                {
+                  path: 'menu1-3',
+                  component: '',
+                  name: 'Menu1-3',
+                  meta: { title: 'menu1-3' }
+                }
+              ]
+            },
+            {
+              path: 'menu2',
+              name: 'Menu2',
+              component: '',
+              meta: { title: 'menu2' }
+            }
+          ]
         },
 
         {
@@ -325,63 +389,60 @@ export default {
         },
 
         { path: '*', redirect: '/404', hidden: true },
-        {
-          path: '/nested',
+         {
+          path: '/zip',
           component: '',
-          redirect: '/nested/menu1/menu1-1',
-          name: 'Nested',
-          meta: {
-            title: 'nested',
-            icon: 'nested'
-          },
+          redirect: '/zip/download',
+          alwaysShow: true,
+          meta: { title: 'zip', icon: 'zip' },
           children: [
             {
-              path: 'menu1',
-              component: '', // Parent router-view
-              name: 'Menu1',
-              meta: { title: 'menu1' },
-              redirect: '/nested/menu1/menu1-1',
-              children: [
-                {
-                  path: 'menu1-1',
-                  component: '',
-                  name: 'Menu1-1',
-                  meta: { title: 'menu1-1' }
-                },
-                {
-                  path: 'menu1-2',
-                  component: '',
-                  name: 'Menu1-2',
-                  redirect: '/nested/menu1/menu1-2/menu1-2-1',
-                  meta: { title: 'menu1-2' },
-                  children: [
-                    {
-                      path: 'menu1-2-1',
-                      component: '',
-                      name: 'Menu1-2-1',
-                      meta: { title: 'menu1-2-1' }
-                    },
-                    {
-                      path: 'menu1-2-2',
-                      component: '',
-                      name: 'Menu1-2-2',
-                      meta: { title: 'menu1-2-2' }
-                    }
-                  ]
-                },
-                {
-                  path: 'menu1-3',
-                  component: '',
-                  name: 'Menu1-3',
-                  meta: { title: 'menu1-3' }
-                }
-              ]
-            },
-            {
-              path: 'menu2',
-              name: 'Menu2',
+              path: 'download',
               component: '',
-              meta: { title: 'menu2' }
+              name: 'ExportZip',
+              meta: { title: 'exportZip' }
+            }
+          ]
+        }  , {
+          path: '/zip',
+          component: '',
+          redirect: '/zip/download',
+          alwaysShow: true,
+          meta: { title: 'zip', icon: 'zip' },
+          children: [
+            {
+              path: 'download',
+              component: '',
+              name: 'ExportZip',
+              meta: { title: 'exportZip' }
+            }
+          ]
+        }  , {
+          path: '/zip',
+          component: '',
+          redirect: '/zip/download',
+          alwaysShow: true,
+          meta: { title: 'zip', icon: 'zip' },
+          children: [
+            {
+              path: 'download',
+              component: '',
+              name: 'ExportZip',
+              meta: { title: 'exportZip' }
+            }
+          ]
+        }  , {
+          path: '/zip',
+          component: '',
+          redirect: '/zip/download',
+          alwaysShow: true,
+          meta: { title: 'zip', icon: 'zip' },
+          children: [
+            {
+              path: 'download',
+              component: '',
+              name: 'ExportZip',
+              meta: { title: 'exportZip' }
             }
           ]
         }
@@ -457,6 +518,30 @@ export default {
   inject: [],
   beforeDestroy: function() {},
   mounted: function() {},
-  methods: {}
+  methods: {
+
+     onScroll (e) {
+       
+
+      //  gscrollTop=e.target.scrollTop;
+        // debugger
+        this.scrollTop=e.target.scrollTop;
+        //方式1.建立全局变量，用的时候自动引用,这样也不依懒VUEX管理
+        Vue.prototype.GscrollTop=e.target.scrollTop
+        //方式2：组件修改，这种可能容易出问题
+        // if(e.target.scrollTop)
+        // {
+        //  for(var i = 0; i <this.$refs.rsidebar.length; i++ ){
+        //     let t=this.$refs.rsidebar[i].$children
+        //    if (t.length>0) {
+        //       this.$refs.rsidebar[i].setscrollTop(this.scrollTop)
+        //     }
+        // }
+        // }
+        
+        
+    }
+
+  }
 }
 </script>

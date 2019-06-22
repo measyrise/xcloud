@@ -21,7 +21,10 @@
         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
         <xlcol border="0px" w="0px" style="overflow:visible;">
+
           <Xsidebar h="100%" w="100px" itemw="100px" itemh="60px"></Xsidebar>
+          <!-- <div style="width:100px;height:100%"></div> -->
+          <!-- <Sidebar class="sidebar-container"/> -->
         </xlcol>
 
         <!-- 右方文档 -->
@@ -63,9 +66,10 @@
 <script>
 import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
 import Xsidebar from '../components/sidebar/sidebar.vue'
+import Sidebar from '../components/elem/sidebar/index.vue'
 import Slotdemo from '../pages/slot'
 export default {
-  components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo },
+  components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo,Sidebar },
   data() {
     return {
       menulist: [

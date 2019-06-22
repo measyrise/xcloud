@@ -117,6 +117,11 @@ module.exports = {
     {
       src: '~/plugins/route/index.js',
       ssr: true
+    },
+    //全局变量
+    {
+      src: '~/plugins/var.js',
+      ssr: true
     }
   ],
 
