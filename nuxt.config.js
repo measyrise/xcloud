@@ -122,6 +122,10 @@ module.exports = {
     {
       src: '~/plugins/var.js',
       ssr: true
+    },
+    {
+      src: '~/utils/index.js',
+      ssr: true
     }
   ],
 

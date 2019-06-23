@@ -21,7 +21,6 @@
         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
         <xlcol border="0px" w="0px" style="overflow:visible;">
-
           <Xsidebar h="100%" w="100px" itemw="100px" itemh="60px"></Xsidebar>
           <!-- <div style="width:100px;height:100%"></div> -->
           <!-- <Sidebar class="sidebar-container"/> -->
@@ -30,7 +29,9 @@
         <!-- 右方文档 -->
         <xlcol w="100%" border="1px" style="flex-grow:1">
           <xlgrid w="100%" h="100%">
-            <xlrow h="60px" border="1px">title</xlrow>
+            <xlrow h="60px" border="1px">
+              <tagsview></tagsview>
+            </xlrow>
             <xlrow h="100%" border="1px">
               <Slotdemo :lists="menulist" sslot="aaa">
                 <template slot="footer">333</template>
@@ -68,8 +69,9 @@ import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
 import Xsidebar from '../components/sidebar/sidebar.vue'
 import Sidebar from '../components/elem/sidebar/index.vue'
 import Slotdemo from '../pages/slot'
+import tagsview from '../components//tags/tagsview.vue'
 export default {
-  components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo,Sidebar },
+  components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo, Sidebar, tagsview },
   data() {
     return {
       menulist: [

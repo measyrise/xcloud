@@ -7,111 +7,97 @@
  * @LastEditTtime: Do not edit
  -->
 <template>
- 
-  <li  @mouseover="mouseover"  class="tag">
+  <li @mouseover="mouseover" class="tag">
     <a>
       <slot name="title"></slot>
     </a>
-      <transition  name="fade">
-      <ul class="nextulitem"  :style="[styles]"  >
-      <slot></slot>
+    <transition name="fade">
+      <ul class="nextulitem" :style="[styles]">
+        <slot></slot>
       </ul>
-      </transition>
+    </transition>
   </li>
-
 </template>
 
 <style>
-
 .nextulitem {
-   display: none; 
-   position: fixed; 
-   z-index: 99;
-   /* opacity: 1; */
+  display: none;
+  position: fixed;
+  z-index: 99;
+  /* opacity: 1; */
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 </style>
 <script>
 import Vue from 'vue'
 export default {
   name: 'Submenu',
-    data() {
+  data() {
     return {
-        styles:{top:'0px',left:'0px'},
+      styles: { top: '0px', left: '0px' }
+    }
+  },
+  methods: {
+    mouseover(e) {
+      //  debugger
+      let scrollTop = Vue.prototype.GscrollTop
+      if (!scrollTop) {
+        scrollTop = 0
+      }
+      var pos = getElementPosition(this.$el)
+
+      //只用第一级菜单需要这样计算位置，因为第一级的坐标算准了后后面的就可参照了
+      if (isfirstmenu(this.$el)) {
+        this.styles.top = pos.top - scrollTop + 'px'
+        this.styles.left = pos.left + 'px'
+      } else {
+        this.styles.top = pos.top + 'px'
+        this.styles.left = pos.left + 'px'
       }
     },
-   methods: {
-      mouseover(e)
-      {
-        //  debugger
-         let scrollTop=Vue.prototype.GscrollTop;
-         if(!scrollTop)
-         {
-           scrollTop=0;
-         }
-          var pos=getElementPosition(this.$el);
-          
-          //只用第一级菜单需要这样计算位置，因为第一级的坐标算准了后后面的就可参照了
-          if(isfirstmenu(this.$el))
-          {
-            this.styles.top=(pos.top-scrollTop)+'px'
-            this.styles.left=pos.left+'px'
-          }
-          else{
-             this.styles.top=(pos.top)+'px'
-            this.styles.left=pos.left+'px'
-          }
-     
-      },
-      setscrollTop(v)
-      {
-         this.scrollTop=v
-      }
+    setscrollTop(v) {
+      this.scrollTop = v
+    }
   }
-        
 }
 
 function isfirstmenu(element) {
-
-      debugger
-      var current = element.parentElement;
-      while (current !== null) {
-         if (current.className.indexOf('lisubmenuitem')>=0) {
-           return 0
-         }
-          current = current.parentElement;
-      }
-      return 1
+  // debugger
+  var current = element.parentElement
+  while (current !== null) {
+    if (current.className.indexOf('lisubmenuitem') >= 0) {
+      return 0
+    }
+    current = current.parentElement
+  }
+  return 1
 }
- 
-
 
 function getElementPosition(element) {
-    
-    var left = element.offsetLeft;
-    var top = element.offsetTop;  
-    var scrollTop=element.scrollTop;
-    var current = element.offsetParent;
-  
-    while (current !== null) {
-        left += current.offsetLeft;
-        top += current.offsetTop;  
-        scrollTop+=current.scrollTop;
-        current = current.offsetParent;
-    }
-    left=left+element.offsetWidth;
-    top=top;
-    // debugger
-    return {
-        top: top,
-        left: left
-    };
+  var left = element.offsetLeft
+  var top = element.offsetTop
+  var scrollTop = element.scrollTop
+  var current = element.offsetParent
+
+  while (current !== null) {
+    left += current.offsetLeft
+    top += current.offsetTop
+    scrollTop += current.scrollTop
+    current = current.offsetParent
+  }
+  left = left + element.offsetWidth
+  top = top
+  // debugger
+  return {
+    top: top,
+    left: left
+  }
 }
 </script>
