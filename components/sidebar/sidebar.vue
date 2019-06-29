@@ -57,6 +57,7 @@
 import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
 import Sidebaritem from '../sidebar/sidebaritem'
 import Vue from 'vue'
+import main from '../../pages/main'
 export default {
   components: { xlgrid, xlrow, xlcol, Sidebaritem },
   extends: '',
@@ -126,6 +127,25 @@ export default {
                 title: 'directivePermission'
                 // if do not set roles, means: this page does not require permission
               }
+            }
+          ]
+        },
+
+         {
+          path: '/main',
+          component: main,
+          children: [
+            {
+              path: '/main/crouter1',
+              component: () => import('../../pages/main/crouter1'),
+              name: 'crouter1',
+              meta: { title: 'crouter1', icon: 'crouter1', noCache: true }
+            },
+              {
+              path: '/main/crouter2',
+              component: () => import('../../pages/main/crouter2'),
+              name: 'crouter2',
+              meta: { title: 'crouter2', icon: 'crouter2', noCache: true }
             }
           ]
         },

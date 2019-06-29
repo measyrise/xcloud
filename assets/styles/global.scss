@@ -20,7 +20,10 @@ button {
   width: calc(100vw - 1px);
   height: calc(100vh - 1px);
 }
-
+ .el-scrollbar__wrap {
+   overflow-x: scroll;
+   height: 100%;
+ }
 /****************************************************** 弹性盒子 ***********************************/
 
 .sidebar-container {

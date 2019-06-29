@@ -18,8 +18,10 @@
   <!-- 这里制定二级与二级以后的style -->
   <ul class="ulitem" :style="ulstyle">
     <!-- 没有下级窗口的POPPER，就是一按钮 -->
-    <li v-if="!item.children" class="nlastmenuitem" :style="listyle" @click="handmenuclick(item)">
-      <a href="#">{{ item.path }}</a>
+    <li v-if="!item.children" class="nlastmenuitem" :style="listyle">
+      <nuxt-link  :to="item.path" @click.native="handmenuclick(subitem)">
+        {{ item.path }}
+      </nuxt-link>
     </li>
 
     <!-- 有下级窗口的POPPER，且只有一行 -->
@@ -44,9 +46,10 @@
           class="hlastmenuitem"
           :key="subitem.path"
           :style="listyle"
-          @click="handmenuclick(item)"
         >
-          <a href="#">{{subitem.path}}</a>
+        <nuxt-link  :to="subitem.path" @click.native="handmenuclick(subitem)">
+           {{ subitem.path }}
+         </nuxt-link>
         </li>
       </template>
     </Submenu>
@@ -143,7 +146,15 @@ export default {
       return 'width:100%'
     }
   },
-  watch: {},
+  watch: {
+      $route()
+      {
+      //this.xebus  是在VUE原型链上加载的对像
+      // this.xebus.$emit('menuclick', $route)
+      // alert(item.path)
+    }
+   
+  },
   created: function() {
     if (this.index == 0) {
       this.ulstyle.background = '#333'
@@ -194,8 +205,10 @@ export default {
       this.$refs.subpopper.setscrollTop(v)
     },
     handmenuclick(item) {
+      // debugger
       this.xebus.$emit('menuclick', item)
-      alert(item.path)
+      // var l=this.$router;
+      // alert(item.path)
     }
   }
 }

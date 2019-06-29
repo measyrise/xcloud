@@ -34,21 +34,32 @@
             </xlrow>
             <xlrow h="100%" border="1px">
               <Slotdemo :lists="menulist" sslot="aaa">
-                <template slot="footer">333</template>
-                <template slot="header">111</template>
-                <template slot="main">222</template>
+                
+                <template slot="footer">
+                  <div class="center">
+                  <!-- <p>嵌套子页面内容区</p> -->
+                 <!-- <router-view> -->
+                 <nuxt-child keep-alive ></nuxt-child>
+                 </div>
+              </template>
+
+                <template slot="header"></template>
+                <template slot="main"></template>
+                
                 <template slot="boy">提供的男人</template>
-                <template slot="girl"></template>
-                <template slot="dd">1</template>
+                <template slot="girl">girl</template>
+                <template slot="dd">dd</template>
                 <!-- //这里的B就是引用了所有的作用域插槽，slot-scope="b" 时的b 就是引用指针，引用所有
                 作用域-->
                 <template slot-scope="b">
-                  {{ b }}
-                  <!-- {{b.say}}
-                  {{b.shit}}-->
-                  <!-- {{b.menu.id}} -->
+                  <!-- {{ b }} -->
+                   {{b.say}}
+                   {{b.shit}}
+                   {{ b.menu }} 
                 </template>
               </Slotdemo>
+              
+               
 
               <!-- 默认的插的内容
               <h4>这个世界不仅有男人和女人</h4>-->

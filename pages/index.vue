@@ -7,6 +7,7 @@
  * @Date: 2018-12-24 01:17:01
  -->
 <template>
+  <div>
   <div class="flex-container">
     <div class="flex-item">
       <!-- <h1>{{item.title}}</h1> -->
@@ -14,11 +15,23 @@
       <nuxt-link
         v-for="i in items"
         :key="i.id"
-        :to="{name:i.title1, path:i.clink, query:{newsID:i.value,testidd:i.text,link:i.link}, params:{hideid:i.text }}"
+        :to="{ path:i.clink,name:i.title1, query:{newsID:i.value,testidd:i.text,link:i.link}, params:{hideid:i.text }}"
       >{{i.text}}</nuxt-link>
+
+      <!-- <li><nuxt-link to='crouter1'>child</nuxt-link></li>
+      <li><nuxt-link to='crouter2'>child2</nuxt-link></li> -->
+
+      
       <!-- <nuxt-link :to="{name:'login',path:'/login',query:{newsID:item.value,testidd:item.text,link:item.link},params:{hideid:item.text }}">登陆</nuxt-link> -->
       <!-- <nuxt-link :to="{name:item.link,path:item.link,params:{vv:item.link}}">{{ item.text }}</nuxt-link> -->
     </div>
+  </div>
+      <hr class="center">
+      <div class="center">
+            <!-- <p>嵌套子页面内容区</p> -->
+             <!-- <router-view> -->
+         <nuxt-child keep-alive ></nuxt-child>
+      </div>
   </div>
 </template>
 <script>
@@ -48,7 +61,9 @@ export default {
         { clink: '/slot', text: 'slot', value: '123', title: 'slot' },
         { clink: '/main', text: 'main', value: '123', title: 'main' },
         { clink: '/menu', text: 'menu', value: '123', title: 'menu' },
-        { clink: '/menu1', text: 'menu1', value: '123', title: 'menu1' }
+        { clink: '/menu1', text: 'menu1', value: '123', title: 'menu1' },
+        { clink: '/crouter1', text: 'crouter1', value: '1', title: 'crouter1' },
+        { clink: '/crouter2', text: 'crouter2', value: '2', title: 'crouter2' }
       ]
     }
   }
@@ -74,5 +89,11 @@ export default {
 }
 a {
   margin-left: 5px;
+}
+.center{
+  margin-left: auto;
+    margin-right: auto;
+      display: flex;
+  justify-content: center;
 }
 </style>

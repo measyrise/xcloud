@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-06-01 08:10:26
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
   <!-- // 插槽使用总结：
       1.当提供插槽时，插槽只能插到指定的位置，而不管提供的须序如何
@@ -45,10 +53,7 @@
       "main"
       <slot name="main"/>
     </main>
-    <footer>
-      "footer"
-      <slot name="footer"/>
-    </footer>
+   
     <div>
       <slot name="dd">{{ sslot }}</slot>
     </div>
@@ -70,6 +75,11 @@
       </ul>
       <!-- <slot v-for="(list) in lists" :menu="list"></slot> -->
     </div>
+    
+     <footer>
+      "footer"
+      <slot name="footer"/>
+    </footer>
   </div>
 </template>
 <script>
