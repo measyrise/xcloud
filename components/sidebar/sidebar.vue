@@ -1,4 +1,4 @@
-<!--
+﻿<!--
  * @Description: 文件描述
  * @Author: liangbojie
  * @Github: https://github.com/measyrise/xcloud.git
@@ -15,7 +15,7 @@
   -->
 <template>
   <!-- 外套 装上 SCROLLBAR -->
-  <div class="scrollbarhide scrollbar"  v-on:scroll.passive="onScroll">
+  <div class="scrollbarhide scrollbar" v-on:scroll.passive="onScroll">
     <xlgrid :h="sh" :w="sw">
       <xlrow
         v-for="(item,index) in asyncRouterMap"
@@ -39,7 +39,7 @@
 </template>
 <style rel="stylesheet/scss" lang="scss" >
 .scrollbar {
-  overflow-y:auto;
+  overflow-y: auto;
 }
 .scrollbarhide::-webkit-scrollbar {
   display: none; //Safari and Chrome
@@ -94,7 +94,7 @@ export default {
       style: {},
       itemstyle: {},
       seconditemstyle: {},
-      scrollTop:0,
+      scrollTop: 0,
       sw: '0%',
       sh: '0%',
       numitems: [],
@@ -131,7 +131,7 @@ export default {
           ]
         },
 
-         {
+        {
           path: '/main',
           component: main,
           children: [
@@ -141,15 +141,30 @@ export default {
               name: 'crouter1',
               meta: { title: 'crouter1', icon: 'crouter1', noCache: true }
             },
-              {
+            {
               path: '/main/crouter2',
               component: () => import('../../pages/main/crouter2'),
               name: 'crouter2',
               meta: { title: 'crouter2', icon: 'crouter2', noCache: true }
+            },
+            {
+              path: '/main/crouter33',
+              component(resolve) {
+                require(['../../pages/main/crouter33' + '.vue'], resolve)
+              },
+              name: 'crouter3',
+              meta: { title: 'crouter3', icon: 'crouter3', noCache: true }
+            },
+            {
+              path: '/main/crouter4',
+              component(resolve) {
+                require(['../../pages/main/crouter4' + '.vue'], resolve)
+              },
+              name: 'crouter4',
+              meta: { title: 'crouter4', icon: 'crouter4', noCache: true }
             }
           ]
         },
-         
 
         {
           path: '/icon',
@@ -279,7 +294,8 @@ export default {
               meta: { title: 'uploadExcel' }
             }
           ]
-        },{
+        },
+        {
           path: '/nested',
           component: '',
           redirect: '/nested/menu1/menu1-1',
@@ -409,7 +425,7 @@ export default {
         },
 
         { path: '*', redirect: '/404', hidden: true },
-         {
+        {
           path: '/zip',
           component: '',
           redirect: '/zip/download',
@@ -423,7 +439,8 @@ export default {
               meta: { title: 'exportZip' }
             }
           ]
-        }  , {
+        },
+        {
           path: '/zip',
           component: '',
           redirect: '/zip/download',
@@ -437,7 +454,8 @@ export default {
               meta: { title: 'exportZip' }
             }
           ]
-        }  , {
+        },
+        {
           path: '/zip',
           component: '',
           redirect: '/zip/download',
@@ -451,7 +469,8 @@ export default {
               meta: { title: 'exportZip' }
             }
           ]
-        }  , {
+        },
+        {
           path: '/zip',
           component: '',
           redirect: '/zip/download',
@@ -539,29 +558,23 @@ export default {
   beforeDestroy: function() {},
   mounted: function() {},
   methods: {
-
-     onScroll (e) {
-       
-
+    onScroll(e) {
       //  gscrollTop=e.target.scrollTop;
-        // debugger
-        this.scrollTop=e.target.scrollTop;
-        //方式1.建立全局变量，用的时候自动引用,这样也不依懒VUEX管理
-        Vue.prototype.GscrollTop=e.target.scrollTop
-        //方式2：组件修改，这种可能容易出问题
-        // if(e.target.scrollTop)
-        // {
-        //  for(var i = 0; i <this.$refs.rsidebar.length; i++ ){
-        //     let t=this.$refs.rsidebar[i].$children
-        //    if (t.length>0) {
-        //       this.$refs.rsidebar[i].setscrollTop(this.scrollTop)
-        //     }
-        // }
-        // }
-        
-        
+      // debugger
+      this.scrollTop = e.target.scrollTop
+      //方式1.建立全局变量，用的时候自动引用,这样也不依懒VUEX管理
+      Vue.prototype.GscrollTop = e.target.scrollTop
+      //方式2：组件修改，这种可能容易出问题
+      // if(e.target.scrollTop)
+      // {
+      //  for(var i = 0; i <this.$refs.rsidebar.length; i++ ){
+      //     let t=this.$refs.rsidebar[i].$children
+      //    if (t.length>0) {
+      //       this.$refs.rsidebar[i].setscrollTop(this.scrollTop)
+      //     }
+      // }
+      // }
     }
-
   }
 }
 </script>
