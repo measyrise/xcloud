@@ -51,8 +51,10 @@ export default {
       for (let i = 0; i < tagList.length; i++) {
         if (tagList[i] === currentTag) {
           if (i === 0) {
+            //如果是第一个元素的话不存在上个元素
             nextTag = tagList[i].length > 1 && tagList[i + 1]
           } else if (i === tagList.length - 1) {
+             //如果是最后一个元素的话不存在下个元素
             prevTag = tagList[i].length > 1 && tagList[i - 1]
           } else {
             prevTag = tagList[i - 1]

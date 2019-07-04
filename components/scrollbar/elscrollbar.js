@@ -50,7 +50,8 @@ export default {
   },
 
   render(h) {
-    debugger
+    // debugger
+    //计算SCROLLBAR.WIDTH
     let gutter = scrollbarWidth()
     let style = this.wrapStyle
 
@@ -80,23 +81,24 @@ export default {
       <div
         ref="wrap"
         style={style}
-        // onScroll={this.handleScroll}
+        onScroll={this.handleScroll}
         class={[
           this.wrapClass,
           'el-scrollbar__wrap',
           gutter ? '' : 'el-scrollbar__wrap--hidden-default'
         ]}
       >
-        {[view]}
+        {' '}
+        {[view]}{' '}
       </div>
     )
     let nodes
 
     if (!this.native) {
       nodes = [
-        wrap
-        // <Bar move={this.moveX} size={this.sizeWidth} />,
-        // <Bar vertical move={this.moveY} size={this.sizeHeight} />
+        wrap,
+        <Bar move={this.moveX} size={this.sizeWidth} />,
+        <Bar vertical move={this.moveY} size={this.sizeHeight} />
       ]
     } else {
       nodes = [
@@ -105,21 +107,27 @@ export default {
           class={[this.wrapClass, 'el-scrollbar__wrap']}
           style={style}
         >
-          {[view]}
+          {' '}
+          {[view]}{' '}
         </div>
       ]
     }
-    return h('div', { class: 'el-scrollbar' }, nodes)
+    return h(
+      'div',
+      {
+        class: 'el-scrollbar'
+      },
+      nodes
+    )
   },
 
   methods: {
-    // handleScroll() {
-    //   debugger
-    //   const wrap = this.wrap
+    handleScroll() {
+      const wrap = this.wrap
 
-    //   this.moveY = (wrap.scrollTop * 100) / wrap.clientHeight
-    //   this.moveX = (wrap.scrollLeft * 100) / wrap.clientWidth
-    // },
+      this.moveY = (wrap.scrollTop * 100) / wrap.clientHeight
+      this.moveX = (wrap.scrollLeft * 100) / wrap.clientWidth
+    },
 
     update() {
       let heightPercentage, widthPercentage
@@ -133,15 +141,16 @@ export default {
       this.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : ''
     }
   },
-
   mounted() {
     if (this.native) return
-    // this.$nextTick(this.update)
-    // !this.noresize && addResizeListener(this.$refs.resize, this.update)
+    this.$nextTick(this.update)
+    !this.noresize && addResizeListener(this.$refs.resize, this.update)
   },
 
   beforeDestroy() {
-    if (this.native) return
-    !this.noresize && removeResizeListener(this.$refs.resize, this.update)
+    if (this.native)
+      return (
+        !this.noresize && removeResizeListener(this.$refs.resize, this.update)
+      )
   }
 }

@@ -17,27 +17,23 @@
   <!-- 外套 装上 SCROLLBAR -->
   <div class="scrollbarhide scrollbar" v-on:scroll.passive="onScroll">
     <xlgrid :h="sh" :w="sw">
-      <!-- <xlrow
+      <xlrow
         v-for="(item,index) in asyncRouterMap"
         :class="{'headitem':index==0}"
         :style="(index==1?seconditemstyle:itemstyle)"
         :key="index"
         class="sidebarmenu"
-      >-->
-      <ScrollPane ref="scrollPane" class="sidebarmenu">
+      >
         <Sidebaritem
-          v-for="(item,index) in asyncRouterMap"
-          ref="rsidebar"
           :key="index"
           :itemw="itemw"
           :itemh="itemh"
           :item="item"
           :direction="direction"
           :index="index"
+          ref="rsidebar"
         />
-      </ScrollPane>
-
-      <!-- </xlrow> -->
+      </xlrow>
     </xlgrid>
   </div>
 </template>
@@ -62,7 +58,6 @@ import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
 import Sidebaritem from '../sidebar/sidebaritem'
 import Vue from 'vue'
 import main from '../../pages/main'
-import ScrollPane from '../scrollbar/scrollbar'
 export default {
   components: { xlgrid, xlrow, xlcol, Sidebaritem },
   extends: '',
@@ -454,14 +449,13 @@ export default {
               meta: { title: 'exportZip' }
             }
           ]
-        },
-        {
+        }, {
           path: '/main',
           component: main,
           children: [
             {
               path: '/main/crouter1',
-              component: () => import('../../pages/main/crouter1'),
+              component:  () => import('../../pages/main/crouter1'),
               name: 'crouter1',
               meta: { title: 'crouter1', icon: 'crouter1', noCache: true }
             },
