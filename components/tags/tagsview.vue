@@ -12,7 +12,7 @@
 
   <div class="tags-view-container">
     
-     <div class=" scroll-container  "  @wheel="handleScroll($event)"> 
+     <div class=" scroll-container  "  @wheel.prevent="handleScroll($event)"> 
      <!-- <ScrollPane ref="scrollPane" class="tags-view-wrapper"> -->
        <div ref=tagsref class="el-scrollbar-wrap"  > 
       
@@ -51,6 +51,7 @@
 .tags-view-container{
     height: 34px;
     width: 100%;
+    margin-bottom: 5px;
     background: #fff;
     border-bottom: 1px solid #d8dce5;
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);

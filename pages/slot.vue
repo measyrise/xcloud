@@ -39,21 +39,21 @@
 
     <slot name="girl">漂亮、美丽、购物、逛街</slot>
 
-    <div style="height:1px;background-color:red;"/>
+    <div style="height:1px;background-color:red;" />
 
-    <slot name="boy"/>
+    <slot name="boy" />
 
-    <div style="height:1px;background-color:red;"/>
+    <div style="height:1px;background-color:red;" />
 
     <header>
       "header"
-      <slot name="header"/>
+      <slot name="header" />
     </header>
     <main>
       "main"
-      <slot name="main"/>
+      <slot name="main" />
     </main>
-   
+
     <div>
       <slot name="dd">{{ sslot }}</slot>
     </div>
@@ -69,16 +69,17 @@
 
     <div>
       <ul>
-        <li v-for="(list,index) in lists" :key="index">
+        <li v-for="(list,index) in lists"
+            :key="index">
           <slot :menu="list"></slot>
         </li>
       </ul>
       <!-- <slot v-for="(list) in lists" :menu="list"></slot> -->
     </div>
-    
-     <footer>
+
+    <footer>
       "footer"
-      <slot name="footer"/>
+      <slot name="footer" />
     </footer>
   </div>
 </template>

@@ -17,35 +17,50 @@
 <template>
   <div class="main">
     <xlgrid border="1px">
-      <xlrow h="100%" border="0px">
+      <xlrow h="100%"
+             border="0px">
         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
-        <xlcol border="0px" w="0px" style="overflow:visible;">
-          <Xsidebar h="100%" w="100px" itemw="100px" itemh="60px"></Xsidebar>
+        <xlcol border="0px"
+               w="0px"
+               style="overflow:visible;">
+          <Xsidebar h="100%"
+                    w="100px"
+                    itemw="100px"
+                    itemh="60px"></Xsidebar>
           <!-- <div style="width:100px;height:100%"></div> -->
           <!-- <Sidebar class="sidebar-container"/> -->
         </xlcol>
 
         <!-- 右方文档 -->
-        <xlcol w="100%" border="1px" style="flex-grow:1">
-          <xlgrid w="100%" h="100%">
-            <xlrow h="60px" border="1px">
+        <xlcol w="100%"
+               border="1px"
+               style="flex-grow:1">
+          <xlgrid w="100%"
+                  h="100%">
+            <xlrow h="0px" 
+                   >
               <tagsview></tagsview>
             </xlrow>
-            <xlrow h="100%" border="1px">
-              <Slotdemo :lists="menulist" sslot="aaa">
-                
+            <xlrow h="100%"
+                   >
+              <Slotdemo :lists="menulist"
+                        sslot="aaa">
+
                 <template slot="footer">
                   <div class="center">
-                  <!-- <p>嵌套子页面内容区</p> -->
-                 <!-- <router-view> -->
-                 <nuxt-child keep-alive ></nuxt-child>
-                 </div>
-              </template>
+                    <!-- <p>嵌套子页面内容区</p> -->
+                    <!-- <router-view> -->
+                    <nuxt-child keep-alive></nuxt-child>
+                  </div>
+                </template>
 
-                <template slot="header"></template>
+                <template slot="header">
+
+                </template>
+
                 <template slot="main"></template>
-                
+
                 <template slot="boy">提供的男人</template>
                 <template slot="girl">girl</template>
                 <template slot="dd">dd</template>
@@ -53,13 +68,11 @@
                 作用域-->
                 <template slot-scope="b">
                   <!-- {{ b }} -->
-                   {{b.say}}
-                   {{b.shit}}
-                   {{ b.menu }} 
+                  {{b.say}}
+                  {{b.shit}}
+                  {{ b.menu }}
                 </template>
               </Slotdemo>
-              
-               
 
               <!-- 默认的插的内容
               <h4>这个世界不仅有男人和女人</h4>-->

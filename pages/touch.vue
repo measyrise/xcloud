@@ -1,17 +1,27 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-04-04 08:18:10
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
   <div id="app">
     <div class="ctn ctn1">
-      <div class="sub sub1" v-for="(site, index) in list1" :key="index">
-        <div
-          class="dragCtn fixed"
-          @mousedown="mousedown(site, $event)"
-          @mousemove.prevent="mousemove(site, $event)"
-          @mouseup="mouseup(site, $event)"
-        >{{ site.name }}</div>
+      <div class="sub sub1"
+           v-for="(site, index) in list1"
+           :key="index">
+        <div class="dragCtn fixed"
+             @mousedown="mousedown(site, $event)"
+             @mousemove.prevent="mousemove(site, $event)"
+             @mouseup="mouseup(site, $event)">{{ site.name }}</div>
       </div>
     </div>
     <div class="ctn ctn2">
-      <div class="sub sub2" v-for="(site, index) in list2" :key="index">
+      <div class="sub sub2"
+           v-for="(site, index) in list2"
+           :key="index">
         <div class="dragCtn">{{ index }} : {{ site.name }}</div>
       </div>
     </div>
@@ -36,14 +46,14 @@ export default {
     }
   },
   methods: {
-    mousedown: function(site, event) {
+    mousedown: function (site, event) {
       var startx = event.x
       var starty = event.y
       this.sb_bkx = startx - event.target.offsetLeft
       this.sb_bky = starty - event.target.offsetTop
       this.is_moving = true
     },
-    mousemove: function(site, event) {
+    mousemove: function (site, event) {
       var endx = event.x - this.sb_bkx
       var endy = event.y - this.sb_bky
       var _this = this
@@ -52,7 +62,7 @@ export default {
         event.target.style.top = endy + 'px'
       }
     },
-    mouseup: function(e) {
+    mouseup: function (e) {
       this.is_moving = false
     }
   }

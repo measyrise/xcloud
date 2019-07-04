@@ -10,7 +10,12 @@
 <template>
     <div>
         <h2>嵌套子组件中的页面child1</h2>
-      
+         <ul>
+            <li><nuxt-link to="/main/crouter1/c1">tab1</nuxt-link></li>
+            <li><nuxt-link to="/main/crouter1/c2">tab2</nuxt-link></li>
+            <li><nuxt-link to="/main/crouter1/c3">tab3</nuxt-link></li>
+        </ul>
+        <nuxt-child></nuxt-child> 
     </div>
 </template>
 <script>

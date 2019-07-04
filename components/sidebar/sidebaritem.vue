@@ -204,6 +204,7 @@ export default {
     setscrollTop(v) {
       this.$refs.subpopper.setscrollTop(v)
     },
+    //发身数据给navbar建立名称及相关用
     handmenuclick(item) {
       // debugger
       this.xebus.$emit('menuclick', item)

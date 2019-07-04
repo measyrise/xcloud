@@ -132,41 +132,6 @@ export default {
         },
 
         {
-          path: '/main',
-          component: main,
-          children: [
-            {
-              path: '/main/crouter1',
-              component: () => import('../../pages/main/crouter1'),
-              name: 'crouter1',
-              meta: { title: 'crouter1', icon: 'crouter1', noCache: true }
-            },
-            {
-              path: '/main/crouter2',
-              component: () => import('../../pages/main/crouter2'),
-              name: 'crouter2',
-              meta: { title: 'crouter2', icon: 'crouter2', noCache: true }
-            },
-            {
-              path: '/main/crouter33',
-              component(resolve) {
-                require(['../../pages/main/crouter33' + '.vue'], resolve)
-              },
-              name: 'crouter3',
-              meta: { title: 'crouter3', icon: 'crouter3', noCache: true }
-            },
-            {
-              path: '/main/crouter4',
-              component(resolve) {
-                require(['../../pages/main/crouter4' + '.vue'], resolve)
-              },
-              name: 'crouter4',
-              meta: { title: 'crouter4', icon: 'crouter4', noCache: true }
-            }
-          ]
-        },
-
-        {
           path: '/icon',
           component: '',
           children: [
@@ -482,6 +447,39 @@ export default {
               component: '',
               name: 'ExportZip',
               meta: { title: 'exportZip' }
+            }
+          ]
+        }, {
+          path: '/main',
+          component: main,
+          children: [
+            {
+              path: '/main/crouter1',
+              component:  () => import('../../pages/main/crouter1'),
+              name: 'crouter1',
+              meta: { title: 'crouter1', icon: 'crouter1', noCache: true }
+            },
+            {
+              path: '/main/crouter2',
+              component: () => import('../../pages/main/crouter2'),
+              name: 'crouter2',
+              meta: { title: 'crouter2', icon: 'crouter2', noCache: true }
+            },
+            {
+              path: '/main/crouter33',
+              component(resolve) {
+                require(['../../pages/main/crouter33' + '.vue'], resolve)
+              },
+              name: 'crouter3',
+              meta: { title: 'crouter3', icon: 'crouter3', noCache: true }
+            },
+            {
+              path: '/main/crouter4',
+              component(resolve) {
+                require(['../../pages/main/crouter4' + '.vue'], resolve)
+              },
+              name: 'crouter4',
+              meta: { title: 'crouter4', icon: 'crouter4', noCache: true }
             }
           ]
         }

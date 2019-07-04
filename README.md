@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2018-12-24 01:17:01
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 
 <!-- 整个技术按照SSR模式架构  是 vue+vuex+nuxt+java-->
 

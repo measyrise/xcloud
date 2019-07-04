@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2018-12-24 01:17:01
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
   <div>
     <h1>{{ ip }}</h1>
@@ -27,32 +35,32 @@ import Mock from 'mockjs'
 //MOCK 使用时，URL 与GET 一致时就会转到MOCK 来，这里有几个问题 AXIOS 拦截器在前，还是代理在前，MOCK 能拦截代理的请求吗？
 //顺序是代理最前，拦截在后，MOCK 拦截代理最后的地址
 
-Mock.mock('/api/fi',  'get',  {
-    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    'list|1-10': [
-      {
-        // 属性 id 是一个自增数，起始值为 1，每次增 1
-        'id|+1': 1
-      }
-    ]
-  }
+Mock.mock('/api/fi', 'get', {
+  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+  'list|1-10': [
+    {
+      // 属性 id 是一个自增数，起始值为 1，每次增 1
+      'id|+1': 1
+    }
+  ]
+}
 )
 
-Mock.mock('/api/ip/fi',  'get',  {
-    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    'list|1-100': [
-      {
-        // 属性 id 是一个自增数，起始值为 1，每次增 1
-        'id|+1': 1
-      }
-    ]
-  }
+Mock.mock('/api/ip/fi', 'get', {
+  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+  'list|1-100': [
+    {
+      // 属性 id 是一个自增数，起始值为 1，每次增 1
+      'id|+1': 1
+    }
+  ]
+}
 )
 
 // 输出结果
 // console.log(JSON.stringify(data, null, 4))
 
- Mock.mock('http://icanhazip.com', 'get',"'dd':'3333'")
+Mock.mock('http://icanhazip.com', 'get', "'dd':'3333'")
 // ;('use strict')
 export default {
   head: {
@@ -68,13 +76,13 @@ export default {
         data: 'params'
       })
       .then(result => {
-      //   debugger
+        //   debugger
         data = result.data
-      //   console.log(result)
+        //   console.log(result)
       })
       .catch(err => {
-      //   debugger
-      //   console.log(err)
+        //   debugger
+        //   console.log(err)
       })
 
     return {
@@ -89,7 +97,7 @@ export default {
     }
   },
   computed: {
-    cmsg: function() {
+    cmsg: function () {
       //  debugger
       // const test=this.msg;
       // const data= this.$axios.$get('http://icanhazip.com').then((result) => {
@@ -105,7 +113,7 @@ export default {
 
       return this.$route.query.newsID ? this.$route.query.newsID : '空值'
     },
-    chideid: function() {
+    chideid: function () {
       return this.$route.params.hideid ? this.$route.params.hideid : '空值'
     }
   }
