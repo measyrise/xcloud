@@ -6,6 +6,7 @@
  * @LastEditTtime: Do not edit
  * @Date: 2018-12-24 01:17:01
  */
+
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -17,12 +18,13 @@ app.set('port', port)
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
+
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
-  // debugger
+
   console.log('0')
   // Build only in dev mode
   if (config.dev) {
@@ -32,6 +34,30 @@ async function start() {
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
+
+  // debugger
+  //在这个时刻加入国际误言
+  // var lang = new VueI18n({
+  //   locale: Cookies.get('language') || 'zh',
+  //   fallbackLocale: Cookies.get('language') || 'zh',
+  //   // debugger,
+  //   messages: {
+  //     zh: require('../plugins/lang/zh'),
+  //     en: require('../plugins/lang/en')
+  //   }
+  // })
+
+  // app.use(lang)
+
+  // app.i18n.locale = 'en'
+  /* 这段代码也没什么用，不知为什么要*/
+  // app.i18n.path = link => {
+  //   debugger
+  //   if (app.i18n.locale === app.i18n.fallbackLocale) {
+  //     return `/${link}`
+  //   }
+  //   return `/${app.i18n.locale}/${link}`
+  // }
 
   // Listen the server
   app.listen(port, host)

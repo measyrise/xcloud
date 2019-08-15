@@ -1,0 +1,187 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-08-09 17:11:21
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <meta charset="utf-8" />
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #table {
+      position: relative;
+    }
+
+    #table th:first-child,
+    #table th:nth-child(2),
+    #table th:last-child,
+    #table tr>td:first-child,
+    #table tr>td:nth-child(2),
+    #table tr>td:last-child {
+      background-color: #ff0000;
+      position: fixed;
+      z-index: 2;
+    }
+  </style>
+  <script src="../Scripts/jq/jquery-2.1.4/jquery-2.1.4.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      if ($("#table>thead>tr>th").length > 5) {
+        //设置固定列的th和td的with都为最长的那个td的长度
+        var tdWith = 0;
+        $("#table tr>td:first-child").each(function (index, item) {
+          if ($(item).width() > tdWith) {
+            tdWith = $(item).width();
+          }
+        });
+        $("#table th:first-child,#table tr>td:first-child").width(tdWith);
+        tdWith = 0;
+        $("#table th:nth-child(2),#table tr>td:nth-child(2)").each(function (index, item) {
+          if ($(item).width() > tdWith) {
+            tdWith = $(item).width();
+          }
+        });
+        $("#table th:nth-child(2),#table tr>td:nth-child(2)").width(tdWith);
+        tdWith = 0;
+        $("#table th:last-child,#table tr>td:last-child").each(function (index, item) {
+          if ($(item).width() > tdWith) {
+            tdWith = $(item).width();
+          }
+        });
+        $("#table th:last-child,#table tr>td:last-child").width(tdWith);
+        //设置外面div的with
+        var div_abroadWith = 0;
+        $("#table>tbody>tr:first-child>td").each(function (index, item) {
+          if (index < 5) {
+            div_abroadWith += $(item).width();
+          } else {
+            return false;
+          }
+        });
+        //设置table的with
+        var tableWith = 0;
+        $("#table>tbody>tr:first-child>td").each(function (index, item) {
+          tableWith += $(item).width();
+        });
+        $("#table").width(tableWith);
+        div_abroadWith += $("#table th:last-child").width();
+        $("#div_abroad").width(div_abroadWith);
+        //设置固定列的偏移量
+        $("#table th:first-child,tr>td:first-child").css("left", $("#div_abroad").offset().left);
+        $("#table th:nth-child(2),tr>td:nth-child(2)").css("left", $("#div_abroad").offset().left + $(
+          "#table td:first-child").width());
+        $("#table th:last-child,tr>td:last-child").css("left", $("#div_abroad").offset().left + $("#div_abroad")
+          .width() - $("#table td:last-child").width());
+
+        //因为第一，二和最后一个设置定位了，所以table里缺少了3列造成滚动条不足，所以要为table补充3列，补充位置有要求，必须在第二列的后面补上第一，第二列。这两列的宽度和原先的保持一致
+        //最后一列的上面要补充一列，宽度和最后一列保持一致。
+        var $td = $("<th style='width:" + $("#table th:first-child").width().toString() +
+          "px'></th><th style='width:" + $("#table th:nth-child(2)").width().toString() + "px'></th>");
+        $("#table th").eq(2).before($td);
+        $td = "<td style='width:" + $("#table th:first-child").width().toString() + "px'></td><td style='width:" +
+          $("#table th:nth-child(2)").width().toString() + "px'></td>";
+        $("#table tbody>tr").each(function (index, item) {
+          $(item).find("td").eq(2).before($($td));
+        });
+        $td = $("<td style='width:" + $("#table th:last-child").width().toString() + "px'></td>");
+        $("#table tbody>tr>td:last-child").before($td);
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div id="div_abroad" style="overflow-x: auto;width:300px;margin:50px auto;background:#4cff00">
+    <table id="table" style="border-collapse: collapse" borderColor=#000000 height=40 cellPadding=1 border=1>
+      <thead>
+        <tr>
+          <th>列1</th>
+          <th>列2</th>
+          <th>列3</th>
+          <th>列4</th>
+          <th>列5</th>
+          <th>列6</th>
+          <th>列7</th>
+          <th>列8</th>
+          <th>列9</th>
+          <th>列10</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>111111111111111111111111</td>
+          <td>222222222</td>
+          <td>33333333</td>
+          <td>44444</td>
+          <td>555555555555555555555</td>
+          <td>66666666</td>
+          <td>777777</td>
+          <td>88888888</td>
+          <td>9999999</td>
+          <td>10959</td>
+        </tr>
+        <tr>
+          <td>111111111111111</td>
+          <td>22222222222</td>
+          <td>333333</td>
+          <td>444444444444</td>
+          <td>5555555555555555</td>
+          <td>666666666666</td>
+          <td>777777</td>
+          <td>88888888888888888</td>
+          <td>999999999999</td>
+          <td>109555559</td>
+        </tr>
+        <tr>
+          <td>111111111111111</td>
+          <td>222222222222222222222</td>
+          <td>333333333333</td>
+          <td>4444444</td>
+          <td>555555555555555555555</td>
+          <td>66666666</td>
+          <td>777777</td>
+          <td>88888888</td>
+          <td>9999999</td>
+          <td>109555999995559</td>
+        </tr>
+        <tr>
+          <td>111111111111111</td>
+          <td>22222222222</td>
+          <td>333333eeee33</td>
+          <td>44444</td>
+          <td>555555555555555555555</td>
+          <td>66666666</td>
+          <td>777wwww777</td>
+          <td>88888eee888</td>
+          <td>9999ww999</td>
+          <td>1095555559</td>
+        </tr>
+        <tr>
+          <td>111111111111111</td>
+          <td>22222222222222222222222222</td>
+          <td>333ww33333</td>
+          <td>44sss444</td>
+          <td>555555555555555555555</td>
+          <td>66666666</td>
+          <td>777777</td>
+          <td>88888</td>
+          <td>9999</td>
+          <td>10559</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

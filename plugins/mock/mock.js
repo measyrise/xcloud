@@ -24,3 +24,10 @@ Mock.mock(/\/api/, 'get', function(options) {
   console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
   return { abcd: 'test' } //返回这个数组,也就是返回处理后的假数据)
 })
+Mock.mock(/\/api\/setlang/, 'get', function(options) {
+  debugger
+  console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+  return {
+    lang: 'lang'
+  } //返回这个数组,也就是返回处理后的假数据)
+})

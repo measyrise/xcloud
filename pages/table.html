@@ -1,0 +1,216 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-07-09 09:22:00
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>响应式布局</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no" />
+  <meta name="format-detection" content="telephone=no,email=no" />
+  <script  type="text/javascript" src="css/t.js" ></script>
+  
+
+  <style >
+    td,
+    th {
+      font-style: normal;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    tr {
+      height: 48px;
+    }
+
+    .firstHead,
+    .twoHead,
+    .threeHead {
+      height: 32px;
+    }
+
+    .fourHead {
+      height: 64px;
+    }
+
+    .firstHead th {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    table {
+      border: none;
+      border-collapse: collapse;
+      border-color: #d8dfe6;
+    }
+
+    table thead {
+      background: #f3fdff;
+    }
+
+    table tbody td {
+      width: 6.3%;
+    }
+
+    table tbody tr {
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="table">
+    <table id="tab" cellpadding="1" cellspacing="1" border="1">
+      <tr>
+        <th rowspan="2">序号</th>
+        <th rowspan="2">监测位置</th>
+        <th rowspan="2">供电通路</th>
+        <th rowspan="2">供电电压</th>
+        <th rowspan="2">负载电流</th>
+        <th rowspan="2">雷击次数</th>
+        <th rowspan="2">最近一次雷击时间</th>
+        <th colspan="2">后备保护空开状态</th>
+        <th rowspan="2">SPD损害数量</th>
+        <th colspan="2">输出空开状态</th>
+      </tr>
+      <tr>
+        <th>B级</th>
+        <th>C级</th>
+        <th>1路</th>
+        <th>2路</th>
+        <!-- <th>more</th> -->
+      </tr>
+
+      <tr>
+        <th rowspan="4">1</th>
+      </tr>
+
+      <tr>
+        <th>1</th>
+        <th>78</th>
+        <th>96</th>
+        <th>67</th>
+        <th>98</th>
+        <th>88</th>
+        <th>75</th>
+        <th>94</th>
+        <th>69</th>
+        <th>23 </th>
+        <th>33 </th>
+      </tr>
+
+      <tr>
+        <th colspan="2">提示建议</th>
+        <th colspan="2">智能防雷箱状态</th>
+        <th colspan="2">防雷箱型号</th>
+        <th colspan="3">防雷箱序列号</th>
+        <th colspan="2">防雷箱版本</th>
+      </tr>
+      <tr>
+        <th colspan="2">建议整机按规程检测</th>
+        <th colspan="2">在线</th>
+        <th colspan="2">2018041201-035PF</th>
+        <th colspan="3">2018041201-256</th>
+        <th colspan="2">V1.0.0</th>
+      </tr>
+
+    </table>
+
+    <table border="1" cellspacing="0" cellpadding="10" width="100%" id="table1">
+      <thead>
+        <tr class="firstHead">
+          <th colspan="1" rowspan="5" width="4%">序号</th>
+          <th colspan="1" rowspan="5" width="6.4%">终端使用人</th>
+          <th colspan="14">工作开展情况</th>
+        </tr>
+        <tr class="twoHead">
+          <th colspan="1" rowspan="4">工作量总计</th>
+          <th colspan="9">采集情况</th>
+          <th colspan="4">检查情况</th>
+
+        </tr>
+        <tr class="threeHead">
+          <th colspan="3" rowspan="1">人口</th>
+          <th colspan="3" rowspan="1">房屋</th>
+          <th colspan="3" rowspan="1">车辆</th>
+          <th colspan="4" rowspan="1">房屋隐患</th>
+
+        </tr>
+        <tr class="fourHead">
+          <th colspan="1" rowspan="2">总数</th>
+          <th colspan="1" rowspan="2">户籍</th>
+          <th colspan="1" rowspan="2">流动</th>
+          <th colspan="1" rowspan="2">总数</th>
+          <th colspan="1" rowspan="2">自住</th>
+          <th colspan="1" rowspan="2">出租</th>
+          <th colspan="1" rowspan="2">总数</th>
+          <th colspan="1" rowspan="2">机动车</th>
+          <th colspan="1" rowspan="2">非机动车</th>
+          <th colspan="1" rowspan="2">总数</th>
+          <th colspan="1" rowspan="2">生活安全</th>
+          <th colspan="1" rowspan="2">出租管理</th>
+          <th colspan="1" rowspan="2">房屋功能</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td width="4%">∞</td>
+          <td>30万</td>
+          <td>20万</td>
+          <td>60万</td>
+          <td>100万</td>
+          <td>看着办</td>
+          <td>∞∞</td>
+          <td>20万</td>
+          <td>100万</td>
+          <td>看着办</td>
+          <td>∞∞</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+        </tr>
+
+        <tr>
+          <td width="4%">∞</td>
+          <td>30万</td>
+          <td>20万</td>
+          <td>60万</td>
+          <td>100万</td>
+          <td>看着办</td>
+          <td>∞∞</td>
+          <td>20万</td>
+          <td>100万</td>
+          <td>看着办</td>
+          <td>∞∞</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+          <td>20万</td>
+        </tr>
+      </tbody>
+
+      <tfoot bgcolor="#00ccff" align="right" valign="middle">
+        <tr>
+          <td colspan="16">表格创建日期:2013-6-8</td>
+        </tr>
+      </tfoot>
+
+    </table>
+
+  </div>
+
+  <script type="text/javascript">
+    mc('table1', 0, 0, 0);
+  </script>
+</body>
+
+</html>

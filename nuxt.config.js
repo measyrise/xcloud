@@ -77,9 +77,11 @@ module.exports = {
     middleware: 'i18n' // middleware all pages of the application
   },
   //当运行 nuxt generate 命令或在编码中调用 nuxt.generate() 时，Nuxt.js 会使用 generate 属性的配置。
+
   // generate: {
-  //   routes: ['/', '/about', '/en', '/en/about']
+  //   routes: ['/', '/about', '/en', '/en/crouter1', '/en/crouter2']
   // },
+
   /*
    ** Customize the progress-bar color
    */
@@ -167,6 +169,9 @@ module.exports = {
    ** Build configuration
    */
   build: {
+
+       cache: true,
+    parallel: true,
     /*
      ** You can extend webpack config here
      */

@@ -8,47 +8,36 @@
  */
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-
+import Cookies from 'js-cookie'
 Vue.use(VueI18n)
 
+//每次刷新会执行这块，路由是不会执行这块,属于后端，看点击时的情况：点击不执行
 export default ({ app, store }) => {
   // debugger
-  app.i18n = new VueI18n({
-    locale: store.state.locale,
-    fallbackLocale: 'zh',
-    messages: {
-      en: require('~/plugins/lang/en.js'),
-      zh: require('~/plugins/lang/zh.js')
-    }
-  })
+  var t = new Date()
+  console.log(
+    t +
+      '********************************lang_plugin********************************'
+  )
 
-  app.i18n.path = link => {
-    if (app.i18n.locale === app.i18n.fallbackLocale) {
-      return `/${link}`
-    }
-    return `/${app.i18n.locale}/${link}`
+  if (!app.i18n) {
+    app.i18n = new VueI18n({
+      locale: store.state.locale,
+      fallbackLocale: 'zh',
+      defaultLocale: 'zh',
+      messages: {
+        zh: require('../../plugins/lang/zh'),
+        en: require('../../plugins/lang/en')
+      }
+    })
   }
 
-  // import Cookies from 'js-cookie'
-  // import enLocale from './en'
-  // import zhLocale from './zh'
+  //这是一个扩展函数，在页面可以$调用
+  // app.i18n.path = link => {
+  //   if (app.i18n.locale === app.i18n.fallbackLocale) {
+  //     return `/${link}`
+  //   }
 
-  // const messages={
-
-  // 	zh:{
-  // 		...zhLocale
-  // 	},
-  // 	en:{
-  // 		...enLocale
-  // 	}
-
+  //   return `/${app.i18n.locale}/${link}`
   // }
-
-  // const i18n=new VueI18n({
-
-  // 	//从cookies 里取，如果取不到则用zh来代替
-  // 	 locale: Cookies.get('language') || 'zh',
-  // 	// set locale messages
-  // 	 messages
-  // })
 }

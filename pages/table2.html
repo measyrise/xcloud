@@ -1,0 +1,118 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-08-09 18:38:29
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/admin/css/common.css">
+  <link rel="stylesheet" href="/admin//css/news/news.css">
+  <link rel="stylesheet" href="/admin//css/font-awesome.min.css">
+  <script src="/admin//js/jquery.min.js"></script>
+  <script src="/admin//js/news.js"></script>
+</head>
+<style>
+  table {
+    table-layout: auto !important;
+    word-break: keep-all !important;
+  }
+
+  td,
+  th {
+    padding: 0 5px;
+  }
+
+  table tr:nth-child(even) {
+    background: white;
+  }
+
+  table tr th:nth-last-child(2),
+  table tr td:nth-last-child(2) {
+    padding-right: 170px;
+  }
+
+  table th:last-child,
+  table tr td:last-child {
+    background: inherit;
+    border-left: 1px solid #ddd;
+    width: 150px;
+    text-align: center;
+    position: fixed;
+    right: 0;
+    z-index: 2;
+  }
+</style>
+
+<body>
+  <div class="list-content" style="overflow:auto;">
+    <table>
+      <tr>
+        <th width="50px">序号</th>
+        <th>应用名</th>
+        <th>app_id</th>
+        <th>secret_key</th>
+        <th>绑定学校</th>
+        <th>教务系统</th>
+        <th>联系人</th>
+        <th>联系电话</th>
+        <th>状态</th>
+        <th>创建日期</th>
+        <th>更新日期</th>
+        <th width="200">操作</th>
+      </tr>
+      <tr>
+        <td align="center">1</td>
+        <td>请打的</td>
+        <td>1542081125346835</td>
+        <td>29f7a4edd04af7f558870636b6689781</td>
+        <td>青岛大学</td>
+        <td>URP综合教务</td>
+        <td>水电费</td>
+        <td></td>
+        <td>1</td>
+        <td>2018-11-13 11:52:05</td>
+        <td>2018-11-13 11:52:05</td>
+        <td>
+          <span class="edit-btn" οnclick="parent.showUrlDialog('edit/id/8')">
+            <li class="fa fa-edit"></li> 编辑
+          </span>
+          <span class="delete-btn" οnclick="delAppClient('8')">
+            <li class="fa fa-ban"></li> 删除
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">2</td>
+        <td>看手机</td>
+        <td>1542036973909802</td>
+        <td>7ce5dc0272e2482acf8c37ef9f0d1582</td>
+        <td>青岛大学</td>
+        <td>URP综合教务</td>
+        <td>万洲</td>
+        <td></td>
+        <td>0</td>
+        <td>2018-11-12 23:36:13</td>
+        <td>2018-11-13 00:14:13</td>
+        <td>
+          <span class="edit-btn" οnclick="parent.showUrlDialog('app_client/edit/id/7')">
+            <li class="fa fa-edit"></li> 编辑
+          </span>
+          <span class="delete-btn" οnclick="delAppClient('7')">
+            <li class="fa fa-ban"></li> 删除
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="page">
+  </div>
+
+</body>
+
+</html>
