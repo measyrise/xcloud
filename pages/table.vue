@@ -16,7 +16,7 @@
             >单元格调整</button>
 
     <xtable :height=300
-            :width=1000
+            :width=1500
             :columns="columns"
             :headRows="titleRows"
             :tableData="tableData"

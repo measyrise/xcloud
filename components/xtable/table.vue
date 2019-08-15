@@ -798,17 +798,17 @@ export default {
 
 <style lang='scss'>
 .x-table-view-wrapper {
-  // overflow: hidden;
+  overflow: hidden;
   border: 1px solid #d8dfe6;
   position: relative;
-  float: left;
+  display: table-row;
 }
 
 .x-table-view-left-wrapper {
   // position: absolute;
   // top:0px;
   // left:0px;
-  float: left;
+   float: left;
 }
 
 .x-table-view-right-wrapper {
