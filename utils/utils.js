@@ -138,7 +138,8 @@ export default {
   // 获取滚动条的宽度
   getScrollbarWidth() {
     const outer = document.createElement('div')
-    outer.className = settings.scrollbarClass
+    // outer.className = settings.scrollbarClass
+
     outer.style.visibility = 'hidden'
     outer.style.width = '100px'
     outer.style.position = 'absolute'

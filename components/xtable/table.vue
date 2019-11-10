@@ -17,10 +17,12 @@
 
       <!-- 左表、为了固定列 -->
       <template :if="frozenCols.length>0">
-        <div class="x-table-view-left-wrapper"
-             :style="{'width':leftViewWidth+'px','height': height +'px'}">
+
+        <div :style="{'width':leftViewWidth+'px','height': height +'px'}"
+             class="x-table-view-left-wrapper">
           <!-- 左表头 -->
           <div class="x-table-view-head-wrapper">
+
             <table border="0"
                    cellspacing="0"
                    cellpadding="0">
@@ -36,102 +38,227 @@
                          :style="{'width':titleColumnWidth(headcol.fields)+'px','height':titleColumnHeight(headcol.rowspan)+'px',
                                'line-height':titleColumnHeight(headcol.rowspan)+'px',
                                'text-align':headcol.titleAlign}">
-                      <span>{{ headcol.title }}</span>
+
+                      <template v-if="headcol.type=='SELECTION'">
+
+                        <xcheckbox 
+                                   :indeterminate="indeterminate"
+                                    v-model="isAllChecked"
+                                   :show-slot="false"
+                                   label="check-all">
+
+                        </xcheckbox>
+<!-- 
+                        <label>
+                          <input type="checkbox"  value="1" style="display:none" class="check-box"><span></span>
+                       </label> -->
+
+                      </template>
+
+                      <template v-else>
+                        <span>{{ headcol.title }}</span>
+                      </template>
+
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- 左表内容  如果存横向滚动条，减去横向滚动条，如果存在纵滚动+加纵向滚动的2 -->
+          <div :style="{'height':(bodyHeight- HscrollbarWidth - hasVscrollbarWidth + hasHscrollbarWidth ) +'px'}"
+               class="x-table-view-body-left-wrapper"
+               @mousewheel.passive="onleftbodyMousewheel($event)">
+            <div class="x-table-view-body-left-inner-wrapper">
+              <table border="0"
+                     cellspacing="0"
+                     cellpadding="0">
+                <tbody>
+                  <tr v-for="(bodyrow,bodyrowindex) in tableData"
+                      :key="bodyrowindex">
+                    <td v-for="(bodycol,bodycolindex) in frozenCols"
+                        :key="bodycolindex">
+                      <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
+                           :style="{'width':bodycol.width+'px','height':rowHeight+'px','line-height':rowHeight+'px','text-align':bodycol.columnAlign}">
+                        <!-- 必须设定宽度，不然要其要根据内容自动缩小 -->
+                        <template v-if="bodycol.type==='SEQUECE'">
+
+                          <span :style="{'text-align':bodycol.columnAlign,'border':'0px','height':'100%','line-height':'100%','width':'100%'}"
+                                v-html="bodycol.formatter(bodyrow,bodyrowindex,bodycolindex,bodycol)">
+                          </span>
+                        </template>
+
+                        <template v-else-if="bodycol.type==='STRING'">
+                          <input :value="bodyrow[bodycol.field]"
+                                 :readonly="bodycol.isEdit==false"
+                                 :style="{'text-align':bodycol.columnAlign,'border':'0px','height':'100%','line-height':'100%','width':'100%'}"
+                                 type="text"
+                                 class="sp-cell-input"
+                                 @keyup="cellEditClick($event,bodycol,bodyrow,bodyrowindex)"
+                                 @blur="onblur($event,bodycol,bodyrow,bodyrowindex)"
+                                 @focus="onfocus($event,bodycol,bodyrow,bodyrowindex)">
+                        </template>
+
+                        <template v-else-if="bodycol.type === 'SELECTION'">
+                                            <xcheckbox  :show-slot="false"
+                                                         :label="rowIndex">
+                                            </xcheckbox>
+                        </template>
+
+                        <template v-else>
+                          <span :style="{'text-align':bodycol.columnAlign,'border':'0px','height':'100%','line-height':'100%','width':'100%'}">
+                          </span>
+                        </template>
+
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- 左表底 -->
+          <div :style="{'margin-top':( HscrollbarWidth )+'px;'}"
+               class="x-table-view-footer-left-wrapper">
+            <!-- 左表底构造 -->
+            <div class="x-table-view-footer-inner-wrapper">
+
+              <table border="0"
+                     cellspacing="0"
+                     cellpadding="0">
+                <tbody>
+                  <!-- //左表底行 -->
+                  <tr v-for="(footerrow,footerrowindex) in GetFrozenfooterRows"
+                      :key="footerrowindex">
+                    <td v-for="(footercol,footercolindex) in footerrow"
+                        :key="footercolindex"
+                        :colspan="footercol.colspan"
+                        :rowspan="footercol.rowspan">
+                      <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
+                           :style="{'width':titleColumnWidth(footercol.fields)+'px','height':titleColumnHeight(footercol.rowspan)+'px',
+                                 'line-height':titleColumnHeight(footercol.rowspan)+'px',
+                                 'text-align':footercol.titleAlign}">
+
+                        <span>{{ computedcol(footercol) }}</span>
+
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+      </template>
+
+      <!-- ------------------------右表---------------- -->
+      <div :style="{'width':rightViewWidth+'px','height': height +'px'}"
+           class="x-table-view-right-wrapper">
+
+        <!-- 右表头 ,如果存在滚动条、减去滚动条高度 17，如果存在固定列 加国定列的 2 -->
+        <div :style="{'width': (rightViewWidth- VscrollbarWidth - hasHscrollbarWidth + hasVscrollbarWidth )+'px'}"
+             class="x-table-view-head-right-wrapper">
+          <div class="x-table-view-head-right-inner-wrapper">
+            <table border="0"
+                   cellspacing="0"
+                   cellpadding="0">
+              <tbody>
+                <!-- //表头行 -->
+                <tr v-for="(headrow,headrowindex) in noFrozenTitleCols"
+                    :key="headrowindex">
+                  <td v-for="(headcol,headcolindex) in headrow"
+                      :key="headcolindex"
+                      :colspan="headcol.fields.length"
+                      :rowspan="headcol.rowspan">
+                    <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
+                         :style="{'width':titleColumnWidth(headcol.fields)+'px','height':titleColumnHeight(headcol.rowspan)+'px',
+                               'line-height':titleColumnHeight(headcol.rowspan)+'px',
+                               'text-align':headcol.titleAlign}">
+
+                      <template v-if="headcol.type==='SELECTION'">
+                        <span>s</span>
+                      </template>
+
+                      <template v-else>
+                        <span>{{ headcol.title }}</span>
+                      </template>
+
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
 
-          <!-- 左表内容 -->
-          <div class="x-table-view-body-wrapper">
+        <!-- 右表内容，如果存因定表头，高度+2，如果存在宽度锁定，宽度+2，SCROLLBAR对齐-->
+
+        <div :style="{'height':(bodyHeight+hasHscrollbarWidth -hasVscrollbarWidth)+'px','width':(rightViewWidth+hasVscrollbarWidth-hasHscrollbarWidth)+'px' }"
+             class="x-table-view-body-right-wrapper"
+             @scroll.passive="onrightbodyscroll($event)">
+          <div class="x-table-view-body-right-inner-wrapper">
             <table border="0"
                    cellspacing="0"
                    cellpadding="0">
               <tbody>
                 <tr v-for="(bodyrow,bodyrowindex) in tableData"
                     :key="bodyrowindex">
-                  <td v-for="(bodycol,bodycolindex) in frozenCols"
+                  <td v-for="(bodycol,bodycolindex) in noFrozenCols"
                       :key="bodycolindex">
                     <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                          :style="{'width':bodycol.width+'px','height':rowHeight+'px','line-height':rowHeight+'px','text-align':bodycol.columnAlign}">
-                      <span>{{ bodyrow[bodycol.field] }}</span>
+
+                      <!-- 必须设定宽度，不然要其要根据内容自动缩小 -->
+                      <input :value="bodyrow[bodycol.field]"
+                             :readonly="bodycol.isEdit==false"
+                             :style="{'text-align':bodycol.columnAlign,'border':'0px','height':'100%','line-height':'100%','width':'100%'}"
+                             type="text"
+                             class="sp-cell-input"
+                             @keyup="cellEditClick($event,bodycol,bodyrow,bodyrowindex)"
+                             @blur="onblur($event,bodycol,bodyrow,bodyrowindex)"
+                             @focus="onfocus($event,bodycol,bodyrow,bodyrowindex)">
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <!-- 左表底 -->
-          <div class="x-table-view-foot-wrapper">
-            <table />
-          </div>
-        </div>
-      </template>
-
-      <div class="x-table-view-right-wrapper"
-           :style="{'width':rightViewWidth+'px','height': height +'px'}">
-
-        <!-- 右表头 -->
-        <div class="x-table-view-head-wrapper">
-          <table border="0"
-                 cellspacing="0"
-                 cellpadding="0">
-            <tbody>
-              <!-- //表头行 -->
-              <tr v-for="(headrow,headrowindex) in noFrozenTitleCols"
-                  :key="headrowindex">
-                <td v-for="(headcol,headcolindex) in headrow"
-                    :key="headcolindex"
-                    :colspan="headcol.fields.length"
-                    :rowspan="headcol.rowspan">
-                  <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                       :style="{'width':titleColumnWidth(headcol.fields)+'px','height':titleColumnHeight(headcol.rowspan)+'px',
-                               'line-height':titleColumnHeight(headcol.rowspan)+'px',
-                               'text-align':headcol.titleAlign}">
-                    <span>{{ headcol.title }}</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 右表内容 -->
-
-        <div class="x-table-view-body-wrapper">
-          <table border="0"
-                 cellspacing="0"
-                 cellpadding="0">
-            <tbody>
-              <tr v-for="(bodyrow,bodyrowindex) in tableData"
-                  :key="bodyrowindex">
-                <td v-for="(bodycol,bodycolindex) in noFrozenCols"
-                    :key="bodycolindex">
-                  <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                       :style="{'width':bodycol.width+'px','height':rowHeight+'px','line-height':rowHeight+'px','text-align':bodycol.columnAlign}">
-
-                    <!-- 必须设定宽度，不然要其要根据内容自动缩小 -->
-                    <input :value="bodyrow[bodycol.field]"
-                           :readonly="bodycol.isEdit==false"
-                           :style="{'text-align':bodycol.columnAlign,'border':'0px','height':'100%','line-height':'100%','width':'100%'}"
-                           type="text"
-                           class="sp-cell-input"
-                           @keyup="cellEditClick($event,bodycol,bodyrow,bodyrowindex)"
-                           @blur="onblur($event,bodycol,bodyrow,bodyrowindex)"
-                           @focus="onfocus($event,bodycol,bodyrow,bodyrowindex)" />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         <!-- 右表底 -->
-        <div class="x-table-view-foot-wrapper">
-          <table />
+        <div :style="{'width':(rightViewWidth+hasVscrollbarWidth-hasHscrollbarWidth-VscrollbarWidth )+'px'}"
+             class="x-table-view-footer-right-wrapper"
+             style="overflow:hidden">
+          <!-- 右表底构造 -->
+          <div class="x-table-view-footer-inner-wrapper">
+            <table border="0"
+                   cellspacing="0"
+                   cellpadding="0">
+              <tbody>
+                <!-- // 右表底 -->
+                <tr v-for="(footerrow,footerrowindex) in GetnoFrozenfooterRows"
+                    :key="footerrowindex">
+                  <td v-for="(footercol,footercolindex) in footerrow"
+                      :key="footercolindex"
+                      :colspan="footercol.colspan"
+                      :rowspan="footercol.rowspan">
+                    <div :class="['x-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
+                         :style="{'width':titleColumnWidth(footercol.fields)+'px','height':titleColumnHeight(footercol.rowspan)+'px',
+                               'line-height':titleColumnHeight(footercol.rowspan)+'px',
+                               'text-align':footercol.titleAlign}">
+                      <span>{{ computedcol(footercol) }}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </div>
@@ -211,6 +338,10 @@ import utils from '../../utils/utils.js'
 import { hasClass, addClass, removeClass } from '../../utils/dom.js'
 import bodyCellMergeMixin from '../../utils/body-cell-merge-mixin'
 import deepClone from '../../utils/deepClone'
+import Vue from 'vue'
+import scroll from '../elem/utils/scrollbar-width'
+import scrollbarWidth from '../elem/utils/scrollbar-width'
+import xcheckbox from '../checkbox/checkbox'
 
 function mc(tableId, startRow, endRow, icol) {
   var tb = tableId
@@ -247,8 +378,22 @@ function mc(tableId, startRow, endRow, icol) {
   }
 }
 
+function getScrollWidth() {
+  var noScroll,
+    scroll,
+    oDiv = document.createElement('DIV')
+  oDiv.style.cssText =
+    'position:absolute;top:-1000px;width:100px;height:100px; overflow:hidden;'
+  noScroll = document.body.appendChild(oDiv).clientWidth
+  oDiv.style.overflowY = 'scroll'
+  scroll = oDiv.clientWidth
+  document.body.removeChild(oDiv)
+  return noScroll - scroll
+}
+
 export default {
   mixins: [bodyCellMergeMixin],
+  components: { xcheckbox },
   props: {
     //  表宽
     width: {
@@ -308,7 +453,7 @@ export default {
       }
     },
 
-    footer: {
+    footerRows: {
       type: Array,
       default: function () {
         return []
@@ -319,6 +464,7 @@ export default {
       type: Number,
       default: 40
     },
+
     showVerticalBorder: {
       type: Boolean,
       default: true
@@ -328,7 +474,117 @@ export default {
       default: true
     }
   },
+  data() {
+    return {
+      dscrollBarWidth: 17,
+      isAllChecked: false,
+      indeterminate: false
+
+    }
+  },
   computed: {
+    //计算优化汇总行的定义
+    GetFrozenfooterRows() {
+      // debugger
+      var allfooterRows = []
+
+      //如果没有冻结列直接返回
+
+      //按冻结行进行一行一行的处理
+      for (var i = 0; i < this.footerRows.length; i++) {
+        var rows = []
+        var v = 1
+
+        //冻结底列，这里有问题，有可能2行底部栏，但可能冻结左栏只存在一行或是一行都不存在，有可能只是有右边有
+
+        var frozerow = this.footerRows[i]
+        //冻结列
+        var frozencol = this.frozenCols
+
+        for (var p = 0; p < frozencol.length; p = p + v) {
+          //找出含有这个字段的定义
+          var poscell = frozencol[p]
+
+          //找出这个COL的位置POS的位置
+          var tcell = {}
+          var colspan = 1
+          frozerow.forEach(cell => {
+            //  debugger
+            if (cell.fields[0] == poscell.field) {
+              tcell = cell
+              colspan = cell.colspan
+            }
+
+          })
+          if (Object.keys(tcell) == 0) {
+            //  debugger
+            tcell = poscell
+            tcell.fields = []
+            //  tcell.couputetype=0
+            tcell.fields.push(poscell.field)
+            tcell.colspan = colspan
+            tcell.title = poscell.field
+          }
+
+
+          //  debugger
+          v = colspan
+          rows.push(tcell)
+        }
+        allfooterRows.push(rows)
+
+      }
+      // debugger
+      return allfooterRows
+    },
+    GetnoFrozenfooterRows() {
+      //  debugger
+      var allfooterRows = []
+
+      for (var i = 0; i < this.footerRows.length; i++) {
+        var rows = []
+        var v = 1
+
+        var frozerow = this.footerRows[i]
+        var frozencol = this.noFrozenCols
+
+        for (var p = 0; p < frozencol.length; p = p + v) {
+          //找出含有这个字段的定义
+          var poscell = frozencol[p]
+
+          //找出这个COL的位置POS的位置
+          var tcell = {}
+          var colspan = 1
+
+          frozerow.forEach(cell => {
+            //  debugger
+            if (cell.fields[0] == poscell.field) {
+              tcell = cell
+              colspan = cell.colspan || cell.fields.length
+            }
+
+          })
+          if (Object.keys(tcell) == 0) {
+            //  debugger
+            tcell = poscell
+            tcell.fields = []
+            //  tcell.couputetype=0
+            tcell.fields.push(poscell.field)
+            tcell.colspan = colspan
+            tcell.title = poscell.field
+          }
+
+
+          //  debugger
+          v = colspan
+          rows.push(tcell)
+        }
+        allfooterRows.push(rows)
+
+      }
+      debugger
+      return allfooterRows
+    },
     // 冻结的列集合
     frozenCols() {
       return this.columns.filter(x => x.isFrozen === true)
@@ -354,7 +610,7 @@ export default {
             //var frozenTitleRows = rows.filter(function (cell) {
             var cell = rows[x]
             //获取这一行每个单元格字段的字段名
-            var fields = [];
+            var fields = []
             for (var i = 0; i < cell.fields.length; i++) {
               // debugger
               var pos = frozenFields.indexOf(cell.fields[i])
@@ -369,7 +625,6 @@ export default {
             }
           }
 
-
           // })
 
           //哪果一行有过虑的字段
@@ -384,11 +639,65 @@ export default {
             //   }
             // }
           }
+        })
+      }
+      return frozenTitleCols
+    },
 
+    frozenFooterCols() {
+      // debugger
+      var frozenFooterCols = [],
+        self = this
+
+      //  debugger
+      var cfooterRows = deepClone(this.footerRows)
+
+      if (cfooterRows.length > 0) {
+        // 获取当前锁定的字段集合
+        var frozenFields = this.frozenCols.map(x => x.field)
+
+        //循环表头每一行
+        cfooterRows.forEach(function (rows) {
+          //循环表头每一单元格
+          // debugger
+          var frozenFooterRows = []
+          for (var x = 0; x < rows.length; x++) {
+            var cell = rows[x]
+            //获取这一行每个单元格字段的字段名
+            var fields = []
+            //  debugger
+
+            for (var i = 0; i < cell.fields.length; i++) {
+              // debugger
+              var pos = frozenFields.indexOf(cell.fields[i])
+              if (pos >= 0) {
+                fields.push(cell.fields[i])
+              }
+            }
+
+            //更改原数组
+            cell.fields = fields
+            if (cell.fields.length > 0) {
+              frozenFooterRows.push(cell)
+            }
+          }
+
+          //哪果一行有过虑的字段
+          if (frozenFooterRows.length > 0) {
+            frozenFooterCols.push(frozenFooterRows)
+
+            // var minRowspan = self.getMinRowspan(frozenTitleRows)
+
+            // if (minRowspan && minRowspan > 0) {
+            //   for (var i = 0; i < minRowspan; i++) {
+            //     frozenTitleCols.push([])
+            //   }
+            // }
+          }
         })
       }
 
-      return frozenTitleCols
+      return frozenFooterCols
     },
 
     // 非冻结列集合
@@ -396,17 +705,23 @@ export default {
       return this.columns.filter(x => x.isFrozen !== true)
     },
 
-    // 未的表头列集合
+    noFrozenColsWidth() {
+      var result = 0
+      if (this.noFrozenCols.length > 0) {
+        result = this.noFrozenCols.reduce((total, col) => total + col.width, 0)
+      }
+      return result
+    },
+
+    // 未冻结的表头列集合
     noFrozenTitleCols() {
-      debugger
+      // debugger
       var frozenTitleCols = [],
         self = this
       var cheadRows = deepClone(this.headRows)
       if (cheadRows.length > 0) {
         // 获取当前锁定的字段集合
         var frozenFields = this.noFrozenCols.map(x => x.field)
-
-        var cheadRows = deepClone(this.headRows)
 
         //循环表头每一行
         cheadRows.forEach(function (rows) {
@@ -416,9 +731,9 @@ export default {
             //var frozenTitleRows = rows.filter(function (cell) {
             var cell = rows[x]
             //获取这一行每个单元格字段的字段名
-            var fields = [];
+            var fields = []
             for (var i = 0; i < cell.fields.length; i++) {
-              debugger
+              // debugger
               var pos = frozenFields.indexOf(cell.fields[i])
               if (pos >= 0) {
                 fields.push(cell.fields[i])
@@ -431,7 +746,6 @@ export default {
             }
           }
 
-
           // })
 
           //哪果一行有过虑的字段
@@ -446,32 +760,183 @@ export default {
             //   }
             // }
           }
-
         })
       }
 
       return frozenTitleCols
     },
+
+    // 未冻结的表尾列集合
+    noFrozenfooterCols() {
+      // debugger
+      var nofrozenfooterCols = [],
+        self = this
+      var cfooterRows = deepClone(this.footerRows)
+      // debugger
+
+      if (cfooterRows.length > 0) {
+        // 获取当前锁定的字段集合
+        var nofrozenFields = this.noFrozenCols.map(x => x.field)
+
+        //循环表头每一行
+        cfooterRows.forEach(function (rows) {
+          //循环表头每一单元格
+          var nofrozenfooterRows = []
+          for (var x = 0; x < rows.length; x++) {
+
+            var cell = rows[x]
+            //获取这一行每个单元格字段的字段名
+            var fields = []
+            for (var i = 0; i < cell.fields.length; i++) {
+              // debugger
+              var pos = nofrozenFields.indexOf(cell.fields[i])
+              if (pos >= 0) {
+                fields.push(cell.fields[i])
+              }
+            }
+            //更改原数组
+            cell.fields = fields
+            if (cell.fields.length > 0) {
+              nofrozenfooterRows.push(cell)
+            }
+          }
+          //哪果一行有过虑的字段
+          if (nofrozenfooterRows.length > 0) {
+            nofrozenfooterCols.push(nofrozenfooterRows)
+          }
+        })
+      }
+      return nofrozenfooterCols
+    },
+
     // 左侧区域宽度
     leftViewWidth() {
       var result = 0
       if (this.frozenCols.length > 0) {
-        result = this.frozenCols.reduce((total, curr) => total + curr.width, 0);
+        result = this.frozenCols.reduce((total, curr) => total + curr.width, 0)
       }
       return result
     },
+
     // 右侧区域宽度
     rightViewWidth() {
       var result = 0
-      debugger
-      if (this.noFrozenCols.length > 0) {
-        result = this.noFrozenCols.reduce((total, curr) => total + curr.width, 0);
+      // debugger
+      result = this.width - this.leftViewWidth
+      return result
+    },
+
+    //是否存在横向滚动条
+    hasHscrollbarWidth() {
+      var result = 0
+      if (this.rightViewWidth < this.noFrozenColsWidth) {
+        var result = 2
       }
+      return result
+    },
+
+    //纵向滚动条宽度
+    VscrollbarWidth() {
+      if (this.hasVscrollbarWidth > 0) {
+        return this.dscrollBarWidth
+      } else return 0
+    },
+    //是否存在纵向滚动条
+    hasVscrollbarWidth() {
+      var result = 0
+      if (this.bodyHeight < this.tableData.length * this.rowHeight) {
+        var result = 2
+      }
+      return result
+    },
+    //横向滚动条宽度
+    HscrollbarWidth() {
+      // debugger
+      if (this.hasHscrollbarWidth > 0) {
+        return this.dscrollBarWidth
+      } else return 0
+    },
+    headHeight() {
+      var result = 0
+      if (this.headRows.length > 0) {
+        result = this.headRows.length * this.headrowheight
+      }
+      return result
+    },
+    footerHeight() {
+      var result = 0
+      if (this.footerRows.length > 0) {
+        result = this.footerRows.length * this.footerRowHeight
+      }
+      return result
+    },
+    bodyHeight() {
+      var result = this.height - this.headHeight - this.footerHeight
       return result
     }
   },
+  mounted() {
+    //如果右边的迟
+    this.dscrollBarWidth = getScrollWidth()
+  },
 
   methods: {
+    computedcol(col) {
+      var result = null
+      let amounts1 = null
+      let sum = 0
+      //显示标题，不显示
+      // debugger
+      if (col.couputetype == 0) {
+        result = col.title
+      }
+      if (col.couputetype == 1) {
+        sum = 0
+        this.tableData.forEach(item => {
+          sum = sum + parseFloat(item[col.fields[0]])
+          //  debugger
+          //  var yy=this.GetfooterRows
+        })
+        result = sum.toFixed(2)
+        //下面也是一种方式
+        // debugger
+        // amounts1 = this.tableData.map(item => {
+
+        //      debugger
+
+        //      var o=item;
+
+        //        return o[col.fields]
+        //       })
+        //  result= amounts1.reduce((prev,curr)=>{return parseInt(prev) + parseInt(curr)})
+      }
+
+      return result
+    },
+
+    onleftbodyMousewheel(e) {
+      var body2 = this.$el.querySelector('.x-table-view-body-right-wrapper')
+      var e1 = e.originalEvent || window.event || e
+      // debugger
+      //为什么要除4，因为一般情况下，e1.wheelDelta值太多，滚动太多，按惯例除4
+      var scrollHeight = e1.wheelDelta / 4 || e1.detail * -1
+      body2.scrollTop = body2.scrollTop - scrollHeight
+    },
+
+    onrightbodyscroll(e) {
+      // debugger
+      var view2 = this.$el.querySelector('.x-table-view-head-right-wrapper')
+      var body1 = this.$el.querySelector('.x-table-view-body-left-wrapper')
+      var body2 = this.$el.querySelector('.x-table-view-body-right-wrapper')
+      var rfooter = this.$el.querySelector('.x-table-view-footer-right-wrapper')
+
+      if (body1) {
+        body1.scrollTop = body2.scrollTop
+      }
+      view2.scrollLeft = body2.scrollLeft
+      rfooter.scrollLeft = body2.scrollLeft
+    },
+
     // 获取每个表头列的宽度
     titleColumnWidth(fields) {
       var result = 0
@@ -568,15 +1033,18 @@ export default {
         nextcoldata
 
       //获得单元格的DIV
-      while (
-        (target.className &&
-          target.className.indexOf('v-table-body-cell') === -1) ||
-        !target.className
-      ) {
-        target = target.parentNode
-      }
+      if (target != null) {
+        while (
+          (target &&
+            target.className &&
+            target.className.indexOf('v-table-body-cell') === -1) ||
+          !target.className
+        ) {
+          target = target.parentNode
+        }
 
-      cellTarget = target.parentNode
+        cellTarget = target.parentNode
+      }
 
       //获得单元格的DIV
       while (
@@ -794,33 +1262,79 @@ export default {
 }
 </script>
 
-
-
 <style lang='scss'>
+　.check-box {
+  display: none;
+}
+.check-box + span {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.check-box:checked + span {
+  background-color: #108ee9;
+}
+
+/*通过绝对定位来确定对勾的位置*/
+.check-box:checked + span:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+/*不要忘了给span添加相对定位*/
+.check-box:checked + span {
+  background-color: #108ee9;
+  position: relative;
+}
+
+.check-box:focus + span,
+.check-box:hover + span {
+  border-color: #108ee9;
+}
+
 .x-table-view-wrapper {
   overflow: hidden;
-  border: 1px solid #d8dfe6;
-  position: relative;
-  display: table-row;
+  border: 1px solid green;
+  // position: relative;
+  display: flex;
+  margin-left: 50px;
 }
 
 .x-table-view-left-wrapper {
   // position: absolute;
   // top:0px;
   // left:0px;
-   float: left;
+  //  float: left;
 }
 
 .x-table-view-right-wrapper {
   // position: absolute;
   // top:0px;
   // right:0px;
-  float: left;
+  // float: left;
+  overflow: hidden;
 }
-.x-table-view-head-inner {
-  float: left;
-  width: 10000px;
+.x-table-view-head-right-wrapper {
+  overflow: hidden;
 }
+.x-table-view-body-left-wrapper {
+  overflow: hidden;
+}
+
+.x-table-view-body-right-wrapper {
+  overflow: auto;
+}
+
 td,
 th {
   font-style: normal;
@@ -897,7 +1411,11 @@ th {
 .horizontal-border {
   border-bottom-width: 1px !important;
 }
-
+.x-table-view-footer-left-wrapper,
+.x-table-view-footer-right-wrapper {
+  border-top: 1px solid rgba(221, 221, 221, 1);
+}
+// .x-table-view-footer-right-wrapper{border: 1px solid rgba(221, 221, 221, 1);}
 .x-table-title-cell {
   border-width: 0;
   border-style: solid;

@@ -16,6 +16,7 @@ export default function() {
 
   const outer = document.createElement('div')
   outer.className = 'el-scrollbar__wrap'
+  
   outer.style.visibility = 'hidden'
   outer.style.width = '100px'
   outer.style.position = 'absolute'

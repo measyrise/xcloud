@@ -12,15 +12,14 @@
     <button @click="ontest">单元格可编辑</button>
     <button @click="emtest($event,'name')"
             ref="emtest"
-            style="margin-bottom:30px"
-            >单元格调整</button>
+            style="margin-bottom:30px">单元格调整</button>
 
-    <xtable :height=300
-            :width=1500
+    <xtable :height=350
+            :width=1000
             :columns="columns"
             :headRows="titleRows"
-            :tableData="tableData"
-            ></xtable>
+            :footerRows="footerRows"
+            :tableData="tableData"></xtable>
 
   </div>
 
@@ -31,23 +30,23 @@
 
 import xtable from '../components/xtable/table'
 export default {
-  components: {xtable},
+  components: { xtable },
 
- data() {
+  data() {
     return {
       titleRows: [
         [
           {
             fields: ['custome'],
-            title: '排序',
+            title: '行号',
             titleAlign: 'center',
             rowspan: 2
           },
           {
-            fields: ['name', 'gender', 'height'],
+            fields: ['checkbox','name', 'gender', 'height'],
             title: '基础信息',
             titleAlign: 'center',
-            colspan: 3
+            colspan: 4
           },
           {
             fields: ['tel', 'email'],
@@ -65,6 +64,7 @@ export default {
         ],
 
         [
+          { fields: ['checkbox'], title: '复选框', titleAlign: 'center',type:"SELECTION"},
           { fields: ['name'], title: '姓名', titleAlign: 'center' },
           {
             fields: ['gender'],
@@ -84,10 +84,10 @@ export default {
 
         [
           {
-            fields: ['custome', 'name', 'gender', 'height'],
+            fields: ['checkbox','custome', 'name', 'gender', 'height'],
             title: '平均值',
             titleAlign: 'center',
-            colspan: 4,
+            colspan: 5,
             titleCellClassName: 'title-cell-class-name-test1'
           },
           {
@@ -129,6 +129,18 @@ export default {
               '</span>'
               : index + 1
           },
+          //'SEQQUECE'=序列,"SELECTION","DROPDOWN","CHECKBOX","LIST" "STRING"=文本（不指定或是其它情况下视为文本
+          type:'SEQUECE',
+          isFrozen: true,
+          isEdit: true
+        },
+        {
+          field: 'checkbox',
+          width: 50,
+          titleAlign: 'center',
+          columnAlign: 'center',
+          //'SEQQUECE'=序列,"SELECTION","DROPDOWN","CHECKBOX","LIST" "STRING"=文本（不指定或是其它情况下视为文本
+          type:'SELECTION',
           isFrozen: true,
           isEdit: true
         },
@@ -137,7 +149,8 @@ export default {
           width: 100,
           columnAlign: 'center',
           isFrozen: true,
-          isEdit: true
+          isEdit: true,
+          type:'STRING',
         },
         {
           field: 'gender',
@@ -153,10 +166,10 @@ export default {
           isFrozen: false,
           isEdit: true
         },
-        { field: 'tel', width: 190, columnAlign: 'center', isEdit: false,isFrozen: false },
-        { field: 'email', width: 230, columnAlign: 'center', isEdit: true ,isFrozen: false},
-        { field: 'hobby', width: 230, columnAlign: 'center', isEdit: true ,isFrozen: false},
-        { field: 'address', width: 330, columnAlign: 'left', isEdit: true ,isFrozen: false}
+         { field: 'tel', width: 190, columnAlign: 'center', isEdit: false, isFrozen: false },
+         { field: 'email', width: 230, columnAlign: 'center', isEdit: true, isFrozen: false},
+        { field: 'hobby', width: 230, columnAlign: 'center', isEdit: true, isFrozen: false }
+        // { field: 'address', width: 330, columnAlign: 'left', isEdit: true, isFrozen: false }
       ],
 
       tableData: [
@@ -214,8 +227,38 @@ export default {
           hobby: '钢琴、书法、唱歌',
           address: '上海市金山区龙胜路143号一层'
         }
+      ],
+
+      footerRows: [
+         [
+            {
+            fields: ['custome','checkbox'],
+            title: '合计',
+            titleAlign: 'center',
+            colspan: 2,
+             //type这里有两种类型, 如果是0=文本，文本内容是查看TEXT, type=1表示汇总数据，2 表示平均数据
+            couputetype:0
+          },
+           {
+            fields: ['height','tel'],
+            title: '身高',
+            titleAlign: 'center',
+            colspan: 2,
+            couputetype:1
+          }
+        ]
       ]
     }
+  },
+  methods: {
+    emtest(e, v) {
+      var field = this.columns.filter((item, index) => {
+        return item.field == v
+      })
+    }
+  },
+  ontest() {
+    var field = 0;
   }
-  }
+}
 </script>
