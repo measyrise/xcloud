@@ -40,19 +40,14 @@
                                'text-align':headcol.titleAlign}">
 
                       <template v-if="headcol.type=='SELECTION'">
-
+                        <!-- 先执行子的过程再执行本过程 -->
                         <xcheckbox 
                                    :indeterminate="indeterminate"
                                     v-model="isAllChecked"
                                    :show-slot="false"
-                                   label="check-all">
-
+                                    label="check-all"
+                                    @change="handleCheckAll">
                         </xcheckbox>
-<!-- 
-                        <label>
-                          <input type="checkbox"  value="1" style="display:none" class="check-box"><span></span>
-                       </label> -->
-
                       </template>
 
                       <template v-else>
@@ -72,10 +67,12 @@
                class="x-table-view-body-left-wrapper"
                @mousewheel.passive="onleftbodyMousewheel($event)">
             <div class="x-table-view-body-left-inner-wrapper">
+              
               <table border="0"
                      cellspacing="0"
                      cellpadding="0">
                 <tbody>
+
                   <tr v-for="(bodyrow,bodyrowindex) in tableData"
                       :key="bodyrowindex">
                     <td v-for="(bodycol,bodycolindex) in frozenCols"
@@ -103,7 +100,7 @@
 
                         <template v-else-if="bodycol.type === 'SELECTION'">
                                             <xcheckbox  :show-slot="false"
-                                                         :label="rowIndex">
+                                                         :label="bodyrowindex">
                                             </xcheckbox>
                         </template>
 
@@ -115,8 +112,10 @@
                       </div>
                     </td>
                   </tr>
+
                 </tbody>
               </table>
+
             </div>
 
           </div>
@@ -478,8 +477,8 @@ export default {
     return {
       dscrollBarWidth: 17,
       isAllChecked: false,
-      indeterminate: false
-
+      indeterminate: false,
+      checkboxGroupModel: []
     }
   },
   computed: {
@@ -881,6 +880,53 @@ export default {
   },
 
   methods: {
+
+      disabledUnChecked: function disabledUnChecked() {
+           debugger
+            var result = [];
+
+            this.tableData.filter(function (item, index) {
+                 debugger
+                if (item._disabled && !item._checked) {
+                    result.push(index);
+                }
+            });
+            return result;
+        },
+   
+     handleCheckAll: function handleCheckAll() {
+
+         //如果是全部选中的话
+         debugger
+         if (this.isAllChecked) {
+
+                //先置空
+                this.checkboxGroupModel = [];
+
+                var allLen = this.tableData.length;
+
+                if (allLen > 0) {
+
+                    for (var i = 0; i < allLen; i++) {
+                          
+                        
+                        if (this.disabledUnChecked.indexOf(i) === -1) {
+
+                            this.checkboxGroupModel.push(i);
+                        }
+                    }
+                }
+            } else {
+
+                this.checkboxGroupModel = this.disabledChecked();
+            }
+
+            this.selectAll && this.selectAll(this.getCheckedTableRow);
+
+     },
+
+
+    //底部列的计算管理
     computedcol(col) {
       var result = null
       let amounts1 = null

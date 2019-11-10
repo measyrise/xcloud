@@ -133,8 +133,9 @@ export default {
     change(event) {
 
       //如果无效，就返回不处理   
+      debugger
       if (this.disabled) {
-
+      
         this.model = !this.model;
         return false;
       }
@@ -150,6 +151,7 @@ export default {
 
         this.checkboxGroup.updateModel(this.label, checked);
       }
+
     },
 
     initModel() {
