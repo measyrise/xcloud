@@ -1,29 +1,37 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-06-04 17:57:00
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <script>
 export default {
-  name: 'MenuItem',
+  name: "MenuItem",
   functional: true,
   props: {
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   render(h, context) {
-    const { icon, title } = context.props
-    const vnodes = []
+    const { icon, title } = context.props;
+    const vnodes = [];
 
     if (icon) {
-      vnodes.push(<svg-icon icon-class={icon}/>)
+      vnodes.push(<svg-icon icon-class={icon} />);
     }
 
     if (title) {
-      vnodes.push(<span slot='title'>{(title)}</span>)
+      vnodes.push(<span slot="title">{title}</span>);
     }
-    return vnodes
+    return vnodes;
   }
-}
+};
 </script>

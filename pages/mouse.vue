@@ -1,12 +1,16 @@
 <template>
   <div class="outer">
-    <div class="left" v-drag></div>
-    <div class="right" v-drag></div>
+    <div 
+      v-drag 
+      class="left"/>
+    <div 
+      v-drag 
+      class="right"/>
   </div>
 </template>
 <script>
 export default {
-  name: 'mousemove',
+  name: "Mousemove",
   data() {
     return {
       list1: [{ name: '拖动我', index: 0 }],
@@ -35,8 +39,8 @@ export default {
       var endy = event.y - this.sb_bky
       var _this = this
       if (this.is_moving) {
-        event.target.style.left = endx + 'px'
-        event.target.style.top = endy + 'px'
+        event.target.style.left = endx + 'px';
+        event.target.style.top = endy + 'px';
       }
     },
     mouseup: function(e) {

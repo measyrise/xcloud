@@ -9,19 +9,22 @@
 <template>
   <div id="app">
     <div class="ctn ctn1">
-      <div class="sub sub1"
-           v-for="(site, index) in list1"
-           :key="index">
-        <div class="dragCtn fixed"
-             @mousedown="mousedown(site, $event)"
-             @mousemove.prevent="mousemove(site, $event)"
-             @mouseup="mouseup(site, $event)">{{ site.name }}</div>
+      <div 
+        v-for="(site, index) in list1"
+        :key="index"
+        class="sub sub1">
+        <div 
+          class="dragCtn fixed"
+          @mousedown="mousedown(site, $event)"
+          @mousemove.prevent="mousemove(site, $event)"
+          @mouseup="mouseup(site, $event)">{{ site.name }}</div>
       </div>
     </div>
     <div class="ctn ctn2">
-      <div class="sub sub2"
-           v-for="(site, index) in list2"
-           :key="index">
+      <div 
+        v-for="(site, index) in list2"
+        :key="index"
+        class="sub sub2">
         <div class="dragCtn">{{ index }} : {{ site.name }}</div>
       </div>
     </div>
@@ -29,7 +32,7 @@
 </template>
 <script>
 export default {
-  name: 'mousemove',
+  name: "Mousemove",
   data() {
     return {
       list1: [{ name: '拖动我', index: 0 }],
@@ -46,23 +49,23 @@ export default {
     }
   },
   methods: {
-    mousedown: function (site, event) {
+    mousedown: function(site, event) {
       var startx = event.x
       var starty = event.y
       this.sb_bkx = startx - event.target.offsetLeft
       this.sb_bky = starty - event.target.offsetTop
       this.is_moving = true
     },
-    mousemove: function (site, event) {
+    mousemove: function(site, event) {
       var endx = event.x - this.sb_bkx
       var endy = event.y - this.sb_bky
       var _this = this
       if (this.is_moving) {
-        event.target.style.left = endx + 'px'
-        event.target.style.top = endy + 'px'
+        event.target.style.left = endx + 'px';
+        event.target.style.top = endy + 'px';
       }
     },
-    mouseup: function (e) {
+    mouseup: function(e) {
       this.is_moving = false
     }
   }

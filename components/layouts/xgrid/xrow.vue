@@ -7,12 +7,14 @@
  * @Date: 2019-01-06 23:04:55
  -->
 <template>
-  <div class="row" :style="style">
-    <slot></slot>
+  <div 
+    :style="style" 
+    class="row">
+    <slot/>
   </div>
 </template>
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import '~assets/styles/variables.scss';
+@import "~assets/styles/variables.scss";
 
 .row {
   display: inline-flex;
@@ -27,7 +29,7 @@
   
 <script>
 export default {
-  name: 'xlrow',
+  name: "Xlrow",
   extends: {},
   props: {
     w: {
@@ -60,23 +62,23 @@ export default {
   computed: {},
   watch: {},
   created: function() {
-    let s = ''
+    let s = '';
     if (this.w == '0px' || this.w == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s = 'width:' + this.w + ';'
+      s = 'width:' + this.w + ';';
     }
 
     if (this.h == '0px' || this.h == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s += 'height:' + this.h + ';'
+      s += 'height:' + this.h + ';';
     }
 
     if (this.full) {
-      s += 'flex-grow:' + 1 + ';'
+      s += 'flex-grow:' + 1 + ';';
     }
-    s += 'border:' + this.border + ' solid red;'
+    s += 'border:' + this.border + ' solid red;';
 
     this.style = s
   },

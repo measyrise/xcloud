@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Mock from 'mockjs'
+import Mock from 'mockjs';
 
 // debugger
 // Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
@@ -43,8 +43,7 @@ Mock.mock('/api/fi', 'get', {
       'id|+1': 1
     }
   ]
-}
-)
+})
 
 Mock.mock('/api/ip/fi', 'get', {
   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
@@ -54,13 +53,12 @@ Mock.mock('/api/ip/fi', 'get', {
       'id|+1': 1
     }
   ]
-}
-)
+})
 
 // 输出结果
 // console.log(JSON.stringify(data, null, 4))
 
-Mock.mock('http://icanhazip.com', 'get', "'dd':'3333'")
+Mock.mock('http://icanhazip.com', 'get', '\'dd\':\'3333\'');
 // ;('use strict')
 export default {
   head: {
@@ -71,7 +69,7 @@ export default {
     await $axios
       .request({
         //url: '/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
-        url: '/ip/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
+        url: '/ip/fi', //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
         method: 'get',
         data: 'params'
       })
@@ -97,7 +95,7 @@ export default {
     }
   },
   computed: {
-    cmsg: function () {
+    cmsg: function() {
       //  debugger
       // const test=this.msg;
       // const data= this.$axios.$get('http://icanhazip.com').then((result) => {
@@ -111,10 +109,10 @@ export default {
       // console.log(this.$route.params.hideid);
       //  this.msg=this.$route.query.newsID;
 
-      return this.$route.query.newsID ? this.$route.query.newsID : '空值'
+      return this.$route.query.newsID ? this.$route.query.newsID : '空值';
     },
-    chideid: function () {
-      return this.$route.params.hideid ? this.$route.params.hideid : '空值'
+    chideid: function() {
+      return this.$route.params.hideid ? this.$route.params.hideid : '空值';
     }
   }
 }

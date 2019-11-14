@@ -7,12 +7,14 @@
  * @Date: 2019-01-06 23:04:55
  -->
 <template>
-  <div class="container" :style="style">
-    <slot></slot>
+  <div 
+    :style="style" 
+    class="container">
+    <slot/>
   </div>
 </template>
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import '~assets/styles/variables.scss';
+@import "~assets/styles/variables.scss";
 
 .container {
   background: $white;
@@ -24,7 +26,7 @@
   
 <script>
 export default {
-  name: 'xlgrid',
+  name: "Xlgrid",
   extends: '',
   props: {
     w: {
@@ -52,20 +54,20 @@ export default {
   watch: {},
   created: function() {
     // debugger
-    let s = ''
+    let s = '';
     if (this.w == '0px' || this.w == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s = 'width:' + this.w + ';'
+      s = 'width:' + this.w + ';';
     }
 
     if (this.h == '0px' || this.h == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s += 'height:' + this.h + ';'
+      s += 'height:' + this.h + ';';
     }
 
-    s += 'border:' + this.border + ' solid red;'
+    s += 'border:' + this.border + ' solid red;';
 
     this.style = s
   },

@@ -8,15 +8,16 @@
  -->
 <template>
   <div class="x-checkbox-group">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
 <script>
-import utils from '../../utils/utils'
+import utils from "../../utils/utils";
 
 export default {
-  
+  name: "XCheckboxGroup",
+
   props: {
     value: {
       type: Array,
@@ -31,47 +32,40 @@ export default {
     }
   },
 
+  watch: {
+    // 更新子组件选中状态
+    value(newVal) {
+      debugger;
+
+      let children = utils.getChildCompsByName(this, "XCheckbox");
+
+      if (children.length > 0) {
+        children.forEach(child => {
+          child.updateModelByGroup(newVal);
+        });
+      }
+    }
+  },
+
   methods: {
-
     updateModel(label, checkedVal) {
-
       let index = this.value.indexOf(label);
 
       //如果找到，是没选中状态那么清除值
       if (index > -1) {
-
         if (!checkedVal) {
-
           this.value.splice(index, 1);
         }
       } else {
         //如果没找到，是选中状态那么加入值
         if (checkedVal) {
-
           this.value.push(label);
         }
       }
 
-      this.$emit('input', this.value);
-      this.$emit('change');
-    }
-  },
-
-  watch: {
-    // 更新子组件选中状态
-    'value'(newVal) {
-
-      let children = utils.getChildCompsByName(this, 'v-checkbox');
-
-      if (children.length > 0) {
-
-        children.forEach(child => {
-
-          child.updateModelByGroup(newVal);
-        })
-      }
-
+      this.$emit("input", this.value);
+      this.$emit("change");
     }
   }
-}
+};
 </script>

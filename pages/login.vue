@@ -1,139 +1,151 @@
 <!--
  * @Description: 文件描述
  * @Author: liangbojie
- * @Github: 
+ * @Github:
  * @LastEditors: liangbojie
  * @LastEditTtime: lastTime
  * @Date: 2018-12-27 11:59:20
  -->
- 
+
 <template>
   <div class="main">
     <xlgrid>
       <xlrow h="50px">
-        <xlcol w="40%"></xlcol>
+        <xlcol w="40%" />
         <xlcol w="100%">text</xlcol>
       </xlrow>
 
       <xlrow h="100%">
         <!-- 动画应用 -->
-        <div
-          class="login animated"
-          :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}"
-        >
+        <div :class="{fadeOutRightBig:ad==2,fadeInLeft:ad==1,fadeOutLeftBig:ad==4,fadeInRight:ad==3}"
+             class="login animated">
           <!-- 头部LOGO 显示 -->
           <div class="top">
-            <div class="svg_comlogo"></div>
+            <div class="svg_comlogo" />
           </div>
 
           <!-- 中部框架 -->
-          <div class="contain_login" v-show="typeid==1">
+          <div v-show="typeid==1"
+               class="contain_login">
             <!-- 切换TAB  -->
             <div class="header">
               <div class="router">
-                <nuxt-link
-                  v-for="(item,index) in ltabs"
-                  @click.native="selectitem(1,index)"
-                  :to="item.to"
-                  :key="index"
-                  :class="{'active':index===currid}"
-                  v-show="true"
-                >{{item.name}}</nuxt-link>
+                <nuxt-link v-for="(item,index) in ltabs"
+                           v-show="true"
+                           :to="item.to"
+                           :key="index"
+                           :class="{'active':index===currid}"
+                           @click.native="selectitem(1,index)">{{ item.name }}</nuxt-link>
               </div>
             </div>
 
             <!--TAB 显示 FORM 区  -->
-            <div class="loginform" v-show="typeid==1">
-              <div v-show="0 == currid" class="child">
+            <div v-show="typeid==1"
+                 class="loginform">
+              <div v-show="0 == currid"
+                   class="child">
                 <form action="a-mobile">
                   <!-- 手机输入行 -->
-                  <div class="inputlinebox" :class="{error:iserror===true}">
+                  <div :class="{error:iserror===true}"
+                       class="inputlinebox">
                     <!-- 使用地区插件 -->
-                    <selcountry></selcountry>
+                    <selcountry />
                     <!-- 使用input插件 -->
-                    <einput placeholder="请输入手机号" verrortip="请输入正确的手机号" ref="idmobile"></einput>
+                    <einput ref="idmobile"
+                            placeholder="请输入手机号"
+                            verrortip="请输入正确的手机号" />
                   </div>
 
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <einput
-                      placeholder="请输入验证码"
-                      verrortip="请输入正确的密码"
-                      type="password"
-                      :showpwd="true"
-                    ></einput>
+                    <einput :showpwd="true"
+                            placeholder="请输入验证码"
+                            verrortip="请输入正确的密码"
+                            type="password" />
 
                     <div class="smsbox">
-                      <button type="button" class="btnsend" @click="sendsms()">获取短信验证码(1)</button>
+                      <button type="button"
+                              class="btnsend"
+                              @click="sendsms()">获取短信验证码(1)</button>
                     </div>
                   </div>
 
                   <!-- 登陆按钮 -->
-                  <button type="submit" class="loginbtn inputlinebox">
+                  <button type="submit"
+                          class="loginbtn inputlinebox">
                     <span>手机登陆</span>
                   </button>
                 </form>
 
                 <div class="tip">
                   注册即表示同意
-                  <a href="/terms" target="_blank" class="link">《使用条款》</a>和
-                  <a href="/comment-self-discipline" target="_blank" class="link">《跟帖评论自律管理承诺书》</a>
+                  <a href="/terms"
+                     target="_blank"
+                     class="link">《使用条款》</a>和
+                  <a href="/comment-self-discipline"
+                     target="_blank"
+                     class="link">《跟帖评论自律管理承诺书》</a>
                 </div>
               </div>
 
-              <div v-show="1 == currid" class="child">
+              <div v-show="1 == currid"
+                   class="child">
                 <form action="a-mobile">
                   <!-- 手机输入行 -->
                   <div class="inputlinebox">
-                    <einput placeholder="请输入手机号/手机号/邮箱"></einput>
+                    <einput placeholder="请输入手机号/手机号/邮箱" />
                   </div>
 
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <einput
-                      placeholder="请输入验证码"
-                      verrortip="请输入正确的密码"
-                      type="password"
-                      :showpwd="true"
-                    ></einput>
+                    <einput :showpwd="true"
+                            placeholder="请输入验证码"
+                            verrortip="请输入正确的密码"
+                            type="password" />
 
                     <div class="smsbox">
-                      <button type="button" class="btnsend">忘记密码？</button>
+                      <button type="button"
+                              class="btnsend">忘记密码？</button>
                     </div>
                   </div>
 
                   <!-- 登陆按钮 -->
-                  <button type="submit" class="regbtn inputlinebox">
+                  <button type="submit"
+                          class="regbtn inputlinebox">
                     <span>帐号登陆</span>
                   </button>
                 </form>
 
                 <div class="tip">
                   注册即表示同意
-                  <a href="/terms" target="_blank" class="link">《使用条款》</a>和
-                  <a href="/comment-self-discipline" target="_blank" class="link">《跟帖评论自律管理承诺书》</a>
+                  <a href="/terms"
+                     target="_blank"
+                     class="link">《使用条款》</a>和
+                  <a href="/comment-self-discipline"
+                     target="_blank"
+                     class="link">《跟帖评论自律管理承诺书》</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="contain_register" v-show="typeid==2">
+          <div v-show="typeid==2"
+               class="contain_register">
             <div class="header">
               <!--  -->
               <div class="router">
-                <nuxt-link
-                  v-for="(item,index) in rtabs"
-                  @click.native="selectitem(2,index)"
-                  :to="item.to"
-                  :key="index"
-                  :class="{'active':index===currid}"
-                  v-show="true"
-                >{{item.name}}</nuxt-link>
+                <nuxt-link v-for="(item,index) in rtabs"
+                           v-show="true"
+                           :to="item.to"
+                           :key="index"
+                           :class="{'active':index===currid}"
+                           @click.native="selectitem(2,index)">{{ item.name }}</nuxt-link>
               </div>
             </div>
             <!--FORM 区  -->
             <div class="loginform">
-              <div v-show="0 == currid" class="child">
+              <div v-show="0 == currid"
+                   class="child">
                 <form action="a-mobile">
                   <!-- 手机输入行 -->
                   <div class="inputlinebox">
@@ -142,30 +154,39 @@
                         <span class="text">中国</span>
                       </div>
                     </div>-->
-                    <selcountry></selcountry>
-                    <einput type="text" placeholder="请输入手机号"></einput>
+                    <selcountry />
+                    <einput type="text"
+                            placeholder="请输入手机号" />
                     <!-- 图标考虑 -->
                   </div>
                   <!-- ****************************333333444******************************************* -->
                   <!-- 密码输入行 -->
                   <div class="inputlinebox">
-                    <einput type="password" placeholder="请输入验证码" :showpwd="true"></einput>
+                    <einput :showpwd="true"
+                            type="password"
+                            placeholder="请输入验证码" />
 
                     <div class="smsbox">
-                      <button type="button" class="btnsend">获取短信验证码(1)</button>
+                      <button type="button"
+                              class="btnsend">获取短信验证码(1)</button>
                     </div>
                   </div>
 
                   <!-- 登陆按钮 -->
-                  <button type="submit" class="regbtn inputlinebox">
+                  <button type="submit"
+                          class="regbtn inputlinebox">
                     <span>注册帐号</span>
                   </button>
                 </form>
 
                 <div class="tip">
                   注册即表示同意
-                  <a href="/terms" target="_blank" class="link">《使用条款》</a>和
-                  <a href="/comment-self-discipline" target="_blank" class="link">《跟帖评论自律管理承诺书》</a>
+                  <a href="/terms"
+                     target="_blank"
+                     class="link">《使用条款》</a>和
+                  <a href="/comment-self-discipline"
+                     target="_blank"
+                     class="link">《跟帖评论自律管理承诺书》</a>
                 </div>
               </div>
             </div>
@@ -174,16 +195,17 @@
           <div class="foot">
             <!--  -->
             <div class="line">
-              <div class="befor"></div>
+              <div class="befor" />
               <div class="text">第三方平台注册/登陆</div>
-              <div class="after"></div>
+              <div class="after" />
             </div>
 
             <div class="thirdbox">
               <!-- 微信 -->
               <div>
-                <nuxt-link to="#" class>
-                  <span class="svg-weixin"></span>
+                <nuxt-link to="#"
+                           class>
+                  <span class="svg-weixin" />
                 </nuxt-link>
               </div>
 
@@ -196,28 +218,31 @@
               </div>-->
               <!--  QQ-->
               <div>
-                <nuxt-link to="#" class>
-                  <span class="svg-qq"></span>
+                <nuxt-link to="#"
+                           class>
+                  <span class="svg-qq" />
                 </nuxt-link>
               </div>
 
               <!--  GITHUB -->
               <div>
-                <nuxt-link to="#" class>
-                  <span class="svg-github"></span>
+                <nuxt-link to="#"
+                           class>
+                  <span class="svg-github" />
                 </nuxt-link>
               </div>
               <!--  微博 -->
               <div>
-                <nuxt-link to="#" class>
-                  <span class="svg-weibo"></span>
+                <nuxt-link to="#"
+                           class>
+                  <span class="svg-weibo" />
                 </nuxt-link>
               </div>
             </div>
           </div>
         </div>
       </xlrow>
-      <xlrow h="30px"></xlrow>
+      <xlrow h="30px" />
     </xlgrid>
   </div>
 </template>
@@ -225,22 +250,23 @@
 
 
 <script>
-import animate from 'animate.css'
+import animate from "animate.css";
 
-import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
-import selcountry from '../components/adrress/selcountry.vue'
-import einput from '../components/input/einput.vue'
+import { xlgrid, xlrow, xlcol } from "../components/layouts/xgrid/xgrid.js";
+import selcountry from "../components/adrress/selcountry.vue";
+import einput from "../components/input/einput.vue";
 
-function query(el) {
-  if (typeof el === 'string') {
-    var selector = el
-    el = document.querySelector(el)
+function query (el) {
+  if (typeof el === "string") {
+    var selector = el;
+    el = document.querySelector(el);
     if (!el) {
-      'development' !== 'production' && warn('Cannot find element: ' + selector)
-      return document.createElement('div')
+      // "development" !== "production" &&
+      // warn("Cannot find element: " + selector);
+      return document.createElement("div");
     }
   }
-  return el
+  return el;
 }
 
 export default {
@@ -251,34 +277,34 @@ export default {
     selcountry,
     einput
   },
-  data() {
+  data () {
     return {
       ltabs: [
         {
-          name: '手机登陆',
-          to: '#',
+          name: "手机登陆",
+          to: "#",
           show: true
         },
         {
-          name: '帐号登陆',
-          to: '#',
+          name: "帐号登陆",
+          to: "#",
           show: false
         },
         {
-          name: '注册',
-          to: '#',
+          name: "注册",
+          to: "#",
           show: false
         }
       ],
       rtabs: [
         {
-          name: '注册',
-          to: '#',
+          name: "注册",
+          to: "#",
           show: true
         },
         {
-          name: '已有帐号、去登陆',
-          to: '#',
+          name: "已有帐号、去登陆",
+          to: "#",
           show: false
         }
       ],
@@ -286,51 +312,51 @@ export default {
       typeid: 1,
       ad: 0,
       iserror: false
-    }
+    };
   },
   methods: {
-    selectitem(typeid, index) {
+    selectitem (typeid, index) {
       // debugger
-      let ltypeid = typeid
-      let lindex = index
+      let ltypeid = typeid;
+      let lindex = index;
 
       //  let login=query(".login");
 
       //  login.addClass("dd");
       if (typeid == 1 && index == 2) {
-        ltypeid = 2
-        lindex = 0
-        this.ad = 2
+        ltypeid = 2;
+        lindex = 0;
+        this.ad = 2;
         setTimeout(() => {
-          this.ad = 1
-        }, 300)
+          this.ad = 1;
+        }, 300);
         // this.ad=0;
       }
 
       if (typeid == 2 && index == 1) {
-        ltypeid = 1
-        lindex = 0
-        this.ad = 4
+        ltypeid = 1;
+        lindex = 0;
+        this.ad = 4;
         setTimeout(() => {
-          this.ad = 3
-        }, 300)
+          this.ad = 3;
+        }, 300);
         //  this.ad=0;
       }
 
-      this.typeid = ltypeid
-      this.currid = lindex
+      this.typeid = ltypeid;
+      this.currid = lindex;
     },
-    sendsms() {
-      this.$refs.idmobile.seterror('test')
-      this.iserror = true
+    sendsms () {
+      this.$refs.idmobile.seterror("test");
+      this.iserror = true;
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@import '../assets/styles/xmixin.scss';
-@import '../assets/styles/variables.scss';
+@import "../assets/styles/xmixin.scss";
+@import "../assets/styles/variables.scss";
 
 .login {
   backface-visibility: hidden;
@@ -349,7 +375,7 @@ export default {
     width: 100%;
     min-height: 70px;
     .svg_comlogo {
-      @include svg_logo('../assets/svg/auth/comlogo.svg', 60px);
+      @include svg_logo("../assets/svg/auth/comlogo.svg", 60px);
     }
   }
 
@@ -555,16 +581,16 @@ export default {
       justify-content: center;
 
       .svg-qq {
-        @include svg_logo('../assets/svg/auth/qq.svg', 30px);
+        @include svg_logo("../assets/svg/auth/qq.svg", 30px);
       }
       .svg-weixin {
-        @include svg_logo('../assets/svg/auth/weixin.svg', 30px);
+        @include svg_logo("../assets/svg/auth/weixin.svg", 30px);
       }
       .svg-github {
-        @include svg_logo('../assets/svg/auth/github.svg', 30px);
+        @include svg_logo("../assets/svg/auth/github.svg", 30px);
       }
       .svg-weibo {
-        @include svg_logo('../assets/svg/auth/weibo.svg', 30px);
+        @include svg_logo("../assets/svg/auth/weibo.svg", 30px);
       }
     }
   }

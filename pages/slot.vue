@@ -60,18 +60,19 @@
 
     <!-- //作用域插槽 -->
     <div>
-      <slot say="你好"></slot>
+      <slot say="你好"/>
     </div>
 
     <div>
-      <slot shit="狗尿"></slot>
+      <slot shit="狗尿"/>
     </div>
 
     <div>
       <ul>
-        <li v-for="(list,index) in lists"
-            :key="index">
-          <slot :menu="list"></slot>
+        <li 
+          v-for="(list,index) in lists"
+          :key="index">
+          <slot :menu="list"/>
         </li>
       </ul>
       <!-- <slot v-for="(list) in lists" :menu="list"></slot> -->

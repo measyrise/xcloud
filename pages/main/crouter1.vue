@@ -21,13 +21,11 @@
         <nuxt-link to="/main/crouter1/c3">tab3</nuxt-link>
       </li>
     </ul>
-    <nuxt-child></nuxt-child>
+    <nuxt-child/>
   </div>
 </template>
 <script>
-export default {
-
-}
+export default {}
 </script>
 <style scoped>
 </style>

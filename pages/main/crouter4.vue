@@ -1,4 +1,4 @@
-﻿<!--
+<!--
  * @Description: 文件描述
  * @Author: liangbojie
  * @Github: https://github.com/measyrise/xcloud.git
@@ -8,15 +8,12 @@
  -->
 
 <template>
-    <div>
-        <h2>嵌套子组件中的页面child4</h2>
-    </div>
+  <div>
+    <h2>嵌套子组件中的页面child4</h2>
+  </div>
 </template>
 <script>
-export default {
-
-}
+export default {}
 </script>
 <style scoped>
- 
 </style>

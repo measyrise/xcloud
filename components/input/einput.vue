@@ -13,37 +13,28 @@
     <input
       :type="type"
       :placeholder="placeholder"
-      class="text-input"
       :style="style"
       v-model="value"
+      class="text-input"
     >
 
     <!-- 错误提示 -->
-    <div class="errortip" v-show="iserror()">{{verrortip}}</div>
+    <div 
+      v-show="iserror()" 
+      class="errortip">{{ verrortip }}</div>
 
     <!-- 图片按钮，这个按钮功能设在调用窗口实现 -->
-    <div class="showpwd" v-show="isshowpwd()" @click="switchshowpwd()">
-      <span :class="{hidepwd:showorhide===false,showpwd:showorhide===true}"></span>
+    <div 
+      v-show="isshowpwd()" 
+      class="showpwd" 
+      @click="switchshowpwd()">
+      <span :class="{hidepwd:showorhide===false,showpwd:showorhide===true}"/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      style: {},
-      value: '',
-      showorhide: true
-    }
-  },
-
-  created: function() {
-    let s = 'width:' + this.w + ';'
-    s += 'height:' + this.h + ';'
-    this.style = s
-  },
-
   props: {
     /**
      * @Description: 文件描述
@@ -65,15 +56,15 @@ export default {
     },
     w: {
       type: String,
-      default: '100%'
+      default: "100%"
     },
     h: {
       type: String,
-      default: '100%'
+      default: "100%"
     },
     type: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     showpwd: {
       type: Boolean,
@@ -84,6 +75,19 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      style: {},
+      value: "",
+      showorhide: true
+    };
+  },
+
+  created: function() {
+    let s = "width:" + this.w + ";";
+    s += "height:" + this.h + ";";
+    this.style = s;
   },
 
   methods: {
@@ -110,7 +114,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import '../../assets/styles/xmixin.scss';
+@import "../../assets/styles/xmixin.scss";
 // @import '../assets/styles/variables.scss';
 
 .flex_full {
@@ -149,10 +153,10 @@ export default {
     // white-space: nowrap;
     // text-overflow: ellipsis;
     .showpwd {
-      @include svg_logo('../../assets/svg/pwd/showpwd.svg', 30px);
+      @include svg_logo("../../assets/svg/pwd/showpwd.svg", 30px);
     }
     .hidepwd {
-      @include svg_logo('../../assets/svg/pwd/hidepwd.svg', 30px);
+      @include svg_logo("../../assets/svg/pwd/hidepwd.svg", 30px);
     }
   }
 }

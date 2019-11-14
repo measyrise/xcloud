@@ -7,13 +7,15 @@
  * @LastEditTtime: Do not edit
  -->
 <template>
-  <li @mouseover="mouseover" class="tag">
+  <li class="tag"
+      @mouseover="mouseover">
     <a>
-      <slot name="title"></slot>
+      <slot name="title" />
     </a>
     <transition name="fade">
-      <ul class="nextulitem" :style="[styles]">
-        <slot></slot>
+      <ul :style="[styles]"
+          class="nextulitem">
+        <slot />
       </ul>
     </transition>
   </li>
@@ -36,16 +38,16 @@
 }
 </style>
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 export default {
   name: 'Submenu',
-  data() {
+  data () {
     return {
       styles: { top: '0px', left: '0px' }
     }
   },
   methods: {
-    mouseover(e) {
+    mouseover (e) {
       //  debugger
       let scrollTop = Vue.prototype.GscrollTop
       if (!scrollTop) {
@@ -55,20 +57,20 @@ export default {
 
       //只用第一级菜单需要这样计算位置，因为第一级的坐标算准了后后面的就可参照了
       if (isfirstmenu(this.$el)) {
-        this.styles.top = pos.top - scrollTop + 'px'
-        this.styles.left = pos.left + 'px'
+        this.styles.top = pos.top - scrollTop + 'px';
+        this.styles.left = pos.left + 'px';
       } else {
-        this.styles.top = pos.top + 'px'
-        this.styles.left = pos.left + 'px'
+        this.styles.top = pos.top + 'px';
+        this.styles.left = pos.left + 'px';
       }
     },
-    setscrollTop(v) {
+    setscrollTop (v) {
       this.scrollTop = v
     }
   }
 }
 
-function isfirstmenu(element) {
+function isfirstmenu (element) {
   // debugger
   var current = element.parentElement
   while (current !== null) {
@@ -80,7 +82,7 @@ function isfirstmenu(element) {
   return 1
 }
 
-function getElementPosition(element) {
+function getElementPosition (element) {
   var left = element.offsetLeft
   var top = element.offsetTop
   var scrollTop = element.scrollTop
@@ -93,7 +95,7 @@ function getElementPosition(element) {
     current = current.offsetParent
   }
   left = left + element.offsetWidth
-  top = top
+  // top = top
   // debugger
   return {
     top: top,

@@ -1,3 +1,11 @@
+/*
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-06-03 21:39:35
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ */
 /**
  * Show migrating guide in browser console.
  *
@@ -21,7 +29,7 @@
  */
 export default {
   mounted() {
-    if (process.env.NODE_ENV === 'production') return;
+    if (process.env.NODE_ENV === "production") return;
     if (!this.$vnode) return;
     const { props = {}, events = {} } = this.getMigratingConfig();
     const { data, componentOptions } = this.$vnode;
@@ -30,13 +38,21 @@ export default {
 
     for (let propName in definedProps) {
       if (definedProps.hasOwnProperty(propName) && props[propName]) {
-        console.warn(`[Element Migrating][${this.$options.name}][Attribute]: ${props[propName]}`);
+        console.warn(
+          `[Element Migrating][${this.$options.name}][Attribute]: ${
+            props[propName]
+          }`
+        );
       }
     }
 
     for (let eventName in definedEvents) {
       if (definedEvents.hasOwnProperty(eventName) && events[eventName]) {
-        console.warn(`[Element Migrating][${this.$options.name}][Event]: ${events[eventName]}`);
+        console.warn(
+          `[Element Migrating][${this.$options.name}][Event]: ${
+            events[eventName]
+          }`
+        );
       }
     }
   },

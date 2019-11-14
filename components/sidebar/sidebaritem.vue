@@ -16,10 +16,17 @@
 <template>
   <!-- 外套 装上 SCROLLBAR  Ul是一个，只是放在DIV里，还是放在-->
   <!-- 这里制定二级与二级以后的style -->
-  <ul class="ulitem" :style="ulstyle">
+  <ul 
+    :style="ulstyle" 
+    class="ulitem">
     <!-- 没有下级窗口的POPPER，就是一按钮 -->
-    <li v-if="!item.children" class="nlastmenuitem" :style="listyle">
-      <nuxt-link  :to="item.path" @click.native="handmenuclick(subitem)">
+    <li 
+      v-if="!item.children" 
+      :style="listyle" 
+      class="nlastmenuitem">
+      <nuxt-link 
+        :to="item.path" 
+        @click.native="handmenuclick(subitem)">
         {{ item.path }}
       </nuxt-link>
     </li>
@@ -27,29 +34,37 @@
     <!-- 有下级窗口的POPPER，且只有一行 -->
 
     <!-- 有下级窗口的POPPER，通过mouseover获得本元素坐标，调用子元素方法、传入坐标 -->
-    <Submenu v-else class="lisubmenuitem" :style="[listyle]" ref="subpopper">
+    <Submenu 
+      v-else 
+      ref="subpopper" 
+      :style="[listyle]" 
+      class="lisubmenuitem">
       <template slot="title">{{ item.path }}</template>
 
-      <template v-for="(subitem,index) in item.children" v-if="!subitem.hidden">
+      <template 
+        v-for="(subitem,index) in item.children" 
+        v-if="!subitem.hidden">
         <Sidebaritem
           v-if="subitem.children && subitem.children.length>0 "
           :itemw="itemw"
           :itemh="itemh"
           :item="subitem"
           :index="index"
-          :isNest="true"
+          :is-nest="true"
           :key="subitem.path"
-          :scrollTop="scrollTop"
+          :scroll-top="scrollTop"
         />
         <li
           v-else
-          class="hlastmenuitem"
           :key="subitem.path"
           :style="listyle"
+          class="hlastmenuitem"
         >
-        <nuxt-link  :to="subitem.path" @click.native="handmenuclick(subitem)">
-           {{ subitem.path }}
-         </nuxt-link>
+          <nuxt-link 
+            :to="subitem.path" 
+            @click.native="handmenuclick(subitem)">
+            {{ subitem.path }}
+          </nuxt-link>
         </li>
       </template>
     </Submenu>
@@ -84,9 +99,9 @@ li:hover > .nextulitem {
 </style>
   
 <script>
-import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
-import Submenu from '../sidebar/submenu'
-import Vue from 'vue'
+import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid';
+import Submenu from '../sidebar/submenu';
+import Vue from 'vue';
 // import bus from '../../utils/ebus'
 export default {
   name: 'Sidebaritem',
@@ -143,54 +158,52 @@ export default {
   },
   computed: {
     cstyle: function() {
-      return 'width:100%'
+      return 'width:100%';
     }
   },
   watch: {
-      $route()
-      {
+    $route() {
       //this.xebus  是在VUE原型链上加载的对像
       // this.xebus.$emit('menuclick', $route)
       // alert(item.path)
     }
-   
   },
   created: function() {
     if (this.index == 0) {
-      this.ulstyle.background = '#333'
+      this.ulstyle.background = '#333';
     } else {
-      this.ulstyle.background = '#676a6c'
+      this.ulstyle.background = '#676a6c';
       // ulstyle = 'background:green'
     }
 
     if (this.itemw == '0px' || this.itemw == '0%') {
-      let a = ''
+      let a = '';
     } else {
       this.listyle.width = this.itemw
     }
 
     if (this.itemh == '0px' || this.itemh == '0%') {
-      let a = ''
+      let a = '';
     } else {
       this.listyle.height = this.itemh
 
       this.listyle['line-height'] = this.itemh
     }
 
-    this.listyle.border = this.border + ' solid red'
+    this.listyle.border = this.border + ' solid red';
 
     // this.listyle.top=this.top+'px'
     // this.listyle.left=this.left+'px'
 
     var s1 = {}
-    s1.background = 'red'
+    s1.background = 'red';
 
     // Vue.set(s1,"background","red")
     // Vue.set(s1,'width:"100px"')
     // s1.push('width:"100px"')
 
     var s2 = {}
-    s2.margin = 'auto'
+    s2.margin = 'auto';
     // Vue.set(s2,'margin',"auto")
     // s2.push('left:"0px"')
 

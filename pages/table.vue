@@ -10,16 +10,18 @@
   <div style="overflow:hidden;">
     <button @click="ontest">合并单元格</button>
     <button @click="ontest">单元格可编辑</button>
-    <button @click="emtest($event,'name')"
-            ref="emtest"
-            style="margin-bottom:30px">单元格调整</button>
+    <button 
+      ref="emtest"
+      style="margin-bottom:30px"
+      @click="emtest($event,'name')">单元格调整</button>
 
-    <xtable :height=350
-            :width=1000
-            :columns="columns"
-            :headRows="titleRows"
-            :footerRows="footerRows"
-            :tableData="tableData"></xtable>
+    <xtable 
+      :height="350"
+      :width="1000"
+      :columns="columns"
+      :head-rows="titleRows"
+      :footer-rows="footerRows"
+      :table-data="tableData"/>
 
   </div>
 
@@ -27,8 +29,7 @@
 
 
 <script>
-
-import xtable from '../components/xtable/table'
+import xtable from '../components/xtable/table';
 export default {
   components: { xtable },
 
@@ -43,7 +44,7 @@ export default {
             rowspan: 2
           },
           {
-            fields: ['checkbox','name', 'gender', 'height'],
+            fields: ['checkbox', 'name', 'gender', 'height'],
             title: '基础信息',
             titleAlign: 'center',
             colspan: 4
@@ -64,7 +65,12 @@ export default {
         ],
 
         [
-          { fields: ['checkbox'], title: '复选框', titleAlign: 'center',type:"SELECTION"},
+          {
+            fields: ['checkbox'],
+            title: '复选框',
+            titleAlign: 'center',
+            type: 'SELECTION'
+          },
           { fields: ['name'], title: '姓名', titleAlign: 'center' },
           {
             fields: ['gender'],
@@ -84,7 +90,7 @@ export default {
 
         [
           {
-            fields: ['checkbox','custome', 'name', 'gender', 'height'],
+            fields: ['checkbox', 'custome', 'name', 'gender', 'height'],
             title: '平均值',
             titleAlign: 'center',
             colspan: 5,
@@ -122,15 +128,15 @@ export default {
           width: 50,
           titleAlign: 'center',
           columnAlign: 'center',
-          formatter: function (rowData, index) {
+          formatter: function(rowData, index) {
             return index < 3
               ? '<span style="color:red;font-weight: bold;">' +
-              (index + 1) +
-              '</span>'
+                  (index + 1) +
+                  '</span>'
               : index + 1
           },
           //'SEQQUECE'=序列,"SELECTION","DROPDOWN","CHECKBOX","LIST" "STRING"=文本（不指定或是其它情况下视为文本
-          type:'SEQUECE',
+          type: 'SEQUECE',
           isFrozen: true,
           isEdit: true
         },
@@ -140,7 +146,7 @@ export default {
           titleAlign: 'center',
           columnAlign: 'center',
           //'SEQQUECE'=序列,"SELECTION","DROPDOWN","CHECKBOX","LIST" "STRING"=文本（不指定或是其它情况下视为文本
-          type:'SELECTION',
+          type: 'SELECTION',
           isFrozen: true,
           isEdit: true
         },
@@ -150,7 +156,7 @@ export default {
           columnAlign: 'center',
           isFrozen: true,
           isEdit: true,
-          type:'STRING',
+          type: 'STRING'
         },
         {
           field: 'gender',
@@ -166,9 +172,27 @@ export default {
           isFrozen: false,
           isEdit: true
         },
-         { field: 'tel', width: 190, columnAlign: 'center', isEdit: false, isFrozen: false },
-         { field: 'email', width: 230, columnAlign: 'center', isEdit: true, isFrozen: false},
-        { field: 'hobby', width: 230, columnAlign: 'center', isEdit: true, isFrozen: false }
+        {
+          field: 'tel',
+          width: 190,
+          columnAlign: 'center',
+          isEdit: false,
+          isFrozen: false
+        },
+        {
+          field: 'email',
+          width: 230,
+          columnAlign: 'center',
+          isEdit: true,
+          isFrozen: false
+        },
+        {
+          field: 'hobby',
+          width: 230,
+          columnAlign: 'center',
+          isEdit: true,
+          isFrozen: false
+        }
         // { field: 'address', width: 330, columnAlign: 'left', isEdit: true, isFrozen: false }
       ],
 
@@ -181,6 +205,7 @@ export default {
           tel: '156*****1987',
           hobby: '钢琴、书法、唱歌',
           address: '上海市黄浦区金陵东路569号17楼'
+          // ,_checked:true,_disabled:true
         },
         {
           name: '李伟',
@@ -190,6 +215,7 @@ export default {
           tel: '182*****1538',
           hobby: '钢琴、书法、唱歌',
           address: '上海市奉贤区南桥镇立新路12号2楼'
+          // ,_disabled:true
         },
         {
           name: '孙伟',
@@ -199,6 +225,7 @@ export default {
           tel: '161*****0097',
           hobby: '钢琴、书法、唱歌',
           address: '上海市崇明县城桥镇八一路739号'
+          // ,_disabled:true
         },
         {
           name: '周伟',
@@ -230,21 +257,21 @@ export default {
       ],
 
       footerRows: [
-         [
-            {
-            fields: ['custome','checkbox'],
+        [
+          {
+            fields: ['custome', 'checkbox'],
             title: '合计',
             titleAlign: 'center',
             colspan: 2,
-             //type这里有两种类型, 如果是0=文本，文本内容是查看TEXT, type=1表示汇总数据，2 表示平均数据
-            couputetype:0
+            //type这里有两种类型, 如果是0=文本，文本内容是查看TEXT, type=1表示汇总数据，2 表示平均数据
+            couputetype: 0
           },
-           {
-            fields: ['height','tel'],
+          {
+            fields: ['height', 'tel'],
             title: '身高',
             titleAlign: 'center',
             colspan: 2,
-            couputetype:1
+            couputetype: 1
           }
         ]
       ]
@@ -254,7 +281,7 @@ export default {
     emtest(e, v) {
       var field = this.columns.filter((item, index) => {
         return item.field == v
-      })
+      });
     }
   },
   ontest() {

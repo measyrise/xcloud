@@ -1,4 +1,4 @@
-﻿<!--
+<!--
  * @Description: 文件描述
  * @Author: liangbojie
  * @Github: https://github.com/measyrise/xcloud.git
@@ -15,8 +15,12 @@
   -->
 <template>
   <!-- 外套 装上 SCROLLBAR -->
-  <div class="scrollbarhide scrollbar" v-on:scroll.passive="onScroll">
-    <xlgrid :h="sh" :w="sw">
+  <div 
+    class="scrollbarhide scrollbar" 
+    @scroll.passive="onScroll">
+    <xlgrid 
+      :h="sh" 
+      :w="sw">
       <!-- <xlrow
         v-for="(item,index) in asyncRouterMap"
         :class="{'headitem':index==0}"
@@ -24,7 +28,9 @@
         :key="index"
         class="sidebarmenu"
       >-->
-      <ScrollPane ref="scrollPane" class="sidebarmenu">
+      <ScrollPane 
+        ref="scrollPane" 
+        class="sidebarmenu">
         <Sidebaritem
           v-for="(item,index) in asyncRouterMap"
           ref="rsidebar"
@@ -58,11 +64,11 @@
 </style>
   
 <script>
-import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid'
-import Sidebaritem from '../sidebar/sidebaritem'
-import Vue from 'vue'
-import main from '../../pages/main'
-import ScrollPane from '../scrollbar/scrollbar'
+import { xlgrid, xlrow, xlcol } from '../layouts/xgrid/xgrid';
+import Sidebaritem from '../sidebar/sidebaritem';
+import Vue from 'vue';
+import main from '../../pages/main';
+import ScrollPane from '../scrollbar/scrollbar';
 export default {
   components: { xlgrid, xlrow, xlcol, Sidebaritem },
   extends: '',
@@ -495,53 +501,53 @@ export default {
   },
   computed: {
     cstyle: function() {
-      return 'width:100%'
+      return 'width:100%';
     }
   },
   watch: {},
   created: function() {
-    let sstyle = ''
-    let sitemstyle = ''
-    let sseconditemstyle = ''
+    let sstyle = '';
+    let sitemstyle = '';
+    let sseconditemstyle = '';
     // debugger
     if (this.w == '0px' || this.w == '0%') {
-      let a = ''
+      let a = '';
     } else {
       // 如果水平，宽度不定宽，自动增长
       if (this.direction == 'h') {
-        this.sw = '0%;'
+        this.sw = '0%;';
       } else {
         this.sw = this.w
-        sstyle = 'width:' + this.w + ';'
+        sstyle = 'width:' + this.w + ';';
       }
     }
 
     if (this.h == '0px' || this.h == '0%') {
-      let a = ''
+      let a = '';
     } else {
       if (this.direction == 'h') {
         this.sh = this.h
-        sstyle += 'height:' + this.h + ';'
+        sstyle += 'height:' + this.h + ';';
       } else {
-        this.sh = '0%'
+        this.sh = '0%';
       }
     }
 
     if (this.itemw == '0px' || this.itemw == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      sitemstyle = 'width:' + this.itemw + ';'
+      sitemstyle = 'width:' + this.itemw + ';';
     }
 
     if (this.itemh == '0px' || this.itemh == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      sitemstyle += 'height:' + this.itemh + ';'
+      sitemstyle += 'height:' + this.itemh + ';';
     }
     if (this.direction == 'h') {
-      sseconditemstyle = 'margin-teft: ' + this.itemw + ';'
+      sseconditemstyle = 'margin-teft: ' + this.itemw + ';';
     } else {
-      sseconditemstyle = 'margin-top:' + this.itemh + ';'
+      sseconditemstyle = 'margin-top:' + this.itemh + ';';
     }
 
     for (var i = 1; i < 20; i++) {
@@ -549,9 +555,9 @@ export default {
       a.name = i
       this.numitems.push(a)
     }
-    sstyle += 'border:' + this.border + ' solid red;'
+    sstyle += 'border:' + this.border + ' solid red;';
     // debugger
-    sitemstyle += 'border:' + this.border + ' solid red;'
+    sitemstyle += 'border:' + this.border + ' solid red;';
     sseconditemstyle = sitemstyle + sseconditemstyle
 
     this.style = sstyle

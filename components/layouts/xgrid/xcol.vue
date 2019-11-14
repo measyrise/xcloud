@@ -7,12 +7,14 @@
  * @Date: 2019-01-06 23:04:55
  -->
 <template>
-  <div class="col" :style="style">
-    <slot></slot>
+  <div 
+    :style="style" 
+    class="col">
+    <slot/>
   </div>
 </template>
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import '~assets/styles/variables.scss';
+@import "~assets/styles/variables.scss";
 
 .col {
   display: inline-flex;
@@ -24,22 +26,17 @@
   
 <script>
 export default {
-  extends: '',
-  data() {
-    return {
-      style: {}
-    }
-  },
-  name: 'xlcol',
+  name: 'Xlcol',
+  extends: "",
   props: {
     w: {
       type: String,
-      default: '100%'
+      default: "100%"
     },
 
     h: {
       type: String,
-      default: '100%'
+      default: "100%"
     },
     full: {
       type: Boolean,
@@ -47,37 +44,42 @@ export default {
     },
     border: {
       type: String,
-      default: '0'
+      default: "0"
     }
   },
+  data() {
+    return {
+      style: {}
+    }
+  },
+  computed: {
+    cstyle: function() {
+      return "width:100%";
+    }
+  },
+  watch: {},
   created: function() {
-    let s = ''
+    let s = '';
     if (this.w == '0px' || this.w == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s = 'width:' + this.w + ';'
+      s = 'width:' + this.w + ';';
     }
 
     if (this.h == '0px' || this.h == '0%') {
-      let a = ''
+      let a = '';
     } else {
-      s += 'height:' + this.h + ';'
+      s += 'height:' + this.h + ';';
     }
     if (this.full) {
-      s += 'flex-grow:' + 1 + ';'
+      s += 'flex-grow:' + 1 + ';';
     }
-    s += 'border:' + this.border + ' solid red;'
+    s += 'border:' + this.border + ' solid red;';
     this.style = s
   },
   inject: [],
   beforeDestroy: function() {},
   mounted: function() {},
-  watch: {},
-  computed: {
-    cstyle: function() {
-      return 'width:100%'
-    }
-  },
   methods: {}
 }
 </script>

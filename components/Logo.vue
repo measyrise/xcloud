@@ -1,10 +1,18 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2018-12-24 01:16:17
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
-  <div class="VueToNuxtLogo">
-    <div class="Triangle Triangle--two"/>
-    <div class="Triangle Triangle--one"/>
-    <div class="Triangle Triangle--three"/>
-    <div class="Triangle Triangle--four"/>
-  </div>
+   <div class="VueToNuxtLogo">
+      <div class="Triangle Triangle--two" />
+      <div class="Triangle Triangle--one" />
+      <div class="Triangle Triangle--three" />
+      <div class="Triangle Triangle--four" />
+   </div>
 </template>
 
 <style>

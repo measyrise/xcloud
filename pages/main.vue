@@ -17,49 +17,55 @@
 <template>
   <div class="main">
     <xlgrid border="1px">
-      <xlrow h="100%"
-             border="0px">
+      <xlrow
+        h="100%"
+        border="0px">
         <!-- 父窗口w='0%' or 0px 时随子窗口变化，不填时为100% -->
 
-        <xlcol border="0px"
-               w="0px"
-               style="overflow:visible;">
-          <Xsidebar h="100%"
-                    w="100px"
-                    itemw="100px"
-                    itemh="60px"></Xsidebar>
-          <!-- <div style="width:100px;height:100%"></div> -->
-          <!-- <Sidebar class="sidebar-container"/> -->
+        <xlcol
+          border="0px"
+          w="0px"
+          style="overflow:visible;">
+          <Xsidebar
+            h="100%"
+            w="100px"
+            itemw="100px"
+            itemh="60px"/>
+            <!-- <div style="width:100px;height:100%"></div> -->
+            <!-- <Sidebar class="sidebar-container"/> -->
         </xlcol>
 
         <!-- 右方文档 -->
-        <xlcol w="100%"
-               border="1px"
-               style="flex-grow:1">
-          <xlgrid w="100%"
-                  h="100%">
-            <xlrow h="0px" 
-                   >
-              <tagsview></tagsview>
+        <xlcol
+          w="100%"
+          border="1px"
+          style="flex-grow:1">
+          <xlgrid
+            w="100%"
+            h="100%">
+            <xlrow
+              h="0px"
+            >
+              <tagsview/>
             </xlrow>
-            <xlrow h="100%"
-                   >
-              <Slotdemo :lists="menulist"
-                        sslot="aaa">
+            <xlrow
+              h="100%"
+            >
+              <Slotdemo
+                :lists="menulist"
+                sslot="aaa">
 
                 <template slot="footer">
                   <div class="center">
                     <!-- <p>嵌套子页面内容区</p> -->
                     <!-- <router-view> -->
-                    <nuxt-child keep-alive></nuxt-child>
+                    <nuxt-child keep-alive/>
                   </div>
                 </template>
 
-                <template slot="header">
+                <template slot="header"/>
 
-                </template>
-
-                <template slot="main"></template>
+                <template slot="main"/>
 
                 <template slot="boy">提供的男人</template>
                 <template slot="girl">girl</template>
@@ -68,8 +74,8 @@
                 作用域-->
                 <template slot-scope="b">
                   <!-- {{ b }} -->
-                  {{b.say}}
-                  {{b.shit}}
+                  {{ b.say }}
+                  {{ b.shit }}
                   {{ b.menu }}
                 </template>
               </Slotdemo>
@@ -77,7 +83,7 @@
               <!-- 默认的插的内容
               <h4>这个世界不仅有男人和女人</h4>-->
 
-              <!-- <div style="height:1px;background-color:red;"></div> 
+              <!-- <div style="height:1px;background-color:red;"></div>
                   <div style="height:1px;background-color:red;"></div>
               <slot tl="girldd">作用域插插调用</slot>-->
             </xlrow>
@@ -86,29 +92,29 @@
       </xlrow>
     </xlgrid>
   </div>
-</template>  
+</template>
 
 <script>
-import { xlgrid, xlrow, xlcol } from '../components/layouts/xgrid/xgrid.js'
-import Xsidebar from '../components/sidebar/sidebar.vue'
-import Sidebar from '../components/elem/sidebar/index.vue'
-import Slotdemo from '../pages/slot'
-import tagsview from '../components//tags/tagsview.vue'
+import { xlgrid, xlrow, xlcol } from "../components/layouts/xgrid/xgrid.js";
+import Xsidebar from "../components/sidebar/sidebar.vue";
+import Sidebar from "../components/elem/sidebar/index.vue";
+import Slotdemo from "../pages/slot";
+import tagsview from "../components//tags/tagsview.vue";
 export default {
   components: { xlgrid, xlrow, xlcol, Xsidebar, Slotdemo, Sidebar, tagsview },
   data() {
     return {
       menulist: [
-        { id: 1, name: '孙悟空' },
-        { id: 2, name: '猪八戒' },
-        { id: 3, name: '沙和尚' },
-        { id: 4, name: '唐僧' },
-        { id: 5, name: '小白龙' }
+        { id: 1, name: "孙悟空" },
+        { id: 2, name: "猪八戒" },
+        { id: 3, name: "沙和尚" },
+        { id: 4, name: "唐僧" },
+        { id: 5, name: "小白龙" }
       ],
-      slot: 'ssss'
-    }
+      slot: "ssss"
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" >

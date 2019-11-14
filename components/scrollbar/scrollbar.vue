@@ -7,22 +7,26 @@
  * @LastEditTtime: Do not edit
  -->
 <template>
-  <cScrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.native.prevent="handleScroll">
+  <cScrollbar 
+    ref="scrollContainer" 
+    :vertical="false" 
+    class="scroll-container" 
+    @wheel.native.prevent="handleScroll">
     <slot/>
   </cScrollbar>
 </template>
 
 <script>
 const tagAndTagSpacing = 4 // tagAndTagSpacing
-import cScrollbar from './elscrollbar'
+import cScrollbar from './elscrollbar';
 export default {
   name: 'ScrollPane',
+  components: { cScrollbar },
   data() {
     return {
       left: 0
-    }
+    };
   },
-  components: { cScrollbar },
   methods: {
     handleScroll(e) {
       debugger
@@ -54,7 +58,7 @@ export default {
             //如果是第一个元素的话不存在上个元素
             nextTag = tagList[i].length > 1 && tagList[i + 1]
           } else if (i === tagList.length - 1) {
-             //如果是最后一个元素的话不存在下个元素
+            //如果是最后一个元素的话不存在下个元素
             prevTag = tagList[i].length > 1 && tagList[i - 1]
           } else {
             prevTag = tagList[i - 1]
@@ -67,15 +71,21 @@ export default {
       if (firstTag === currentTag) {
         $scrollWrapper.scrollLeft = 0
       } else if (lastTag === currentTag) {
-        $scrollWrapper.scrollLeft = $scrollWrapper.scrollWidth - $containerWidth
+        $scrollWrapper.scrollLeft =
+          $scrollWrapper.scrollWidth - $containerWidth
       } else {
         // the tag's offsetLeft after of nextTag
-        const afterNextTagOffsetLeft = nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
+        const afterNextTagOffsetLeft =
+          nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
 
         // the tag's offsetLeft before of prevTag
-        const beforePrevTagOffsetLeft = prevTag.$el.offsetLeft - tagAndTagSpacing
+        const beforePrevTagOffsetLeft =
+          prevTag.$el.offsetLeft - tagAndTagSpacing
 
-        if (afterNextTagOffsetLeft > $scrollWrapper.scrollLeft + $containerWidth) {
+        if (
+          afterNextTagOffsetLeft >
+          $scrollWrapper.scrollLeft + $containerWidth
+        ) {
           $scrollWrapper.scrollLeft = afterNextTagOffsetLeft - $containerWidth
         } else if (beforePrevTagOffsetLeft < $scrollWrapper.scrollLeft) {
           $scrollWrapper.scrollLeft = beforePrevTagOffsetLeft
@@ -92,7 +102,5 @@ export default {
   position: relative;
   overflow: hidden;
   width: 100%;
-  
-
 }
 </style>

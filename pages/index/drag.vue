@@ -1,6 +1,8 @@
 <template>
   <div>
-    <transition-group tag="div" class="container">
+    <transition-group 
+      tag="div" 
+      class="container">
       <div
         v-for="(item,index) in items"
         :id="index"
@@ -31,22 +33,22 @@ export default {
   },
   methods: {
     handleDragStart(e, item) {
-      console.log('handleDragStart')
+      console.log('handleDragStart');
       this.dragging = item
     },
     handleDragEnd(e, item) {
-      console.log('handleDragEnd')
+      console.log('handleDragEnd');
       this.dragging = null
     },
     //首先把div变成可以放置的元素，即重写dragenter/dragover
     handleDragOver(e) {
-      console.log('handleDragOver')
-      e.dataTransfer.dropEffect = 'move'
+      console.log('handleDragOver');
+      e.dataTransfer.dropEffect = 'move';
       // e.dataTransfer.dropEffect="move";//在dragenter中针对放置目标来设置!
     },
     handleDragEnter(e, item) {
-      console.log('handleDragEnter')
-      e.dataTransfer.effectAllowed = 'move' //为需要移动的元素设置dragstart事件
+      console.log('handleDragEnter');
+      e.dataTransfer.effectAllowed = 'move'; //为需要移动的元素设置dragstart事件
       if (item === this.dragging) {
         return
       }

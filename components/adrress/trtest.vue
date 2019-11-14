@@ -1,3 +1,11 @@
+<!--
+ * @Description: 文件描述
+ * @Author: liangbojie
+ * @Github: https://github.com/measyrise/xcloud.git
+ * @Date: 2019-01-01 09:24:49
+ * @LastEditors: liangbojie
+ * @LastEditTtime: Do not edit
+ -->
 <template>
   <div id="root">
     <transition
@@ -15,21 +23,21 @@
 
 
 <script>
-import animate from 'animate.css'
+import animate from "animate.css";
 
 export default {
   data() {
     return {
       show: true
-    }
+    };
   },
   methods: {
     handleClick: function() {
-      this.show = !this.show
-      console.log('3333')
+      this.show = !this.show;
+      console.log("3333");
     }
   }
-}
+};
 </script>
 <style rel="stylesheet/scss" lang="scss">
 </style>
