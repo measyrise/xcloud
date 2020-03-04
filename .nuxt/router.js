@@ -5,7 +5,6 @@ import { interopDefault } from './utils'
 const _d851183c = () => interopDefault(import('..\\pages\\about.vue' /* webpackChunkName: "pages_about" */))
 const _6ab21aa0 = () => interopDefault(import('..\\pages\\adtest.vue' /* webpackChunkName: "pages_adtest" */))
 const _55c60422 = () => interopDefault(import('..\\pages\\drag.vue' /* webpackChunkName: "pages_drag" */))
-const _dcde78ba = () => interopDefault(import('..\\pages\\json.vue' /* webpackChunkName: "pages_json" */))
 const _7d36f1be = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages_login" */))
 const _06c70bf4 = () => interopDefault(import('..\\pages\\main.vue' /* webpackChunkName: "pages_main" */))
 const _6590a3e4 = () => interopDefault(import('..\\pages\\main\\index.vue' /* webpackChunkName: "pages_main_index" */))
@@ -25,7 +24,6 @@ const _72f7748e = () => interopDefault(import('..\\pages\\slot.vue' /* webpackCh
 const _6d2a83a3 = () => interopDefault(import('..\\pages\\table.vue' /* webpackChunkName: "pages_table" */))
 const _0d3ff2d8 = () => interopDefault(import('..\\pages\\touch.vue' /* webpackChunkName: "pages_touch" */))
 const _07d86a0b = () => interopDefault(import('..\\pages\\trtest.vue' /* webpackChunkName: "pages_trtest" */))
-const _4a10a083 = () => interopDefault(import('..\\pages\\css\\t.js' /* webpackChunkName: "pages_css_t" */))
 const _98e162b2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 const _5f738bfb = () => interopDefault(import('..\\pages\\index\\index.vue' /* webpackChunkName: "pages_index_index" */))
 const _636f952c = () => interopDefault(import('..\\pages\\index\\crouter1.vue' /* webpackChunkName: "pages_index_crouter1" */))
@@ -101,10 +99,6 @@ export function createRouter() {
       path: "/drag",
       component: _55c60422,
       name: "drag"
-    }, {
-      path: "/json",
-      component: _dcde78ba,
-      name: "json"
     }, {
       path: "/login",
       component: _7d36f1be,
@@ -182,10 +176,6 @@ export function createRouter() {
       path: "/trtest",
       component: _07d86a0b,
       name: "trtest"
-    }, {
-      path: "/css/t",
-      component: _4a10a083,
-      name: "css-t"
     }, {
       path: "/",
       component: _98e162b2,

@@ -118,9 +118,9 @@ module.exports = {
     "consistent-return": 0, //无论有没有返回值都强制要求return语句返回一个值
     curly: ["error", "all"], //强制使用花括号的风格
     "default-case": 0, //在switch语句中需要有default语句
-    "dot-notation": ["error", { allowKeywords: false, allowPattern: "" }], //获取对象属性的时候使用点号
+    // "dot-notation": ["error", { allowKeywords: false, allowPattern: "" }], //获取对象属性的时候使用点号
     // eqeqeq: ["error", "smart"], //比较的时候使用严格等于
-    "no-alert": 1, //不允许使用alert，confirm，prompt语句
+    // "no-alert": 1, //不允许使用alert，confirm，prompt语句
     "no-caller": 2, //不允许使用arguments.callee和arguments.caller属性
     "guard-for-in": 0, //监视for in循环，防止出现不可预料的情况
     "no-div-regex": 2, //不能使用看起来像除法的正则表达式

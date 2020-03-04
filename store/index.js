@@ -7,13 +7,13 @@
  * @Date: 2018-12-24 01:17:01
  */
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-import app from './modules/app'
-import errorLog from './modules/errorLog'
-import tagsView from './modules/tagsView'
-import getters from './getters'
-Vue.use(Vuex)
+import Vue from "vue";
+import Vuex from "vuex";
+import app from "./modules/app";
+import errorLog from "./modules/errorLog";
+import tagsView from "./modules/tagsView";
+import getters from "./getters";
+Vue.use(Vuex);
 
 //模块化方法，每个state，mutations，action都单独导出，并放文件里
 // nuxt很贴心的帮我们省去了返回Vuex实例的代码，我们可以不用去写了
@@ -28,7 +28,7 @@ Vue.use(Vuex)
 //本文如下采用的是普通方法，并采取了模块化
 //一级状态树与二级状态树同名同方法时，以二级状态书优先
 //每次刷新会执行这块，,属于后端，看点击时的情况：点击不执行,因为数据已返到前端，前端在后台获取相关数据了,只有刷新再从这里取数
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 const store = () =>
   new Vuex.Store({
     modules: {
@@ -39,59 +39,59 @@ const store = () =>
     actions: {
       //每次网页刷新时会在后端执行,但这个req 是怎么带进来
       nuxtServerInit({ commit }, { req }) {
-        debugger
+        debugger;
         console.log(
-          '******************************isClient*************************************'
-        )
+          "******************************isClient*************************************"
+        );
         // console.log(isClient)
-        console.log('**********************req headers***************')
-        console.log(req.headers)
-        console.log('**********************req cookie***************')
-        console.log(req.headers.cookie)
+        console.log("**********************req headers***************");
+        // console.log(req.headers)
+        console.log("**********************req cookie***************");
+        // console.log(req.headers.cookie)
 
         // let lang = req.headers.cookie.split('language=')[1]
-        let lang = 'zh'
-        console.log('**********************req language***************')
-        console.log(lang)
-        commit('SET_LANG', lang)
+        let lang = "zh";
+        console.log("**********************req language***************");
+        console.log(lang);
+        commit("SET_LANG", lang);
       },
       setLanguage({ commit }, language) {
-        commit('SET_LANG', language)
+        commit("SET_LANG", language);
       }
     },
 
     state: {
-      locales: ['zh', 'en'],
-      locale: Cookies.get('language') || 'zh',
+      locales: ["zh", "en"],
+      locale: Cookies.get("language") || "zh",
       todos: [
         {
           id: 1,
-          text: '...',
+          text: "...",
           done: true
         },
         {
           id: 2,
-          text: '...',
+          text: "...",
           done: false
         },
         {
           id: 3,
-          text: '...',
+          text: "...",
           done: true
         }
       ],
-      size: 'onesize'
+      size: "onesize"
     },
     mutations: {
       SET_LANG(state, locale) {
         // debugger
         if (state.locales.indexOf(locale) !== -1) {
-          state.locale = locale
-          Cookies.set('language', locale)
+          state.locale = locale;
+          Cookies.set("language", locale);
         }
       },
       SET_SIZE: (state, size) => {
-        state.size = size
+        state.size = size;
       }
     },
     getters: {
@@ -116,5 +116,5 @@ const store = () =>
       addRouters: state => state.permission.addRouters,
       errorLogs: state => state.errorLog.logs
     }
-  })
-export default store
+  });
+export default store;

@@ -7,11 +7,11 @@
  * @LastEditTtime: Do not edit
  -->
 <template>
-  <div>
-    <h1>{{ ip }}</h1>
-    <h2>{{ chideid }}</h2>
-    <p>param: {{ $t('login.welmsg') }} {{ cmsg }} </p>
-  </div>
+   <div>
+      <h1>{{ ip }}</h1>
+      <h2>{{ chideid }}</h2>
+      <p>param: {{ $t('login.welmsg') }} {{ cmsg }} </p>
+   </div>
 </template>
 
 <script>
@@ -36,23 +36,23 @@ import Mock from 'mockjs';
 //顺序是代理最前，拦截在后，MOCK 拦截代理最后的地址
 
 Mock.mock('/api/fi', 'get', {
-  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-  'list|1-10': [
-    {
-      // 属性 id 是一个自增数，起始值为 1，每次增 1
-      'id|+1': 1
-    }
-  ]
+   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+   'list|1-10': [
+      {
+         // 属性 id 是一个自增数，起始值为 1，每次增 1
+         'id|+1': 1
+      }
+   ]
 })
 
 Mock.mock('/api/ip/fi', 'get', {
-  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-  'list|1-100': [
-    {
-      // 属性 id 是一个自增数，起始值为 1，每次增 1
-      'id|+1': 1
-    }
-  ]
+   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+   'list|1-100': [
+      {
+         // 属性 id 是一个自增数，起始值为 1，每次增 1
+         'id|+1': 1
+      }
+   ]
 })
 
 // 输出结果
@@ -61,59 +61,59 @@ Mock.mock('/api/ip/fi', 'get', {
 Mock.mock('http://icanhazip.com', 'get', '\'dd\':\'3333\'');
 // ;('use strict')
 export default {
-  head: {
-    title: 'myTitle'
-  },
-  async asyncData({ $axios }) {
-    let data = null
-    await $axios
-      .request({
-        //url: '/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
-        url: '/ip/fi', //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
-        method: 'get',
-        data: 'params'
-      })
-      .then(result => {
-        //   debugger
-        data = result.data
-        //   console.log(result)
-      })
-      .catch(err => {
-        //   debugger
-        //   console.log(err)
-      })
+   head: {
+      title: 'myTitle'
+   },
+   async asyncData ({ $axios }) {
+      let data = null
+      await $axios
+         .request({
+            //url: '/fi',   //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
+            url: '/ip/fi', //  代理设了 /=/API/ 这里翻译过来就是  /API/FI,那么MOCK 要设成/API/FI
+            method: 'get',
+            data: 'params'
+         })
+         .then(result => {
+            //   debugger
+            data = result.data
+            //   console.log(result)
+         })
+         .catch(err => {
+            //   debugger
+            console.log(err)
+         })
 
-    return {
-      ip: data ? data : 'null'
-    }
-  },
-  data() {
-    return {
-      //注意，直接刷新本界面时会存在$route值不存在,因为根据就不存在跳转，所以程序设计上要注意
-      msg: '',
-      hideid: ''
-    }
-  },
-  computed: {
-    cmsg: function() {
-      //  debugger
-      // const test=this.msg;
-      // const data= this.$axios.$get('http://icanhazip.com').then((result) => {
-      //    console.log(result);
+      return {
+         ip: data ? data : 'null'
+      }
+   },
+   data () {
+      return {
+         //注意，直接刷新本界面时会存在$route值不存在,因为根据就不存在跳转，所以程序设计上要注意
+         msg: '',
+         hideid: ''
+      }
+   },
+   computed: {
+      cmsg: function () {
+         //  debugger
+         // const test=this.msg;
+         // const data= this.$axios.$get('http://icanhazip.com').then((result) => {
+         //    console.log(result);
 
-      // }).catch((err) => {
-      //     console.log("asyncData");
-      // });
+         // }).catch((err) => {
+         //     console.log("asyncData");
+         // });
 
-      // console.log(this.$route.query.testidd);
-      // console.log(this.$route.params.hideid);
-      //  this.msg=this.$route.query.newsID;
+         // console.log(this.$route.query.testidd);
+         // console.log(this.$route.params.hideid);
+         //  this.msg=this.$route.query.newsID;
 
-      return this.$route.query.newsID ? this.$route.query.newsID : '空值';
-    },
-    chideid: function() {
-      return this.$route.params.hideid ? this.$route.params.hideid : '空值';
-    }
-  }
+         return this.$route.query.newsID ? this.$route.query.newsID : '空值';
+      },
+      chideid: function () {
+         return this.$route.params.hideid ? this.$route.params.hideid : '空值';
+      }
+   }
 }
 </script>

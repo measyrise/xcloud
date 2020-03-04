@@ -7,7 +7,7 @@
  * @LastEditTtime: Do not edit
  -->
 <template>
-  <!-- // 插槽使用总结：
+   <!-- // 插槽使用总结：
       1.当提供插槽时，插槽只能插到指定的位置，而不管提供的须序如何
       2.如果插槽没有默认值，必须提供默认值，才有显示，如这种类型的<slot name="girl"/>
       3.有默认值的时候，使用时不填的话显示插槽默认值，否则显示提供的值如
@@ -28,74 +28,73 @@
                   {{ b }}
                    {{b.say}}
             {{b.shit}}
-            {{b.menu.id}} 
+            {{b.menu.id}}
           </template>
               </Slotdemo>
 
 
   -->
-  <div style="margin-top:20px">
-    <h4>这个世界不仅有男人和女人</h4>
+   <div style="margin-top:20px">
+      <h4>这个世界不仅有男人和女人</h4>
 
-    <slot name="girl">漂亮、美丽、购物、逛街</slot>
+      <slot name="girl">漂亮、美丽、购物、逛街</slot>
 
-    <div style="height:1px;background-color:red;" />
+      <div style="height:1px;background-color:red;" />
 
-    <slot name="boy" />
+      <slot name="boy" />
 
-    <div style="height:1px;background-color:red;" />
+      <div style="height:1px;background-color:red;" />
 
-    <header>
-      "header"
-      <slot name="header" />
-    </header>
-    <main>
-      "main"
-      <slot name="main" />
-    </main>
+      <header>
+         "header"
+         <slot name="header" />
+      </header>
+      <main>
+         "main"
+         <slot name="main" />
+      </main>
 
-    <div>
-      <slot name="dd">{{ sslot }}</slot>
-    </div>
+      <div>
+         <slot name="dd">{{ sslot }}</slot>
+      </div>
 
-    <!-- //作用域插槽 -->
-    <div>
-      <slot say="你好"/>
-    </div>
+      <!-- //作用域插槽 -->
+      <div>
+         <slot say="你好" />
+      </div>
 
-    <div>
-      <slot shit="狗尿"/>
-    </div>
+      <div>
+         <slot shit="狗尿" />
+      </div>
 
-    <div>
-      <ul>
-        <li 
-          v-for="(list,index) in lists"
-          :key="index">
-          <slot :menu="list"/>
-        </li>
-      </ul>
-      <!-- <slot v-for="(list) in lists" :menu="list"></slot> -->
-    </div>
+      <div>
+         <ul>
+            <li v-for="(list,index) in lists"
+                :key="index">
+               <slot :menu="list" />
+            </li>
+         </ul>
+         <!-- <slot v-for="(list) in lists" :menu="list"></slot> -->
+      </div>
 
-    <footer>
-      "footer"
-      <slot name="footer" />
-    </footer>
-  </div>
+      <footer>
+         "footer"
+         <slot name="footer" />
+      </footer>
+   </div>
 </template>
 <script>
 export default {
-  name: 'Slotdemo',
-  props: {
-    lists: {
-      type: Array,
-      default: null
-    },
-    sslot: {
-      type: String,
-      default: '3'
-    }
-  }
+   name: 'Slotdemo',
+   props: {
+      lists: {
+         type: Array,
+         default: null
+      },
+      sslot: {
+         type: String,
+         default: '3'
+      }
+   }
 }
 </script>

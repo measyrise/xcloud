@@ -53,6 +53,9 @@ export default {
       overflow: hidden;
       .x-table-view-head-right-wrapper1 {
          overflow: hidden;
+         .x-table-view-head-right-wrapper1 {
+            overflow: hidden;
+         }
       }
    }
 }
