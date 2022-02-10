@@ -40,7 +40,7 @@
     "express": "^4.16.4",
     "js-cookie": "^2.2.0",
     "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^1.11.0",
     "normalize.css": "^8.0.1",
     "postcss-px2rem": "^0.3.0",
